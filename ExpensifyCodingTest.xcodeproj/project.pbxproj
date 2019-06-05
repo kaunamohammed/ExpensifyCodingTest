@@ -28,13 +28,13 @@
 		FC5F9FD922A7F65400598548 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FD822A7F65400598548 /* AppDelegate.swift */; };
 		FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */; };
 		FC989D5922A7F2CB0066310C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D5822A7F2CB0066310C /* SignInViewController.swift */; };
-		FC989D5E22A7F2DE0066310C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC989D5D22A7F2DE0066310C /* Assets.xcassets */; };
-		FC989D6122A7F2DE0066310C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC989D5F22A7F2DE0066310C /* LaunchScreen.storyboard */; };
 		FC989D6C22A7F2DE0066310C /* ExpensifyCodingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D6B22A7F2DE0066310C /* ExpensifyCodingTestTests.swift */; };
 		FCA1D61D22A850C100D33EF5 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D61B22A850C100D33EF5 /* LayoutAnchor.swift */; };
 		FCA1D61E22A850C100D33EF5 /* LayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D61C22A850C100D33EF5 /* LayoutProperty.swift */; };
 		FCA1D62022A850E900D33EF5 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D61F22A850E900D33EF5 /* UIView+Constraints.swift */; };
 		FCA1D62222A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D62122A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift */; };
+		FCA1D62522A86E0B00D33EF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA1D62322A86E0B00D33EF5 /* LaunchScreen.storyboard */; };
+		FCA1D62822A86E2800D33EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA1D62622A86E2800D33EF5 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,9 +74,6 @@
 		FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensifyAppCoordinator.swift; sourceTree = "<group>"; };
 		FC989D5322A7F2CB0066310C /* ExpensifyCodingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensifyCodingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC989D5822A7F2CB0066310C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		FC989D5D22A7F2DE0066310C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
-		FC989D6022A7F2DE0066310C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FC989D6222A7F2DE0066310C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FC989D6722A7F2DE0066310C /* ExpensifyCodingTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpensifyCodingTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC989D6B22A7F2DE0066310C /* ExpensifyCodingTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensifyCodingTestTests.swift; sourceTree = "<group>"; };
 		FC989D6D22A7F2DE0066310C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +81,9 @@
 		FCA1D61C22A850C100D33EF5 /* LayoutProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutProperty.swift; path = ExpensifyCodingTest/Layout/LayoutProperty.swift; sourceTree = SOURCE_ROOT; };
 		FCA1D61F22A850E900D33EF5 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Constraints.swift"; path = "ExpensifyCodingTest/Layout/UIView+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		FCA1D62122A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SafeAreaConstraints.swift"; sourceTree = "<group>"; };
+		FCA1D62422A86E0B00D33EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCA1D62622A86E2800D33EF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCA1D62722A86E2800D33EF5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,9 +202,9 @@
 		FC0EB6F322A84FA300BFAFC2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FC989D5D22A7F2DE0066310C /* Assets.xcassets */,
-				FC989D5F22A7F2DE0066310C /* LaunchScreen.storyboard */,
-				FC989D6222A7F2DE0066310C /* Info.plist */,
+				FCA1D62622A86E2800D33EF5 /* Assets.xcassets */,
+				FCA1D62722A86E2800D33EF5 /* Info.plist */,
+				FCA1D62322A86E0B00D33EF5 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -344,8 +344,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC989D6122A7F2DE0066310C /* LaunchScreen.storyboard in Resources */,
-				FC989D5E22A7F2DE0066310C /* Assets.xcassets in Resources */,
+				FCA1D62822A86E2800D33EF5 /* Assets.xcassets in Resources */,
+				FCA1D62522A86E0B00D33EF5 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,10 +455,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FC989D5F22A7F2DE0066310C /* LaunchScreen.storyboard */ = {
+		FCA1D62322A86E0B00D33EF5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FC989D6022A7F2DE0066310C /* Base */,
+				FCA1D62422A86E0B00D33EF5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CG9RTC2HJD;
-				INFOPLIST_FILE = ExpensifyCodingTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ExpensifyCodingTest/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -609,7 +609,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CG9RTC2HJD;
-				INFOPLIST_FILE = ExpensifyCodingTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ExpensifyCodingTest/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
