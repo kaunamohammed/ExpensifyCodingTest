@@ -1,0 +1,6 @@
+module CoordinatorLibrary {
+  umbrella header "CoordinatorLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}

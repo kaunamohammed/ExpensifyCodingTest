@@ -1,0 +1,6 @@
+module Pods_ExpensifyCodingTest {
+  umbrella header "Pods-ExpensifyCodingTest-umbrella.h"
+
+  export *
+  module * { export * }
+}

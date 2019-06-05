@@ -10,25 +10,55 @@ import XCTest
 @testable import ExpensifyCodingTest
 
 class ExpensifyCodingTestTests: XCTestCase {
+  
+  static let expensifyAuthAPI = URL(string:"https://expensify.com/api?command=Authenticate&partnerName=applicant&partnerPassword=d7c3119c6cdab02d68d9&partnerUserID=expensifytest@mailinator.com&partnerUserSecret=hire_me")
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+  
+  func testAuthEndPointDefinedCorrectly() {
+    let authEndPoint = EndPoint.authenticateUser(partnerUserID: "expensifytest@mailinator.com",
+                                                 partnerUserSecret: "hire_me").url
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    XCTAssertTrue(authEndPoint == ExpensifyCodingTestTests.expensifyAuthAPI)
+    
+  }
+  
+  static let expensifyTransactionAPI = URL(string: "https://expensify.com/api?command=Get&authToken=fake_token&returnValueList=transactionList&&startDate&endDate&limit=50&offset")
+  
+  func testGetTransactionsEndPointDefinedCorrectly() {
+    let transactionsEndPoint = EndPoint.getTransactions(authToken: "fake_token",
+                                                        params: .init(idType: .none, limit: 50.asString)).url
+    print(transactionsEndPoint!)
+    XCTAssertTrue(transactionsEndPoint == ExpensifyCodingTestTests.expensifyTransactionAPI)
+    
+  }
+  
+  func testRouterRequest() {
+    
+    let expectation = self.expectation(description: "Network Request")
+    var info: AccountInfo?
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    let router = Router()
+    router.request(EndPoint.authenticateUser(partnerUserID: Constants.TestUser.id, partnerUserSecret: Constants.TestUser.password)) { (result) in
+      switch result {
+      case .success(let data): print(data)
+      do {
+        let decoder = JSONDecoder()
+        let accountInfo = try decoder.decode(AccountInfo.self, from: data)
+        info = accountInfo
+        expectation.fulfill()
+      }
+      catch {
+        print(error.localizedDescription)
         }
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+      
     }
-
+    
+    waitForExpectations(timeout: 20, handler: nil)
+    print(info)
+    XCTAssertTrue(info?.email == Constants.TestUser.id)
+  }
+  
 }
