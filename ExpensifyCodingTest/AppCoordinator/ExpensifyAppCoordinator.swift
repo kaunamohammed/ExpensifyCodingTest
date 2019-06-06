@@ -22,7 +22,7 @@ public class ExpensifyAppCoordinator: AppCoordinator {
   
   override public func start() {
     
-    startTransactionListViewCoordinator()
+    startSignInViewCoordinator()
     
   }
   

@@ -32,6 +32,12 @@ final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewC
       startCreateTransactionViewCoordinator(authToken)
     }
     
+    viewController.logOut = { [startSignInViewCoordinator] in startSignInViewCoordinator() }
+    
+  }
+  
+  deinit {
+    print("Bye: \(self.description)")
   }
   
 }
@@ -44,7 +50,7 @@ private extension TransactionListViewCoorinator {
     createTransactionViewCoordinator.start()
   }
   
-  func startSignInViewCoordinator(with token: String) {
+  func startSignInViewCoordinator() {
     add(child: signInViewCoordinator)
     signInViewCoordinator.start()
   }

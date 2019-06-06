@@ -26,10 +26,6 @@
 		FC0EB6F222A84F5F00BFAFC2 /* SignInViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6F122A84F5F00BFAFC2 /* SignInViewCoordinator.swift */; };
 		FC55F79922A9A6140066D3E5 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */; };
 		FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */; };
-		FC55F79B22A9A6140066D3E5 /* TransactionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79022A9A6140066D3E5 /* TransactionListTableViewCell.swift */; };
-		FC55F79C22A9A6140066D3E5 /* TransactionListViewCoorinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79122A9A6140066D3E5 /* TransactionListViewCoorinator.swift */; };
-		FC55F79D22A9A6140066D3E5 /* TransactionListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79222A9A6140066D3E5 /* TransactionListDatasource.swift */; };
-		FC55F79E22A9A6140066D3E5 /* TransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79322A9A6140066D3E5 /* TransactionListViewController.swift */; };
 		FC55F79F22A9A6140066D3E5 /* TransactionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79522A9A6140066D3E5 /* TransactionListTableViewCell.swift */; };
 		FC55F7A022A9A6140066D3E5 /* TransactionListViewCoorinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79622A9A6140066D3E5 /* TransactionListViewCoorinator.swift */; };
 		FC55F7A122A9A6140066D3E5 /* TransactionListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F79722A9A6140066D3E5 /* TransactionListDatasource.swift */; };
@@ -94,10 +90,6 @@
 		FC0EB6F122A84F5F00BFAFC2 /* SignInViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewCoordinator.swift; sourceTree = "<group>"; };
 		FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
 		FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewCoordinator.swift; sourceTree = "<group>"; };
-		FC55F79022A9A6140066D3E5 /* TransactionListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListTableViewCell.swift; sourceTree = "<group>"; };
-		FC55F79122A9A6140066D3E5 /* TransactionListViewCoorinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewCoorinator.swift; sourceTree = "<group>"; };
-		FC55F79222A9A6140066D3E5 /* TransactionListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListDatasource.swift; sourceTree = "<group>"; };
-		FC55F79322A9A6140066D3E5 /* TransactionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewController.swift; sourceTree = "<group>"; };
 		FC55F79522A9A6140066D3E5 /* TransactionListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListTableViewCell.swift; sourceTree = "<group>"; };
 		FC55F79622A9A6140066D3E5 /* TransactionListViewCoorinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewCoorinator.swift; sourceTree = "<group>"; };
 		FC55F79722A9A6140066D3E5 /* TransactionListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListDatasource.swift; sourceTree = "<group>"; };
@@ -267,12 +259,8 @@
 		FC55F78B22A9A6130066D3E5 /* TransactionList */ = {
 			isa = PBXGroup;
 			children = (
-				FC55F78C22A9A6140066D3E5 /* CreateTransaction */,
-				FC55F79022A9A6140066D3E5 /* TransactionListTableViewCell.swift */,
-				FC55F79122A9A6140066D3E5 /* TransactionListViewCoorinator.swift */,
-				FC55F79222A9A6140066D3E5 /* TransactionListDatasource.swift */,
-				FC55F79322A9A6140066D3E5 /* TransactionListViewController.swift */,
 				FC55F79422A9A6140066D3E5 /* Views */,
+				FC55F78C22A9A6140066D3E5 /* CreateTransaction */,
 			);
 			path = TransactionList;
 			sourceTree = "<group>";
@@ -288,8 +276,8 @@
 		FC55F78D22A9A6140066D3E5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */,
 				FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */,
+				FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,9 +285,9 @@
 		FC55F79422A9A6140066D3E5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FC55F79522A9A6140066D3E5 /* TransactionListTableViewCell.swift */,
 				FC55F79622A9A6140066D3E5 /* TransactionListViewCoorinator.swift */,
 				FC55F79722A9A6140066D3E5 /* TransactionListDatasource.swift */,
+				FC55F79522A9A6140066D3E5 /* TransactionListTableViewCell.swift */,
 				FC55F79822A9A6140066D3E5 /* TransactionListViewController.swift */,
 			);
 			path = Views;
@@ -523,11 +511,9 @@
 				FC0EB6F222A84F5F00BFAFC2 /* SignInViewCoordinator.swift in Sources */,
 				FC0EB6D922A8119900BFAFC2 /* EndPoint.swift in Sources */,
 				FC0EB6DF22A8210C00BFAFC2 /* String+OrEmpty.swift in Sources */,
-				FC55F79C22A9A6140066D3E5 /* TransactionListViewCoorinator.swift in Sources */,
 				FCA1D61D22A850C100D33EF5 /* LayoutAnchor.swift in Sources */,
 				FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */,
 				FCA1D62F22A8890500D33EF5 /* APIResponse.swift in Sources */,
-				FC55F79E22A9A6140066D3E5 /* TransactionListViewController.swift in Sources */,
 				FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */,
 				FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */,
 				FC0EB6D522A8102A00BFAFC2 /* RESTComponent.swift in Sources */,
@@ -551,10 +537,8 @@
 				FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */,
 				FCA1D62222A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift in Sources */,
 				FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */,
-				FC55F79B22A9A6140066D3E5 /* TransactionListTableViewCell.swift in Sources */,
 				FC55F7A222A9A6140066D3E5 /* TransactionListViewController.swift in Sources */,
 				FC7E354C22A95E47008C8646 /* String+Truncate.swift in Sources */,
-				FC55F79D22A9A6140066D3E5 /* TransactionListDatasource.swift in Sources */,
 				FCA1D62B22A8773E00D33EF5 /* Credentials.swift in Sources */,
 				FC62B93C22A8B32E00A03D08 /* GenericTableViewDatasource.swift in Sources */,
 				FC0EB6D322A8056600BFAFC2 /* AddableAndRemovable.swift in Sources */,

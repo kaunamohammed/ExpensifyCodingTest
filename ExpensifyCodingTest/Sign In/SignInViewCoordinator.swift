@@ -27,6 +27,11 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
     viewController.successfullySignedIn = { [startTransactionListViewCoordinator] apiResponse in
       startTransactionListViewCoordinator(apiResponse)
     }
+    
+  }
+  
+  deinit {
+    print("Bye: \(self.description)")
   }
   
 }

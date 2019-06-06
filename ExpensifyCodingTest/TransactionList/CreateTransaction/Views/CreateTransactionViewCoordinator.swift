@@ -14,6 +14,7 @@ final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransa
   
   override func start() {
     
+    viewController = .init(authToken: authToken.orEmpty, router: Router())
     navigate(to: viewController, with: .push, animated: true)
     
   }

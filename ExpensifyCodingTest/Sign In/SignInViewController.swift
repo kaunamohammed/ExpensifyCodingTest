@@ -123,7 +123,6 @@ private extension SignInViewController {
   }
   
   func attemptSignIn(with credentials: Credentials) {
-    showIndicator()
     updateViews(for: .authenticating)
     // I prefer to capture objects directly rather than doing the weak/unowned self dance
     router.request(EndPoint.authenticateUser(partnerUserID: credentials.id,

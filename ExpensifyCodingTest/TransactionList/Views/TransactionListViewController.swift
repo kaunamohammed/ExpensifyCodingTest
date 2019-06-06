@@ -57,7 +57,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     navigationItem.leftBarButtonItem = .init(title: "Log Out",
                                               style: .plain,
                                               target: self,
-                                              action: #selector(createTransactionButtonTapped))
+                                              action: #selector(logOutButtonTapped))
     
     navigationItem.rightBarButtonItem = .init(title: "Create",
                                               style: .plain,
