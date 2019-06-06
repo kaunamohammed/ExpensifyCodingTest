@@ -28,6 +28,7 @@ class TransactionListTableViewCell: UITableViewCell {
 
     leadingLabel.layout {
       $0.leading == contentView.leadingAnchor + 20
+      $0.width == contentView.widthAnchor - (contentView.frame.width * 0.6)
       $0.centerY == contentView.centerYAnchor
     }
     trailingLabel.layout {
@@ -41,22 +42,20 @@ class TransactionListTableViewCell: UITableViewCell {
   }
   
   func configure(with model: TransactionList) {
-//    let dateFormatter = DateFormatter()
-//    let date = dateFormatter.date(from: model.created)
-//    dateFormatter.dateFormat = "E d MMM"
-//    let formattedDateString = dateFormatter.string(from: date!)
-    
     leadingLabel.attributedText = AttributedStringBuilder()
-      .append(model.merchant, attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
-      .append("\n", attributes: [:])
-      .append(model.created, attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
+      .append(model.merchant.truncate(by: 15) + "\n",
+              attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
+      .append(model.created.orEmpty,
+              attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
       .build()
     
     trailingLabel.attributedText = AttributedStringBuilder()
-      .append("\(model.currency) \(model.amount)", attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
+      .append("\(model.currency.orEmpty) \(model.amount)", attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
       .append("\n", attributes: [:])
-      .append(model.bank, attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
+      .append(model.bank.orEmpty, attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
       .build()
   }
   
 }
+
+

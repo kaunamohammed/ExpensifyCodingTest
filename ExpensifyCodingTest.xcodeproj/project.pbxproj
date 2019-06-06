@@ -37,6 +37,7 @@
 		FC62B94222A8C78500A03D08 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */; };
 		FC62B94422A8C7A600A03D08 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B94322A8C7A600A03D08 /* RefreshControl.swift */; };
 		FC62B94622A8C84300A03D08 /* RefreshControlHoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B94522A8C84300A03D08 /* RefreshControlHoldable.swift */; };
+		FC7E354C22A95E47008C8646 /* String+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354B22A95E47008C8646 /* String+Truncate.swift */; };
 		FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */; };
 		FC89987522A8933D0071EA3B /* LoadingDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89987422A8933D0071EA3B /* LoadingDisplayable.swift */; };
 		FC989D5922A7F2CB0066310C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D5822A7F2CB0066310C /* SignInViewController.swift */; };
@@ -96,6 +97,7 @@
 		FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		FC62B94322A8C7A600A03D08 /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		FC62B94522A8C84300A03D08 /* RefreshControlHoldable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlHoldable.swift; sourceTree = "<group>"; };
+		FC7E354B22A95E47008C8646 /* String+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Truncate.swift"; sourceTree = "<group>"; };
 		FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		FC89987422A8933D0071EA3B /* LoadingDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDisplayable.swift; sourceTree = "<group>"; };
 		FC989D5322A7F2CB0066310C /* ExpensifyCodingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensifyCodingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +180,7 @@
 				FC0EB6DC22A81A0100BFAFC2 /* Constants.swift */,
 				FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */,
 				FC62B93722A8AE1B00A03D08 /* URLQueryItem+RemoveNilValues.swift */,
+				FC7E354B22A95E47008C8646 /* String+Truncate.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				FC0EB6D722A8117600BFAFC2 /* URLProducer.swift in Sources */,
 				FCA1D62222A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift in Sources */,
 				FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */,
+				FC7E354C22A95E47008C8646 /* String+Truncate.swift in Sources */,
 				FCA1D62B22A8773E00D33EF5 /* Credentials.swift in Sources */,
 				FC62B93C22A8B32E00A03D08 /* GenericTableViewDatasource.swift in Sources */,
 				FC0EB6D322A8056600BFAFC2 /* AddableAndRemovable.swift in Sources */,

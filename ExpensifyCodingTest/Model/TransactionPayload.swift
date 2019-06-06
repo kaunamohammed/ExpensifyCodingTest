@@ -18,24 +18,25 @@ struct TransactionPayload: Codable {
 // MARK: - TransactionList
 struct TransactionList: Codable {
   let amount: Int
-  let bank: String
-  let billable: Bool
-  let cardID: Int
-  let cardName, cardNumber, category, comment: String
-  let created, currency, details, externalID: String
-  let inserted: String
-  let managedCard: Bool
-  let mcc: Int
+  let bank: String?
+//  let billable: Bool
+//  let cardID: Int
+//  let cardName, cardNumber, category, comment: String?
+  let created, currency: String?
+  //, details, externalID: String?
+//  let inserted: String
+//  let managedCard: Bool
+//  let mcc: Int
   let merchant: String
-  let modified: Bool
-  let modifiedAmount, modifiedCreated, modifiedCurrency, modifiedMCC: String
-  let modifiedMerchant, receiptFilename, receiptID, receiptState: String
-  let reimbursable: Bool
-  let reportID, tag, transactionHash, transactionID: String
-  let nameValuePairs: NameValuePairs
-  let unverified: Bool
-  let convertedAmount, currencyConversionRate: Int
-  let editable: String
+//  let modified: Bool
+//  let modifiedAmount, modifiedCreated, modifiedCurrency, modifiedMCC: String?
+//  let modifiedMerchant, receiptFilename, receiptID, receiptState: String?
+//  let reimbursable: Bool
+//  let reportID, tag, transactionHash, transactionID: String?
+//  let nameValuePairs: NameValuePairs?
+//  let unverified: Bool
+//  let convertedAmount, currencyConversionRate: Int?
+//  let editable: String
 }
 
 // MARK: - NameValuePairs

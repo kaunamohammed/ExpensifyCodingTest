@@ -27,16 +27,16 @@ public final class RefreshControl: NSObject {
     holder.add(refreshControl)
     isRefreshing = false
     refreshControl.addTarget(self, action: #selector(refreshControlDidRefresh), for: .valueChanged)
-    
   }
   
   @objc private func refreshControlDidRefresh(_ control: UIRefreshControl) {
     startRefreshing()
   }
   
-  public func startRefreshing() {
+  @objc public func startRefreshing() {
     isRefreshing = true
     refreshControl.beginRefreshing()
+    NotificationCenter.default.post(name: .refreshControlStartedRefreshing, object: nil)
   }
   
   public func endRefreshing() {
@@ -45,3 +45,9 @@ public final class RefreshControl: NSObject {
   }
   
 }
+
+extension Notification.Name {
+  static let refreshControlStartedRefreshing = Notification.Name(rawValue: "refreshControlStartedRefreshing")
+}
+
+//NotificationCenter.default.addObserver(self, selector: #selector(startRefreshing), name: .refreshControlStartedRefreshing, object: nil)

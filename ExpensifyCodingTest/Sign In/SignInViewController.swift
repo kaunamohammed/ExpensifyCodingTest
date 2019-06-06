@@ -127,7 +127,8 @@ private extension SignInViewController {
     updateViews(for: .authenticating)
     // I prefer to capture objects directly rather than doing the weak/unowned self dance
     router.request(EndPoint.authenticateUser(partnerUserID: credentials.id,
-                                             partnerUserSecret: credentials.password)) { [handle] (result) in handle(result) }
+                                             partnerUserSecret: credentials.password),
+                   completion: { [handle] result in handle(result) })
   }
   
   private func handle(result: Result<Data, NetworkError>) {
@@ -142,7 +143,7 @@ private extension SignInViewController {
           // here i'm passing along the apiResponse if the status code is between 200...299
           successfullySignedIn?(apiResponse)
         case 401...500:
-          updateViews(for: .failure(title: "Uh Oh", reason: "There seems to be a problem with the credentials you provided"))
+          updateViews(for: .failure(title: "Uh Oh", reason: "Please check your email or password and try again"))
         case 501...599:
           updateViews(for: .failure(title: nil, reason: "An internal error has occured. Please try again"))
         default:

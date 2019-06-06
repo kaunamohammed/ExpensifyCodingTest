@@ -20,7 +20,7 @@ public class ExpensifyAppCoordinator: AppCoordinator {
   private var signInViewCoordinator: SignInViewCoordinator?
   private var transactionListViewCoorinator: TransactionListViewCoorinator?
   
-  override func start() {
+  override public func start() {
     
     startSignInViewCoordinator()
     
@@ -41,11 +41,11 @@ private extension ExpensifyAppCoordinator {
   }
   
   func startTransactionListViewCoordinator(with response: APIResponse = .init(accountID: nil,
-                                                                                      httpCode: nil,
-                                                                                      jsonCode: 200,
-                                                                                      authToken: UUID().uuidString,
-                                                                                      email: "email",
-                                                                                      requestID: UUID().uuidString)) {
+                                                                              httpCode: nil,
+                                                                              jsonCode: 200,
+                                                                              authToken: UUID().uuidString,
+                                                                              email: "email",
+                                                                              requestID: UUID().uuidString)) {
     transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
     add(child: transactionListViewCoorinator!)
     transactionListViewCoorinator?.apiResponse = response
@@ -53,3 +53,4 @@ private extension ExpensifyAppCoordinator {
   }
 }
 
+//private extensi

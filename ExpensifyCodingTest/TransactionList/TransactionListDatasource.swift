@@ -8,4 +8,5 @@
 
 import Foundation
 
+// this can easily be put in the TransactionListViewController but incase of future development
 final class TransactionListDatasource: GenericTableViewDatasource<TransactionList, TransactionListTableViewCell> {}
