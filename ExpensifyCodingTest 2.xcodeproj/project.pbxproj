@@ -52,6 +52,8 @@
 		FCA1D62822A86E2800D33EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA1D62622A86E2800D33EF5 /* Assets.xcassets */; };
 		FCA1D62B22A8773E00D33EF5 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D62A22A8773E00D33EF5 /* Credentials.swift */; };
 		FCA1D62F22A8890500D33EF5 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D62E22A8890500D33EF5 /* APIResponse.swift */; };
+		FCD46EF422A99E5F00F96EC0 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD46EF322A99E5F00F96EC0 /* CreateTransactionViewController.swift */; };
+		FCD46EF722A99EF600F96EC0 /* CreateTransactionViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD46EF622A99EF600F96EC0 /* CreateTransactionViewCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		FCA1D62722A86E2800D33EF5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA1D62A22A8773E00D33EF5 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		FCA1D62E22A8890500D33EF5 /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		FCD46EF322A99E5F00F96EC0 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
+		FCD46EF622A99EF600F96EC0 /* CreateTransactionViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,10 +259,8 @@
 		FC62B93022A8A02000A03D08 /* TransactionList */ = {
 			isa = PBXGroup;
 			children = (
-				FC62B93122A8A07500A03D08 /* TransactionListViewCoorinator.swift */,
-				FC62B93322A8A0C900A03D08 /* TransactionListViewController.swift */,
-				FC62B93922A8B2FA00A03D08 /* TransactionListDatasource.swift */,
-				FC62B93D22A8B59F00A03D08 /* TransactionListTableViewCell.swift */,
+				FCD46EF222A99E2200F96EC0 /* Views */,
+				FCD46EF122A99DEC00F96EC0 /* CreateTransaction */,
 			);
 			path = TransactionList;
 			sourceTree = "<group>";
@@ -326,6 +328,34 @@
 				FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		FCD46EF122A99DEC00F96EC0 /* CreateTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				FCD46EF522A99EC100F96EC0 /* Views */,
+			);
+			path = CreateTransaction;
+			sourceTree = "<group>";
+		};
+		FCD46EF222A99E2200F96EC0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FC62B93122A8A07500A03D08 /* TransactionListViewCoorinator.swift */,
+				FC62B93322A8A0C900A03D08 /* TransactionListViewController.swift */,
+				FC62B93922A8B2FA00A03D08 /* TransactionListDatasource.swift */,
+				FC62B93D22A8B59F00A03D08 /* TransactionListTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FCD46EF522A99EC100F96EC0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FCD46EF622A99EF600F96EC0 /* CreateTransactionViewCoordinator.swift */,
+				FCD46EF322A99E5F00F96EC0 /* CreateTransactionViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -503,12 +533,14 @@
 				FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */,
 				FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */,
 				FC5F9FD922A7F65400598548 /* AppDelegate.swift in Sources */,
+				FCD46EF722A99EF600F96EC0 /* CreateTransactionViewCoordinator.swift in Sources */,
 				FC0EB6D722A8117600BFAFC2 /* URLProducer.swift in Sources */,
 				FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */,
 				FCA1D62222A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift in Sources */,
 				FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */,
 				FC7E354C22A95E47008C8646 /* String+Truncate.swift in Sources */,
 				FCA1D62B22A8773E00D33EF5 /* Credentials.swift in Sources */,
+				FCD46EF422A99E5F00F96EC0 /* CreateTransactionViewController.swift in Sources */,
 				FC62B93C22A8B32E00A03D08 /* GenericTableViewDatasource.swift in Sources */,
 				FC0EB6D322A8056600BFAFC2 /* AddableAndRemovable.swift in Sources */,
 				FC62B93822A8AE1C00A03D08 /* URLQueryItem+RemoveNilValues.swift in Sources */,

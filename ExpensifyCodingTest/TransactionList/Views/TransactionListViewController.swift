@@ -14,15 +14,19 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private lazy var tableView = UITableView {
     $0.dataSource = dataSource
-    $0.rowHeight = 80 //UITableView.automaticDimension
-    $0.estimatedRowHeight = 44
+    $0.rowHeight = 70 //UITableView.automaticDimension
+    $0.estimatedRowHeight = 80
     $0.allowsSelection = false
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     $0.removeEmptyCells()
+    $0.separatorInset = .init(top: 0, left: 40, bottom: 0, right: 0)
   }
   
   var activityIndicator: UIActivityIndicatorView? = nil
   private lazy var refreshControl = RefreshControl(holder: tableView)
+  
+  public var logOut: (() -> Void)?
+  public var goToCreateTransactionScreen: ((String) -> Void)?
   
   private let authToken: String
   private let router: NetworkRouter
@@ -45,10 +49,20 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
     title = "Transactions"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    
     view.add(tableView)
     tableView.pin(to: view)
     tableView.register(TransactionListTableViewCell.self)
+    
+    navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+    navigationItem.leftBarButtonItem = .init(title: "Log Out",
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(createTransactionButtonTapped))
+    
+    navigationItem.rightBarButtonItem = .init(title: "Create",
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(createTransactionButtonTapped))
     
     #if DEBUG
     refreshControl.title = "Getting shit done"
@@ -61,6 +75,14 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
     NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .refreshControlStartedRefreshing, object: nil)
     
+  }
+  
+  @objc private func logOutButtonTapped() {
+    logOut?()
+  }
+  
+  @objc private func createTransactionButtonTapped() {
+    goToCreateTransactionScreen?(authToken)
   }
   
   @objc private func reloadTableView(notification: NSNotification) {

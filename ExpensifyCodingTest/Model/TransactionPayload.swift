@@ -44,23 +44,3 @@ struct NameValuePairs: Codable {
 }
 
 
-struct CurrencyCode {
-  let string: String
-}
-extension CurrencyCode: ExpressibleByStringLiteral {
-  init(stringLiteral value: String) {
-    string = value
-  }
-}
-
-extension NumberFormatter {
-  
-  static func currency(from currencyCode: CurrencyCode, amount: Double) -> String? {
-    let formatter = NumberFormatter()
-    formatter.usesGroupingSeparator = true
-    formatter.numberStyle = .currency
-    formatter.currencyCode = currencyCode.string
-    return formatter.string(from: NSNumber(value: amount))
-  }
-  
-}

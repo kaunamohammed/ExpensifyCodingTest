@@ -11,8 +11,7 @@ import CoordinatorLibrary
 // here I have marked the class final because there's no need to inherit from it
 final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
   
-  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(presenter: presenter,
-                                                                                        removeCoordinator: remove)
+  private var transactionListViewCoorinator: TransactionListViewCoorinator?
   
   override func start() {
     
@@ -22,7 +21,7 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
     viewController = .init(router: Router())
     
     // here I kick of the navigation with the 'AppCoordinator' viewController
-    navigate(to: viewController, with: .set, animated: false)
+    navigate(to: viewController, with: .push, animated: false)
     
     viewController.successfullySignedIn = { [startTransactionListViewCoordinator] apiResponse in
       startTransactionListViewCoordinator(apiResponse)
@@ -33,8 +32,9 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 
 extension SignInViewCoordinator {
   private func startTransactionListViewCoordinator(with response: APIResponse) {
-    add(child: transactionListViewCoorinator)
-    transactionListViewCoorinator.apiResponse = response
-    transactionListViewCoorinator.start()
+    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
+    add(child: transactionListViewCoorinator!)
+    transactionListViewCoorinator!.apiResponse = response
+    transactionListViewCoorinator!.start()
   }
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import CoreGraphics
 
 extension Int {
   
@@ -16,6 +15,10 @@ extension Int {
   
   var asDouble: Double {
     return Double(self)
+  }
+  
+  var asCurrency: Double {
+    return Double(self / 1000)
   }
   
 }
