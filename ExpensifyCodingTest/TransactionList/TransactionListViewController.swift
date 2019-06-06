@@ -19,6 +19,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.allowsSelection = false
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     $0.removeEmptyCells()
+    $0.separatorInset = .init(top: 0, left: 30, bottom: 0, right: 0)
   }
   
   var activityIndicator: UIActivityIndicatorView? = nil
@@ -45,7 +46,6 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
     title = "Transactions"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    
     view.add(tableView)
     tableView.pin(to: view)
     tableView.register(TransactionListTableViewCell.self)
