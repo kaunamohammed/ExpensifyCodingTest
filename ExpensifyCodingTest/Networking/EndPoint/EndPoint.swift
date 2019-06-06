@@ -23,7 +23,7 @@ extension EndPoint: URLProducer {
     components.scheme = scheme
     components.host = host
     components.path = path
-    components.queryItems = queryItems
+    components.queryItems = queryItems.removeNilValues() 
     return components.url
   }
 }

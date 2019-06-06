@@ -17,20 +17,39 @@ import CoordinatorLibrary
  */
 class ExpensifyAppCoordinator: AppCoordinator {
   
-  var signInViewCoordinator: SignInViewCoordinator!
+  var signInViewCoordinator: SignInViewCoordinator?
+  var transactionListViewCoorinator: TransactionListViewCoorinator?
   
   override func start() {
     
+    startTransactionListViewCoordinator()
+    
+  }
+  
+}
+
+private extension ExpensifyAppCoordinator {
+  
+  func startSignInViewCoordinator() {
     signInViewCoordinator = SignInViewCoordinator(presenter: presenter,
                                                   removeCoordinator: remove)
     
     // adding the signInViewCoordinator to the Coordinator Hierachy
-    add(child: signInViewCoordinator)
-    
+    add(child: signInViewCoordinator!)
     // calling start to trigger the navigation to signInViewCoordinator
-    signInViewCoordinator.start()
-    
+    signInViewCoordinator!.start()
   }
   
+  func startTransactionListViewCoordinator(with response: APIResponse = .init(accountID: nil,
+                                                                                      httpCode: nil,
+                                                                                      jsonCode: 200,
+                                                                                      authToken: UUID().uuidString,
+                                                                                      email: "email",
+                                                                                      requestID: UUID().uuidString)) {
+    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
+    add(child: transactionListViewCoorinator!)
+    transactionListViewCoorinator?.apiResponse = response
+    transactionListViewCoorinator!.start()
+  }
 }
 

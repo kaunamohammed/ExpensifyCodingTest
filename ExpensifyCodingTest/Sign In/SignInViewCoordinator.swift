@@ -11,14 +11,30 @@ import CoordinatorLibrary
 // here I have marked the class final because there's no need to inherit from it
 final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
   
+  private var transactionListViewCoorinator: TransactionListViewCoorinator?
+  
   override func start() {
     
     // initialize the viewController
     // If someone tried to use a `TransactionListViewController` here we won't be able to compile, enforcing type-safety
-    viewController = SignInViewController()
+    // also using type inference to leave out a full definition i.e SignInViewCoordinator(router: Router())
+    viewController = .init(router: Router())
     
     // here I kick of the navigation with the 'AppCoordinator' viewController
     navigate(to: viewController, with: .push, animated: false)
+    
+    viewController.successfullySignedIn = { [startTransactionListViewCoordinator] apiResponse in
+      startTransactionListViewCoordinator(apiResponse)
+    }
   }
   
+}
+
+extension SignInViewCoordinator {
+  private func startTransactionListViewCoordinator(with response: APIResponse) {
+    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
+    add(child: transactionListViewCoorinator!)
+    transactionListViewCoorinator?.apiResponse = response
+    transactionListViewCoorinator!.start()
+  }
 }

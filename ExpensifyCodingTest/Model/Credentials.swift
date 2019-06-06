@@ -1,5 +1,5 @@
 //
-//  AccountInfo.swift
+//  Credentials.swift
 //  ExpensifyCodingTest
 //
 //  Created by Kauna Mohammed on 05/06/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AccountInfo: Decodable {
-  let accountID, httpCode, jsonCode: Int
-  let authToken, email, requestID: String
+struct Credentials {
+  let id: String
+  let password: String
 }

@@ -11,6 +11,14 @@ import XCTest
 
 class ExpensifyCodingTestTests: XCTestCase {
   
+  func testQueryItemsRemovesNilValues() {
+    let item1 = URLQueryItem(name: "q", value: nil)
+    let item2 = URLQueryItem(name: "sort", value: "getting_shit_done")
+    let items = [item1, item2]
+    
+    XCTAssertFalse(items.removeNilValues().contains(item1), "Did not remove nil values") 
+  }
+  
   static let expensifyAuthAPI = URL(string:"https://expensify.com/api?command=Authenticate&partnerName=applicant&partnerPassword=d7c3119c6cdab02d68d9&partnerUserID=expensifytest@mailinator.com&partnerUserSecret=hire_me")
 
   
@@ -34,20 +42,18 @@ class ExpensifyCodingTestTests: XCTestCase {
   
   func testRouterRequest() {
     
-    let expectation = self.expectation(description: "Network Request")
-    var info: AccountInfo?
+    let expectation = self.expectation(description: "Making Network Request")
+    var response: APIResponse!
 
     let router = Router()
     router.request(EndPoint.authenticateUser(partnerUserID: Constants.TestUser.id, partnerUserSecret: Constants.TestUser.password)) { (result) in
       switch result {
-      case .success(let data): print(data)
+      case .success(let data):
       do {
-        let decoder = JSONDecoder()
-        let accountInfo = try decoder.decode(AccountInfo.self, from: data)
-        info = accountInfo
+        response = try data.decoded()
         expectation.fulfill()
       }
-      catch {
+      catch let error {
         print(error.localizedDescription)
         }
       case .failure(let error):
@@ -57,8 +63,14 @@ class ExpensifyCodingTestTests: XCTestCase {
     }
     
     waitForExpectations(timeout: 20, handler: nil)
-    print(info)
-    XCTAssertTrue(info?.email == Constants.TestUser.id)
+    switch response.jsonCode {
+    case 200...299: print("success authenticating")
+    case 401...500: print("error authenticating")
+    case 501...599: print("bad request")
+    default: print("failiure")
+    }
+
+    XCTAssertTrue(response.email == Constants.TestUser.id)
   }
   
 }
