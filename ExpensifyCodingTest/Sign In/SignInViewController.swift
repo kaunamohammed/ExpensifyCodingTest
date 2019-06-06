@@ -17,6 +17,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.contentMode = .scaleAspectFill
   }
   
+  // marked lazy so i can have self available
   private lazy var emailTextField = UITextField {
     $0.placeholder = "Email"
     $0.borderStyle = .roundedRect
@@ -26,6 +27,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     //$0.delegate = self
   }
   
+  // marked lazy so i can have self available
   private lazy var passwordTextField = UITextField {
     $0.placeholder = "Password"
     $0.isSecureTextEntry = true
@@ -38,6 +40,8 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   private lazy var signInButton = UIButton {
     $0.backgroundColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
     $0.layer.cornerRadius = 5
+    //$0.alpha = 0.5
+    //$0.isEnabled = false
     $0.setTitle("Sign In", for: .normal)
     $0.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
   }
@@ -74,8 +78,6 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     
     title = "Sign In"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    signInButton.alpha = 0.5
-    signInButton.isEnabled = false
     layoutSubViews()
     
   }
@@ -94,42 +96,64 @@ final class SignInViewController: UIViewController, AlertDisplayable {
 
 // MARK: - Networking
 private extension SignInViewController {
+  
+  private enum SignInState {
+    case authenticating
+    case success
+    case failure(title: String?, reason: String?)
+  }
+  
+  /// changes the state of views based on the sign in state
+  private func updateViews(for state: SignInState) {
+    switch state {
+    case .authenticating:
+      showIndicator()
+      signInButton.alpha = 0.5
+      signInButton.isEnabled = false
+    case .success:
+      hideIndicator()
+      signInButton.alpha = 0.5
+      signInButton.isEnabled = false
+    case .failure(title: let title, reason: let message):
+      hideIndicator()
+      signInButton.alpha = 1
+      signInButton.isEnabled = true
+      displayAlert(title: title, message: message)
+    }
+  }
+  
   func attemptSignIn(with credentials: Credentials) {
     showIndicator()
-    signInButton.alpha = 0.5
-    signInButton.isEnabled = false
-    
+    updateViews(for: .authenticating)
     // I prefer to capture objects directly rather than doing the weak/unowned self dance
     router.request(EndPoint.authenticateUser(partnerUserID: credentials.id,
-                                             partnerUserSecret: credentials.password)) { [signInButton, hideIndicator, successfullySignedIn, displayAlert] (result) in
-      switch result {
-      case .success(let data):
-        do {
-          let apiResponse: APIResponse = try data.decoded()
-          switch apiResponse.jsonCode {
-          case 200...299:
-            hideIndicator()
-            signInButton.alpha = 0.5
-            signInButton.isEnabled = false
-            successfullySignedIn?(apiResponse)
-          default:
-            hideIndicator()
-            displayAlert("Uh Oh", "Looks like there was a problem signing in. Please check your credentials or wait a little and try again")
-          }
-        } catch let error {
-          hideIndicator()
-          signInButton.alpha = 1
-          signInButton.isEnabled = true
-          displayAlert("Uh Oh", error.localizedDescription)
+                                             partnerUserSecret: credentials.password)) { [handle] (result) in handle(result) }
+  }
+  
+  private func handle(result: Result<Data, NetworkError>) {
+    switch result {
+    case .success(let data):
+      do {
+        // here i'm taking advantage of the decoded() extension on `Data`
+        let apiResponse: APIResponse = try data.decoded()
+        switch apiResponse.jsonCode {
+        case 200...299:
+          updateViews(for: .success)
+          // here i'm passing along the apiResponse if the status code is between 200...299
+          successfullySignedIn?(apiResponse)
+        case 401...500:
+          updateViews(for: .failure(title: "Uh Oh", reason: "There seems to be a problem with the credentials you provided"))
+        case 501...599:
+          updateViews(for: .failure(title: nil, reason: "An internal error has occured. Please try again"))
+        default:
+          updateViews(for: .failure(title: nil, reason: "An unknown problem occured. Please try again"))
         }
-        
-      case .failure(let error):
-        hideIndicator()
-        signInButton.alpha = 1
-        signInButton.isEnabled = true
-        displayAlert("Uh Oh", error.errorDescription.orEmpty)
+      } catch let error {
+        updateViews(for: .failure(title: nil, reason: error.localizedDescription))
       }
       
+    case .failure(let error):
+      updateViews(for: .failure(title: nil, reason: error.errorDescription.orEmpty))
     }
   }
 }
@@ -166,11 +190,3 @@ private extension SignInViewController {
     
   }
 }
-
-//
-//case 401...500:
-//hideActivityIndicator()
-//showAlert("Uh Oh", "Looks like there was a problem signing you in")
-//case 501...599:
-//hideActivityIndicator()
-//showAlert("Uh Oh", "We can't sign you in at this time")

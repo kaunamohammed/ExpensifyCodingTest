@@ -15,14 +15,14 @@ import CoordinatorLibrary
  
  I could mark this class as `final` but incase I want to kick of a different navigation flow based on business logic I'll like to inherit from this class
  */
-class ExpensifyAppCoordinator: AppCoordinator {
+public class ExpensifyAppCoordinator: AppCoordinator {
   
-  var signInViewCoordinator: SignInViewCoordinator?
-  var transactionListViewCoorinator: TransactionListViewCoorinator?
+  private var signInViewCoordinator: SignInViewCoordinator?
+  private var transactionListViewCoorinator: TransactionListViewCoorinator?
   
   override func start() {
     
-    startTransactionListViewCoordinator()
+    startSignInViewCoordinator()
     
   }
   

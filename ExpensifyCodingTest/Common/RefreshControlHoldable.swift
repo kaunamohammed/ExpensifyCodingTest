@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol RefreshControlHoldable {
+public protocol RefreshControlHoldable {
   func add(_ refreshControl: UIRefreshControl)
 }
 
 extension RefreshControlHoldable where Self: UIScrollView {
-  func add(_ refreshControl: UIRefreshControl) {
+  public func add(_ refreshControl: UIRefreshControl) {
     if #available(iOS 10.0, *) {
       self.refreshControl = refreshControl
     } else {

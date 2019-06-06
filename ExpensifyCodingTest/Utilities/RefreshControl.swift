@@ -8,15 +8,24 @@
 
 import UIKit.UIRefreshControl
 
-class RefreshControl: NSObject {
+public final class RefreshControl: NSObject {
   
-  var isRefreshing = false
+  public var isRefreshing = false
+  
+  public var title: String? = nil
+  public var titleColor: UIColor = .clear {
+    didSet {
+      refreshControl.attributedTitle = AttributedStringBuilder().append(title.orEmpty, attributes: [.foregroundColor: titleColor]).build()
+    }
+  }
+  
   private let refreshControl = UIRefreshControl()
   
-  init(holder: RefreshControlHoldable) {
+  public init(holder: RefreshControlHoldable) {
     super.init()
     
     holder.add(refreshControl)
+    isRefreshing = false
     refreshControl.addTarget(self, action: #selector(refreshControlDidRefresh), for: .valueChanged)
     
   }
@@ -25,12 +34,12 @@ class RefreshControl: NSObject {
     startRefreshing()
   }
   
-  func startRefreshing() {
+  public func startRefreshing() {
     isRefreshing = true
     refreshControl.beginRefreshing()
   }
   
-  func endRefreshing() {
+  public func endRefreshing() {
     isRefreshing = false
     refreshControl.endRefreshing()
   }

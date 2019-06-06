@@ -21,6 +21,18 @@ class TransactionListViewController: UIViewController {
     $0.removeEmptyCells()
   }
   
+  private lazy var forceEndRefreshButton = UIButton {
+    $0.setTitle("stop refreshing", for: .normal)
+    $0.setTitleColor(.black, for: .normal)
+    $0.addTarget(self, action: #selector(forceEndRefresh), for: .touchUpInside)
+  }
+  
+  @objc private func forceEndRefresh() {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+      self.refreshControl.endRefreshing()
+    }
+  }
+  
   private lazy var refreshControl = RefreshControl(holder: tableView)
   
   private let authToken: String
@@ -39,11 +51,16 @@ class TransactionListViewController: UIViewController {
     title = "Transactions"
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    view.add(tableView)
+    view.add(tableView, forceEndRefreshButton)
     tableView.pin(to: view)
     tableView.register(TransactionListTableViewCell.self)
     dataSource.dataList = stubTransactions
-    refreshControl.isRefreshing = false
+    
+    refreshControl.title = "Checking for updates"
+    refreshControl.titleColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
+    
+    forceEndRefreshButton.center(in: view)
+    
   }
   
 }
