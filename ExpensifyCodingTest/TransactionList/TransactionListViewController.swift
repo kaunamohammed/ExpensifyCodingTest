@@ -14,11 +14,12 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private lazy var tableView = UITableView {
     $0.dataSource = dataSource
-    $0.rowHeight = 50 //UITableView.automaticDimension
+    $0.rowHeight = 80 //UITableView.automaticDimension
     $0.estimatedRowHeight = 44
     $0.allowsSelection = false
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     $0.removeEmptyCells()
+    $0.separatorInset = .init(top: 0, left: 30, bottom: 0, right: 0)
   }
   
   var activityIndicator: UIActivityIndicatorView? = nil
@@ -45,7 +46,6 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
     title = "Transactions"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    
     view.add(tableView)
     tableView.pin(to: view)
     tableView.register(TransactionListTableViewCell.self)
