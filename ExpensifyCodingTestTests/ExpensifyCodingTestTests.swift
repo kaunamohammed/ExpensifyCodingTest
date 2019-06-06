@@ -11,6 +11,11 @@ import XCTest
 
 class ExpensifyCodingTestTests: XCTestCase {
   
+  func testNumberFormatterConvertsToExpectedCurrency() {
+    let str = NumberFormatter.currency(from: "USD", amount: 900.99)
+    XCTAssertTrue(str == "$900.99")
+  }
+  
   func testQueryItemsRemovesNilValues() {
     let item1 = URLQueryItem(name: "q", value: nil)
     let item2 = URLQueryItem(name: "sort", value: "getting_shit_done")

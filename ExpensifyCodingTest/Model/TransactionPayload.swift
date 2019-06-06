@@ -10,8 +10,9 @@ import Foundation
 
 // MARK: - Welcome
 struct TransactionPayload: Codable {
-  let jsonCode, httpCode: Int
-  let transactionList: [TransactionList]
+  let jsonCode: Int
+  let title, httpCode: Int?
+  let transactionList: [TransactionList]?
   let codeRevision, requestID: String
 }
 
@@ -19,27 +20,47 @@ struct TransactionPayload: Codable {
 struct TransactionList: Codable {
   let amount: Int
   let bank: String?
-//  let billable: Bool
-//  let cardID: Int
-//  let cardName, cardNumber, category, comment: String?
-  let created, currency: String?
-  //, details, externalID: String?
-//  let inserted: String
-//  let managedCard: Bool
-//  let mcc: Int
+  let billable: Bool
+  let cardID: Int
+  let cardName, cardNumber, category, comment: String?
+  let created, details, externalID: String?
+  let currency: String?
+  let inserted: String
+  let managedCard: Bool
+  let mcc: Int
   let merchant: String
-//  let modified: Bool
-//  let modifiedAmount, modifiedCreated, modifiedCurrency, modifiedMCC: String?
-//  let modifiedMerchant, receiptFilename, receiptID, receiptState: String?
-//  let reimbursable: Bool
-//  let reportID, tag, transactionHash, transactionID: String?
-//  let nameValuePairs: NameValuePairs?
-//  let unverified: Bool
-//  let convertedAmount, currencyConversionRate: Int?
-//  let editable: String
+  let modified: Bool
+  let reimbursable: Bool
+  let reportID, tag, transactionHash, transactionID: String?
+  let nameValuePairs: NameValuePairs?
+  let unverified: Bool
+  let convertedAmount, currencyConversionRate: Int?
+  let editable: String
 }
 
 // MARK: - NameValuePairs
 struct NameValuePairs: Codable {
   let comment: String
+}
+
+
+struct CurrencyCode {
+  let string: String
+}
+extension CurrencyCode: ExpressibleByStringLiteral {
+  init(stringLiteral value: String) {
+    string = value
+  }
+}
+
+extension NumberFormatter {
+  
+  static func currency(from currencyCode: CurrencyCode, amount: Double) -> String? {
+    let formatter = NumberFormatter()
+    formatter.usesGroupingSeparator = true
+    formatter.numberStyle = .currency
+    formatter.currencyCode = currencyCode.string
+    return formatter.string(from: NSNumber(value: amount))
+  }
+  
 }

@@ -132,6 +132,7 @@ private extension SignInViewController {
   }
   
   private func handle(result: Result<Data, NetworkError>) {
+    assert(Thread.isMainThread, "Get on the main thread dude")
     switch result {
     case .success(let data):
       do {

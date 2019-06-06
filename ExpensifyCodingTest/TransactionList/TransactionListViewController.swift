@@ -50,7 +50,11 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     tableView.pin(to: view)
     tableView.register(TransactionListTableViewCell.self)
     
+    #if DEBUG
+    refreshControl.title = "Getting shit done"
+    #else
     refreshControl.title = "Checking for updates"
+    #endif
     refreshControl.titleColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
     
     loadData()
@@ -81,16 +85,17 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
         let payload: TransactionPayload = try data.decoded()
         switch payload.jsonCode {
         case 200...299:
-          dataSource.dataList = payload.transactionList
+          dataSource.dataList = payload.transactionList!.isEmpty ? [] : payload.transactionList!
           isReloaded ? refreshControl.endRefreshing() : hideIndicator()
           tableView.reloadData()
         default:
           isReloaded ? refreshControl.endRefreshing() : hideIndicator()
           displayAlert(message: "We couldn't retrieve your transactions")
         }
-      } catch let _ {
+      } catch let error {
+        print(error)
         isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-        displayAlert(message: "Looks like your session has expired. Please sign in again")
+        displayAlert(message: "Looks like there was a problem. Please try again")
       }
       
     case .failure(let error):
@@ -118,116 +123,3 @@ extension TransactionListViewController: LoadingDisplayable {
 //          displayAlert(message: "We couldnt retrieve your transactions")
 //        case 501...599: print("Failure")
 
-
-
-//let stubTransactions = [
-//
-//  TransactionList(amount: 100,
-//                  bank: "Monzo",
-//                  billable: true,
-//                  cardID: 000,
-//                  cardName: "Monzo",
-//                  cardNumber: "000-000",
-//                  category: "noCategory",
-//                  comment: "",
-//                  created: "2019-03-03",
-//                  currency: "USD",
-//                  details: "",
-//                  externalID: "",
-//                  inserted: "",
-//                  managedCard: false,
-//                  mcc: 0,
-//                  merchant: "Tesco",
-//                  modified: false,
-//                  modifiedAmount: "",
-//                  modifiedCreated: "",
-//                  modifiedCurrency: "",
-//                  modifiedMCC: "",
-//                  modifiedMerchant: "",
-//                  receiptFilename: "",
-//                  receiptID: "",
-//                  receiptState: "",
-//                  reimbursable: true,
-//                  reportID: "",
-//                  tag: "",
-//                  transactionHash: "",
-//                  transactionID: "",
-//                  nameValuePairs: NameValuePairs(comment: ""),
-//                  unverified: true,
-//                  convertedAmount: 50,
-//                  currencyConversionRate: 2,
-//                  editable: "notEditable"),
-//
-//  TransactionList(amount: 10,
-//                  bank: "Monzo",
-//                  billable: true,
-//                  cardID: 000,
-//                  cardName: "Monzo",
-//                  cardNumber: "000-000",
-//                  category: "noCategory",
-//                  comment: "",
-//                  created: "2019-03-03",
-//                  currency: "USD",
-//                  details: "",
-//                  externalID: "",
-//                  inserted: "",
-//                  managedCard: false,
-//                  mcc: 0,
-//                  merchant: "Tesco",
-//                  modified: false,
-//                  modifiedAmount: "",
-//                  modifiedCreated: "",
-//                  modifiedCurrency: "",
-//                  modifiedMCC: "",
-//                  modifiedMerchant: "",
-//                  receiptFilename: "",
-//                  receiptID: "",
-//                  receiptState: "",
-//                  reimbursable: true,
-//                  reportID: "",
-//                  tag: "",
-//                  transactionHash: "",
-//                  transactionID: "",
-//                  nameValuePairs: NameValuePairs(comment: ""),
-//                  unverified: true,
-//                  convertedAmount: 50,
-//                  currencyConversionRate: 2,
-//                  editable: "notEditable"),
-//
-//  TransactionList(amount: 96,
-//                  bank: "Monzo",
-//                  billable: true,
-//                  cardID: 000,
-//                  cardName: "Monzo",
-//                  cardNumber: "000-000",
-//                  category: "noCategory",
-//                  comment: "",
-//                  created: "2019-03-03",
-//                  currency: "GBP",
-//                  details: "",
-//                  externalID: "",
-//                  inserted: "",
-//                  managedCard: false,
-//                  mcc: 0,
-//                  merchant: "Tesco",
-//                  modified: false,
-//                  modifiedAmount: "",
-//                  modifiedCreated: "",
-//                  modifiedCurrency: "",
-//                  modifiedMCC: "",
-//                  modifiedMerchant: "",
-//                  receiptFilename: "",
-//                  receiptID: "",
-//                  receiptState: "",
-//                  reimbursable: true,
-//                  reportID: "",
-//                  tag: "",
-//                  transactionHash: "",
-//                  transactionID: "",
-//                  nameValuePairs: NameValuePairs(comment: ""),
-//                  unverified: true,
-//                  convertedAmount: 50,
-//                  currencyConversionRate: 2,
-//                  editable: "notEditable")
-//
-//]

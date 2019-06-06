@@ -46,13 +46,16 @@ class TransactionListTableViewCell: UITableViewCell {
       .append(model.merchant.truncate(by: 15) + "\n",
               attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
       .append(model.created.orEmpty,
-              attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
+              attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .footnote)])
       .build()
     
+  
     trailingLabel.attributedText = AttributedStringBuilder()
-      .append("\(model.currency.orEmpty) \(model.amount)", attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
+      .append(NumberFormatter.currency(from: .init(string: model.currency.orEmpty), amount: abs(model.amount).asDouble)!,
+              attributes: [.foregroundColor: model.amount < 0 ? #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1) : #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
       .append("\n", attributes: [:])
-      .append(model.bank.orEmpty, attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
+      .append(model.bank.orEmpty,
+              attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .footnote)])
       .build()
   }
   
