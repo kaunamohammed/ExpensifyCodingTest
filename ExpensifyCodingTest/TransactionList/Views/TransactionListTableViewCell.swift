@@ -17,7 +17,7 @@ class TransactionListTableViewCell: UITableViewCell {
   
   private let trailingLabel = UILabel {
     $0.numberOfLines = 2
-    $0.textAlignment = .right
+    $0.textAlignment = .center
   }
 
   private let billableImageView = UIImageView {
@@ -45,7 +45,7 @@ class TransactionListTableViewCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    contentView.add(leaingStackView, trailingStackView)
+
     backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     setUpConstraints()
@@ -86,14 +86,20 @@ class TransactionListTableViewCell: UITableViewCell {
 
 private extension TransactionListTableViewCell {
   func setUpConstraints() {
+    contentView.add(leaingStackView, trailingStackView)
+
     billableImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
     billableImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    
-    leaingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    billableImageView.translatesAutoresizingMaskIntoConstraints = false
+
+    leaingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
     leaingStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
     leaingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    
-    trailingStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-    trailingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 20)
+    leaingStackView.translatesAutoresizingMaskIntoConstraints = false
+
+    trailingStackView.topAnchor.constraint(equalTo: leaingStackView.topAnchor).isActive = true
+    trailingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    trailingStackView.translatesAutoresizingMaskIntoConstraints = false
+
   }
 }

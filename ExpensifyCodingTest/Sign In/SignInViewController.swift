@@ -14,7 +14,8 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   
   private let logoImageView = UIImageView {
     $0.image = #imageLiteral(resourceName: "expensify-logo")
-    $0.contentMode = .scaleAspectFill
+    $0.contentMode = .scaleAspectFit
+    $0.clipsToBounds = true
   }
   
   // marked lazy so i can have self available
@@ -23,8 +24,8 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.borderStyle = .roundedRect
     $0.keyboardType = .emailAddress
     $0.autocapitalizationType = .none
-    $0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .allEditingEvents)
-    //$0.delegate = self
+    //$0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .allEditingEvents)
+    $0.delegate = self
   }
   
   // marked lazy so i can have self available
@@ -32,7 +33,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.placeholder = "Password"
     $0.isSecureTextEntry = true
     $0.borderStyle = .roundedRect
-    $0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .allEditingEvents)
+    //$0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .allEditingEvents)
     //$0.delegate = self
   }
   
@@ -82,6 +83,11 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    view.endEditing(true)
+  }
+  
   // FIXME: - when either textField get edited this turns the button on, need too wait for both textfields to not be empty
   @objc func textFieldEditingChanged(_ textField: UITextField) {
 //    signInButton.alpha = textField.text.orEmpty.isEmpty ? 0.5 : 1.0
@@ -92,6 +98,69 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     attemptSignIn(with: Credentials(id: emailTextField.text.orEmpty, password: passwordTextField.text.orEmpty))
   }
   
+}
+
+extension SignInViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
+    if emailTextField.isFirstResponder {
+      emailTextField.resignFirstResponder()
+      passwordTextField.becomeFirstResponder()
+      return false
+    } else {
+      return true
+    }
+    
+  }
+}
+
+// MARK: - Loading Indicator
+extension SignInViewController {
+  func showIndicator() {
+    view.add(activityIndicator)
+    activityIndicator.startAnimating()
+    activityIndicator.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10).isActive = true
+    activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor).isActive = true
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  func hideIndicator() {
+    activityIndicator.stopAnimating()
+    activityIndicator.removeFromSuperview()
+  }
+}
+
+// MARK: - Constraints
+private extension SignInViewController {
+  
+  func setUpConstraints() {
+    view.add(containerStackView)
+    
+    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 30).isActive = true
+    containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    containerStackView.translatesAutoresizingMaskIntoConstraints = false
+    
+    let height = view.frame.size.height * 0.06
+    let width = view.frame.size.width * 0.95
+    
+    logoImageView.heightAnchor.constraint(equalToConstant: height).isActive = true
+    logoImageView.widthAnchor.constraint(equalToConstant: width).isActive = true
+    logoImageView.translatesAutoresizingMaskIntoConstraints = false
+    
+    emailTextField.heightAnchor.constraint(equalToConstant: height).isActive = true
+    emailTextField.widthAnchor.constraint(equalToConstant: width).isActive = true
+    emailTextField.translatesAutoresizingMaskIntoConstraints = false
+    
+    passwordTextField.heightAnchor.constraint(equalToConstant: height).isActive = true
+    passwordTextField.widthAnchor.constraint(equalToConstant: width).isActive = true
+    passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+    
+    signInButton.heightAnchor.constraint(equalToConstant: height).isActive = true
+    signInButton.widthAnchor.constraint(equalToConstant: width).isActive = true
+    signInButton.translatesAutoresizingMaskIntoConstraints = false
+    
+    
+  }
 }
 
 // MARK: - Networking
@@ -159,35 +228,3 @@ private extension SignInViewController {
   }
 }
 
-// MARK: - Loading Indicator
-extension SignInViewController {
-  func showIndicator() {
-    view.add(activityIndicator)
-    activityIndicator.startAnimating()
-    activityIndicator.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10).isActive = true
-    activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor, constant: 10).isActive = true
-  }
-  
-  func hideIndicator() {
-    activityIndicator.stopAnimating()
-    activityIndicator.removeFromSuperview()
-  }
-}
-
-// MARK: - Constraints
-private extension SignInViewController {
-  
-  func setUpConstraints() {
-    view.add(containerStackView)
-    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 50).isActive = true
-    containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10).isActive = true
-    
-    // I favour this approach to reduce the amount of layout code when I have the same view layout specifications
-    containerStackView.arrangedSubviews
-      .forEach {
-        $0.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: (view.frame.height * 0.95))
-        $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: (view.frame.width * 0.2))
-    }
-    
-  }
-}

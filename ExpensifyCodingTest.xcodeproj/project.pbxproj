@@ -45,6 +45,7 @@
 		FC7E354E22A98725008C8646 /* NumberFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354D22A98725008C8646 /* NumberFormatter+Ext.swift */; };
 		FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354F22A9875D008C8646 /* CurrencyCode.swift */; };
 		FC83011622AA1117007AA66D /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83011522AA1117007AA66D /* Date+String.swift */; };
+		FC83011A22AA8349007AA66D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83011922AA8349007AA66D /* NetworkManager.swift */; };
 		FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */; };
 		FC989D5922A7F2CB0066310C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D5822A7F2CB0066310C /* SignInViewController.swift */; };
 		FC989D6C22A7F2DE0066310C /* ExpensifyCodingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D6B22A7F2DE0066310C /* ExpensifyCodingTestTests.swift */; };
@@ -108,6 +109,8 @@
 		FC7E354D22A98725008C8646 /* NumberFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Ext.swift"; sourceTree = "<group>"; };
 		FC7E354F22A9875D008C8646 /* CurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		FC83011522AA1117007AA66D /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		FC83011722AA13F4007AA66D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FC83011922AA8349007AA66D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		FC989D5322A7F2CB0066310C /* ExpensifyCodingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensifyCodingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC989D5822A7F2CB0066310C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +208,7 @@
 		FC0EB6EC22A84E9000BFAFC2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				FC83011922AA8349007AA66D /* NetworkManager.swift */,
 				FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */,
 				FC0EB6E422A83BAD00BFAFC2 /* Router.swift */,
 				FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */,
@@ -250,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				FC55F79422A9A6140066D3E5 /* Views */,
-				FC55F78C22A9A6140066D3E5 /* CreateTransaction */,
 			);
 			path = TransactionList;
 			sourceTree = "<group>";
@@ -306,9 +309,11 @@
 		FC989D5522A7F2CB0066310C /* ExpensifyCodingTest */ = {
 			isa = PBXGroup;
 			children = (
+				FC83011722AA13F4007AA66D /* README.md */,
 				FC989D7622A7F5B10066310C /* AppCoordinator */,
 				FC0EB6B222A8028200BFAFC2 /* Sign In */,
 				FC55F78B22A9A6130066D3E5 /* TransactionList */,
+				FC55F78C22A9A6140066D3E5 /* CreateTransaction */,
 				FC0EB6B022A8016400BFAFC2 /* Networking */,
 				FC0EB6B122A8021D00BFAFC2 /* Utilities */,
 				FC0EB6EE22A84EC200BFAFC2 /* Model */,
@@ -519,6 +524,7 @@
 				FC7E354E22A98725008C8646 /* NumberFormatter+Ext.swift in Sources */,
 				FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */,
 				FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */,
+				FC83011A22AA8349007AA66D /* NetworkManager.swift in Sources */,
 				FC5F9FD922A7F65400598548 /* AppDelegate.swift in Sources */,
 				FC55F7A122A9A6140066D3E5 /* TransactionListDatasource.swift in Sources */,
 				FC0EB6D722A8117600BFAFC2 /* URLProducer.swift in Sources */,

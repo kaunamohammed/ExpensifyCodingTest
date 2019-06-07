@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class Router: NetworkRouter {
   
@@ -15,10 +15,11 @@ final class Router: NetworkRouter {
   func request(_ route: URLProducer, completion: @escaping NetworkCompletion) {
     let session = URLSession.shared
     guard let request = buildRequest(from: route) else { return }
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     task = session.dataTask(with: request, completionHandler: { (data, response, error) in
       DispatchQueue.main.async {
         guard error == nil else { completion(.failure(.requestFailure)); return }
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         if let httpResponse = response as? HTTPURLResponse {
           switch httpResponse.statusCode {
           case 200: completion(.success(data!))

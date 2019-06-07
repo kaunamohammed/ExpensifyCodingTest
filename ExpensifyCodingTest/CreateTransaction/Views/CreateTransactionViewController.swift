@@ -10,7 +10,7 @@ import UIKit
 
 class CreateTransactionViewController: UIViewController, AlertDisplayable {
   
-  lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+  private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
 
   private let datePicker = UIDatePicker {
     $0.datePickerMode = .date
@@ -46,7 +46,7 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     return stackView
   }()
   
-  public var uploadedTransaction: (() -> Void)?
+  public var didSuccessfullyCreateTransaction: ((String) -> Void)?
   
   private let authToken: String
   private let router: NetworkRouter
@@ -107,17 +107,27 @@ private extension CreateTransactionViewController {
     view.add(containerStackView)
     containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 20).isActive = true
     containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    containerStackView.translatesAutoresizingMaskIntoConstraints = false
+    
+    let height = (view.frame.size.height * 0.05)
+    let width = (view.frame.size.width * 0.8)
     
     datePicker.heightAnchor.constraint(equalToConstant: 100).isActive = true
-    datePicker.widthAnchor.constraint(equalToConstant: (view.frame.size.width * 0.8)).isActive = true
+    datePicker.widthAnchor.constraint(equalToConstant: width).isActive = true
+    datePicker.translatesAutoresizingMaskIntoConstraints = false
     
-    // I favour this approach to reduce the amount of layout code when I have the same view layout specifications
-    containerStackView.arrangedSubviews
-      .filter { $0 is UITextField || $0 is UIButton }
-      .forEach {
-        $0.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: (view.frame.height * 0.95))
-        $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: (view.frame.width * 0.2))
-    }
+    merchantInputTextField.heightAnchor.constraint(equalToConstant: height).isActive = true
+    merchantInputTextField.widthAnchor.constraint(equalToConstant: width).isActive = true
+    merchantInputTextField.translatesAutoresizingMaskIntoConstraints = false
+
+    amountInputTextField.heightAnchor.constraint(equalToConstant: height).isActive = true
+    amountInputTextField.widthAnchor.constraint(equalToConstant: width).isActive = true
+    amountInputTextField.translatesAutoresizingMaskIntoConstraints = false
+
+    createTransactionButton.heightAnchor.constraint(equalToConstant: height).isActive = true
+    createTransactionButton.widthAnchor.constraint(equalToConstant: width).isActive = true
+    createTransactionButton.translatesAutoresizingMaskIntoConstraints = false
+
   }
   
 }
@@ -167,10 +177,7 @@ private extension CreateTransactionViewController {
         switch response.jsonCode {
         case 200...299:
           updateViews(for: .uploaded)
-          NotificationCenter.default.post(name: .createdTansaction,
-                                          object: nil,
-                                          userInfo: ["transactionID": response.transactionID.orEmpty])
-          uploadedTransaction?()
+          didSuccessfullyCreateTransaction?(response.transactionID.orEmpty)
         default:
           updateViews(for: .failure(title: nil, reason: "We couldn't upload your transaction. Please try again"))
         }

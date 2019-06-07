@@ -26,14 +26,16 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private lazy var refreshControl = RefreshControl(holder: tableView)
   
-  public var logOut: (() -> Void)?
+  public var didTapTologOut: (() -> Void)?
   public var goToCreateTransactionScreen: ((String) -> Void)?
   
   private let authToken: String
   private let router: NetworkRouter
-  init(authToken: String, router: NetworkRouter) {
+  private let coordinator: TransactionListViewCoorinator
+  init(authToken: String, router: NetworkRouter, coordinator: TransactionListViewCoorinator) {
     self.authToken = authToken
     self.router = router
+    self.coordinator = coordinator
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -43,7 +45,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   deinit {
     NotificationCenter.default.removeObserver(self, name: .refreshControlStartedRefreshing, object: nil)
-    NotificationCenter.default.removeObserver(self, name: .createdTansaction, object: nil)
+    //NotificationCenter.default.removeObserver(self, name: .createdTansaction, object: nil)
   }
   
   override func viewDidLoad() {
@@ -51,7 +53,6 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
     title = "Transactions"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    view.add(tableView)
     
     setUpConstraints()
     
@@ -78,12 +79,13 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     loadData()
     
     NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .refreshControlStartedRefreshing, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .createdTansaction, object: nil)
+    
+    coordinator.createdTransactionID = { [loadData] transactionID in loadData(false) }
     
   }
   
   @objc private func logOutButtonTapped() {
-    logOut?()
+    didTapTologOut?()
   }
   
   @objc private func createTransactionButtonTapped() {
@@ -94,13 +96,34 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     notification.userInfo != nil ? loadData(force: false) : loadData(force: true)
   }
   
+}
+
+// MARK: - Loading Indicator
+extension TransactionListViewController {
+  func showIndicator() {
+    view.add(activityIndicator)
+    activityIndicator.startAnimating()
+    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  func hideIndicator() {
+    activityIndicator.stopAnimating()
+    activityIndicator.removeFromSuperview()
+  }
+}
+
+// MARK: - Constraints
+extension TransactionListViewController {
   func setUpConstraints() {
+    view.add(tableView)
     tableView.topAnchor.constraint(equalTo: topSafeArea).isActive = true
     tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     tableView.bottomAnchor.constraint(equalTo: bottomSafeArea).isActive = true
+    tableView.translatesAutoresizingMaskIntoConstraints = false
   }
-  
 }
 
 // MARK: Networking
@@ -141,24 +164,6 @@ extension TransactionListViewController {
     }
   }
 }
-
-// MARK: - Indicator
-extension TransactionListViewController {
-  func showIndicator() { 
-    view.add(activityIndicator)
-    activityIndicator.startAnimating()
-    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  }
-  
-  func hideIndicator() {
-    activityIndicator.stopAnimating()
-    activityIndicator.removeFromSuperview()
-  }
-}
-
-
-
 
 //        case 401...500: print("Failure")
 //          displayAlert(message: "We couldnt retrieve your transactions")

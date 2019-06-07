@@ -8,16 +8,25 @@
 
 import CoordinatorLibrary
 
+protocol CreateTransactionViewCoordinatorDelegate: class {
+  func didCreateTransaction(_ transactionID: String)
+}
+
 final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransactionViewController> {
   
   var authToken: String?
+  
+  public weak var delegate: CreateTransactionViewCoordinatorDelegate?
   
   override func start() {
 
     viewController = .init(authToken: authToken.orEmpty, router: Router())
     navigate(to: viewController, with: .push, animated: true)
     
-    viewController.uploadedTransaction = { [popViewController] in popViewController(true) }
+    viewController.didSuccessfullyCreateTransaction = { [delegate, popViewController] transactionID in
+      delegate?.didCreateTransaction(transactionID)
+      popViewController(true)
+    }
     
   }
   

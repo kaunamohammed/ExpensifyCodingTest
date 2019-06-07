@@ -12,6 +12,8 @@ final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewC
   
   public var apiResponse: APIResponse!
   
+  public var createdTransactionID: ((String) -> Void)?
+  
   private lazy var createTransactionViewCoordinator: CreateTransactionViewCoordinator = .init(presenter: presenter,
                                                                                               removeCoordinator: remove)
   private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
@@ -19,7 +21,7 @@ final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewC
   
   override func start() {
     
-    viewController = .init(authToken: apiResponse.authToken.orEmpty, router: Router())
+    viewController = .init(authToken: apiResponse.authToken.orEmpty, router: Router(), coordinator: self)
     
     navigate(to: viewController, with: .set, animated: false)
     
@@ -27,8 +29,16 @@ final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewC
       startCreateTransactionViewCoordinator(authToken)
     }
     
-    viewController.logOut = { [startSignInViewCoordinator] in startSignInViewCoordinator() }
+    viewController.didTapTologOut = { [startSignInViewCoordinator] in startSignInViewCoordinator() }
     
+  }
+  
+}
+
+extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegate {
+  
+  func didCreateTransaction(_ transactionID: String) {
+    createdTransactionID?(transactionID)
   }
   
 }
@@ -38,6 +48,7 @@ private extension TransactionListViewCoorinator {
   func startCreateTransactionViewCoordinator(with token: String) {
     add(child: createTransactionViewCoordinator)
     createTransactionViewCoordinator.authToken = token
+    createTransactionViewCoordinator.delegate = self
     createTransactionViewCoordinator.start()
   }
   
