@@ -20,7 +20,13 @@ public extension Optional where Wrapped == String {
 }
 
 extension String {
+  
   var asInt: Int {
     return Int(self)!
   }
+  
+  func truncate(by length: Int, trailing: String = "...") -> String {
+    return count > length ? String(prefix(length)) + trailing : self
+  }
+  
 }

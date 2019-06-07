@@ -42,24 +42,14 @@ class TransactionListTableViewCell: UITableViewCell {
     stackView.distribution = .fill
     return stackView
   }()
-
-
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(leaingStackView, trailingStackView)
     backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
-    billableImageView.set(height: 20, width: 20)
-    leaingStackView.layout {
-      $0.leading == contentView.leadingAnchor + 10
-      $0.width == contentView.widthAnchor - (contentView.frame.width * 0.6)
-      $0.centerY == contentView.centerYAnchor
-    }
-    
-    trailingStackView.layout {
-      $0.top == leaingStackView.topAnchor
-      $0.trailing == contentView.trailingAnchor - 20
-    }
+    setUpConstraints()
+
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -94,4 +84,16 @@ class TransactionListTableViewCell: UITableViewCell {
   
 }
 
-
+private extension TransactionListTableViewCell {
+  func setUpConstraints() {
+    billableImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    billableImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    
+    leaingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    leaingStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    leaingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    
+    trailingStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    trailingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 20)
+  }
+}

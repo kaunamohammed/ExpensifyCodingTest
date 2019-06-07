@@ -17,11 +17,14 @@ import CoordinatorLibrary
  */
 public class ExpensifyAppCoordinator: AppCoordinator {
   
-  private var signInViewCoordinator: SignInViewCoordinator?
-  private var transactionListViewCoorinator: TransactionListViewCoorinator?
+  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
+                                                                        removeCoordinator: remove)
+  
+  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(presenter: presenter,
+                                                                                        removeCoordinator: remove)
   
   override public func start() {
-    
+                                                                                          
     startSignInViewCoordinator()
     
   }
@@ -35,9 +38,9 @@ private extension ExpensifyAppCoordinator {
                                                   removeCoordinator: remove)
     
     // adding the signInViewCoordinator to the Coordinator Hierachy
-    add(child: signInViewCoordinator!)
+    add(child: signInViewCoordinator)
     // calling start to trigger the navigation to signInViewCoordinator
-    signInViewCoordinator!.start()
+    signInViewCoordinator.start()
   }
   
 }

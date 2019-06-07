@@ -12,6 +12,8 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
   
+  lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+  
   private lazy var tableView = UITableView {
     $0.dataSource = dataSource
     $0.rowHeight = 70
@@ -22,7 +24,6 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.separatorInset = .init(top: 0, left: 40, bottom: 0, right: 0)
   }
   
-  var activityIndicator: UIActivityIndicatorView? = nil
   private lazy var refreshControl = RefreshControl(holder: tableView)
   
   public var logOut: (() -> Void)?
@@ -51,7 +52,9 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     title = "Transactions"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     view.add(tableView)
-    tableView.pin(to: view)
+    
+    setUpConstraints()
+    
     tableView.register(TransactionListTableViewCell.self)
     
     navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
@@ -89,6 +92,13 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   @objc private func reloadTableView(notification: NSNotification) {
     notification.userInfo != nil ? loadData(force: false) : loadData(force: true)
+  }
+  
+  func setUpConstraints() {
+    tableView.topAnchor.constraint(equalTo: topSafeArea).isActive = true
+    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: bottomSafeArea).isActive = true
   }
   
 }
@@ -133,12 +143,17 @@ extension TransactionListViewController {
 }
 
 // MARK: - Indicator
-extension TransactionListViewController: LoadingDisplayable {
+extension TransactionListViewController {
   func showIndicator() { 
-    activityIndicator = .init(style: .gray)
-    view.add(activityIndicator!)
-    activityIndicator!.center(in: view)
-    activityIndicator!.startAnimating()
+    view.add(activityIndicator)
+    activityIndicator.startAnimating()
+    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+  }
+  
+  func hideIndicator() {
+    activityIndicator.stopAnimating()
+    activityIndicator.removeFromSuperview()
   }
 }
 

@@ -10,6 +10,8 @@ import UIKit
 
 class CreateTransactionViewController: UIViewController, AlertDisplayable {
   
+  lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+
   private let datePicker = UIDatePicker {
     $0.datePickerMode = .date
   }
@@ -44,8 +46,6 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     return stackView
   }()
   
-  var activityIndicator: UIActivityIndicatorView? = nil
-  
   public var uploadedTransaction: (() -> Void)?
   
   private let authToken: String
@@ -65,7 +65,7 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
-    layoutSubViews()
+    setUpConstraints()
     
   }
   
@@ -81,6 +81,42 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
                         amount: amountInputTextField.text!,
                         created: dateString,
                         merchant: merchantInputTextField.text!)
+    }
+  }
+  
+}
+
+// MARK: - Loading Indicator
+extension CreateTransactionViewController {
+  func showIndicator() {
+    view.add(activityIndicator)
+    activityIndicator.startAnimating()
+    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+  }
+  
+  func hideIndicator() {
+    activityIndicator.stopAnimating()
+    activityIndicator.removeFromSuperview()
+  }
+}
+
+// MARK: - Constraints
+private extension CreateTransactionViewController {
+  func setUpConstraints() {
+    view.add(containerStackView)
+    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 20).isActive = true
+    containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    
+    datePicker.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    datePicker.widthAnchor.constraint(equalToConstant: (view.frame.size.width * 0.8)).isActive = true
+    
+    // I favour this approach to reduce the amount of layout code when I have the same view layout specifications
+    containerStackView.arrangedSubviews
+      .filter { $0 is UITextField || $0 is UIButton }
+      .forEach {
+        $0.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: (view.frame.height * 0.95))
+        $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: (view.frame.width * 0.2))
     }
   }
   
@@ -146,42 +182,5 @@ private extension CreateTransactionViewController {
     case .failure(let error):
       updateViews(for: .failure(title: nil, reason: error.errorDescription.orEmpty))
     }
-  }
-}
-
-// MARK: - Indicator
-extension CreateTransactionViewController: LoadingDisplayable {
-  func showIndicator() {
-    activityIndicator = .init(style: .gray)
-    view.add(activityIndicator!)
-    activityIndicator!.layout {
-      $0.top == createTransactionButton.bottomAnchor + 10
-      $0.centerX == createTransactionButton.centerXAnchor
-    }
-    activityIndicator!.startAnimating()
-  }
-}
-
-// MARK: - Layout
-private extension CreateTransactionViewController {
-  func layoutSubViews() {
-    view.add(containerStackView)
-    containerStackView.layout {
-      $0.top == topSafeArea + 20
-      $0.centerX == view.centerXAnchor
-    }
-    
-    datePicker.set(height: 100, width: view.frame.size.width * 0.8)
-    
-    // I favour this approach to reduce the amount of layout code when I have the same view layout specifications
-    containerStackView.arrangedSubviews
-      .filter { $0 is UITextField || $0 is UIButton }
-      .forEach {
-        $0.layout {
-          $0.height == view.heightAnchor - (view.frame.height * 0.95)
-          $0.width == view.widthAnchor - (view.frame.width * 0.2)
-        }
-    }
-    
   }
 }

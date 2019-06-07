@@ -6,7 +6,7 @@
 //  Copyright © 2018 Kauna Mohammed. All rights reserved.
 //
 
-import UIKit.UITableView
+import UIKit
 
 extension UITableView {
   func removeEmptyCells() {

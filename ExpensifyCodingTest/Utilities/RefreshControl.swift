@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import UIKit.UIRefreshControl
+import UIKit
 
 public final class RefreshControl: NSObject {
   

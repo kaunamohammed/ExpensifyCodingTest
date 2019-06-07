@@ -8,17 +8,6 @@
 
 import UIKit
 
-extension Date {
-  
-  static func nowString() -> String {
-    let formatter = DateFormatter()
-    let date = Date()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.string(from: date)
-  }
-  
-}
-
 public protocol Reusable {
     static var reuseIdentifier: String { get }
 }
@@ -31,7 +20,6 @@ public extension Reusable {
 
 
 extension UITableViewCell: Reusable {}
-extension UICollectionViewCell: Reusable {}
 
 public extension UITableView {
 
@@ -45,13 +33,4 @@ public extension UITableView {
         }
         return cell
     }
-}
-
-
-public extension UICollectionView {
-  
-  func register<T: UICollectionViewCell>(_ cellType: T.Type) {
-    register(cellType.self, forCellWithReuseIdentifier: T.reuseIdentifier)
-  }
-  
 }

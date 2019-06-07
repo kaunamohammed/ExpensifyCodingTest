@@ -6,7 +6,6 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-
 extension Int {
   
   var asString: String {

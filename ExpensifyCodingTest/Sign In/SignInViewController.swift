@@ -10,7 +10,7 @@ import UIKit
 
 final class SignInViewController: UIViewController, AlertDisplayable {
   
-  var activityIndicator: UIActivityIndicatorView?
+  lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
   private let logoImageView = UIImageView {
     $0.image = #imageLiteral(resourceName: "expensify-logo")
@@ -78,7 +78,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     
     title = "Sign In"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    layoutSubViews()
+    setUpConstraints()
     
   }
   
@@ -159,34 +159,34 @@ private extension SignInViewController {
   }
 }
 
-// MARK: - Alerts
-extension SignInViewController: LoadingDisplayable {
+// MARK: - Loading Indicator
+extension SignInViewController {
   func showIndicator() {
-    activityIndicator = .init(style: .gray)
-    view.add(activityIndicator!)
-    activityIndicator!.startAnimating()
-    activityIndicator!.layout {
-      $0.top == signInButton.bottomAnchor + 10
-      $0.centerX == signInButton.centerXAnchor
-    }
+    view.add(activityIndicator)
+    activityIndicator.startAnimating()
+    activityIndicator.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10).isActive = true
+    activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor, constant: 10).isActive = true
+  }
+  
+  func hideIndicator() {
+    activityIndicator.stopAnimating()
+    activityIndicator.removeFromSuperview()
   }
 }
 
-// MARK: - Layout
+// MARK: - Constraints
 private extension SignInViewController {
-  func layoutSubViews() {
+  
+  func setUpConstraints() {
     view.add(containerStackView)
-    containerStackView.layout {
-      $0.top == topSafeArea + 50
-      $0.centerX == view.centerXAnchor
-    }
+    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 50).isActive = true
+    containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10).isActive = true
+    
     // I favour this approach to reduce the amount of layout code when I have the same view layout specifications
     containerStackView.arrangedSubviews
       .forEach {
-        $0.layout {
-          $0.height == view.heightAnchor - (view.frame.height * 0.95)
-          $0.width == view.widthAnchor - (view.frame.width * 0.2)
-        }
+        $0.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: (view.frame.height * 0.95))
+        $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: (view.frame.width * 0.2))
     }
     
   }
