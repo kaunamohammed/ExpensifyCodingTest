@@ -9,6 +9,5 @@
 import Foundation
 
 extension Notification.Name {
-  static let refreshControlStartedRefreshing = Notification.Name(rawValue: "refreshControlStartedRefreshing")
-  static let createdTansaction = Notification.Name(rawValue: "createdTansaction")
+  static let authStateChanged = Notification.Name(rawValue: "com.codingtest.ExpensifyCodingTest.authStateChanged")
 }
