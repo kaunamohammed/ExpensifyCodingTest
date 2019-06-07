@@ -10,8 +10,6 @@ import UIKit
 
 class TransactionListViewController: UIViewController, AlertDisplayable {
   
-  private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
-  
   private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
   private lazy var refreshControl = UIRefreshControl {
@@ -27,15 +25,18 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     $0.removeEmptyCells()
     $0.add(refreshControl: refreshControl)
+    $0.register(TransactionListTableViewCell.self)
     $0.separatorInset = .init(top: 0, left: 40, bottom: 0, right: 0)
   }
   
   public var didTapTologOut: (() -> Void)?
   public var goToCreateTransactionScreen: ((String) -> Void)?
-  
+  private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
+
   private let authToken: String
   private let router: NetworkRouter
   private let coordinator: TransactionListViewCoorinator
+  
   init(authToken: String, router: NetworkRouter, coordinator: TransactionListViewCoorinator) {
     self.authToken = authToken
     self.router = router
@@ -46,7 +47,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -54,19 +55,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     setUpConstraints()
-    
-    tableView.register(TransactionListTableViewCell.self)
-    
-    navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-    navigationItem.leftBarButtonItem = .init(title: "Log Out",
-                                              style: .plain,
-                                              target: self,
-                                              action: #selector(logOutButtonTapped))
-    
-    navigationItem.rightBarButtonItem = .init(title: "Create",
-                                              style: .plain,
-                                              target: self,
-                                              action: #selector(createTransactionButtonTapped))
+    setUpNavigationItems()
 
     loadData()
     
@@ -74,18 +63,33 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
   }
   
-  @objc private func logOutButtonTapped() {
+  private func setUpNavigationItems() {
+    navigationItem.leftBarButtonItem = .init(title: "Log Out",
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(logOutButtonTapped))
+    navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+    
+    navigationItem.rightBarButtonItem = .init(title: "Create",
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(createTransactionButtonTapped))
+  }
+  
+}
+
+private extension TransactionListViewController {
+  @objc func logOutButtonTapped() {
     didTapTologOut?()
   }
   
-  @objc private func createTransactionButtonTapped() {
+  @objc func createTransactionButtonTapped() {
     goToCreateTransactionScreen?(authToken)
   }
   
-  @objc private func refreshTableView() {
+  @objc func refreshTableView() {
     loadData(force: true)
   }
-  
 }
 
 // MARK: - Loading Indicator
