@@ -12,4 +12,13 @@ extension UITableView {
   func removeEmptyCells() {
     tableFooterView = UIView()
   }
+  
+  func add(refreshControl: UIRefreshControl) {
+    if #available(iOS 10.0, *) {
+      self.refreshControl = refreshControl
+    } else {
+      addSubview(refreshControl)
+    }
+  }
+  
 }

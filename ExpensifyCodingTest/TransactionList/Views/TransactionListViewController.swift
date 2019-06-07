@@ -12,7 +12,12 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
   
-  lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+  private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+  
+  private lazy var refreshControl = UIRefreshControl {
+    $0.attributedTitle = AttributedStringBuilder().append("Checking for updates", attributes: [.foregroundColor: #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)]).build()
+    $0.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+  }
   
   private lazy var tableView = UITableView {
     $0.dataSource = dataSource
@@ -21,10 +26,9 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.allowsSelection = false
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     $0.removeEmptyCells()
+    $0.add(refreshControl: refreshControl)
     $0.separatorInset = .init(top: 0, left: 40, bottom: 0, right: 0)
   }
-  
-  private lazy var refreshControl = RefreshControl(holder: tableView)
   
   public var didTapTologOut: (() -> Void)?
   public var goToCreateTransactionScreen: ((String) -> Void)?
@@ -42,12 +46,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self, name: .refreshControlStartedRefreshing, object: nil)
-    //NotificationCenter.default.removeObserver(self, name: .createdTansaction, object: nil)
-  }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -68,17 +67,8 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
                                               style: .plain,
                                               target: self,
                                               action: #selector(createTransactionButtonTapped))
-    
-    #if DEBUG
-    refreshControl.title = "Getting shit done"
-    #else
-    refreshControl.title = "Checking for updates"
-    #endif
-    refreshControl.titleColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
-    
+
     loadData()
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .refreshControlStartedRefreshing, object: nil)
     
     coordinator.createdTransactionID = { [loadData] transactionID in loadData(false) }
     
@@ -92,8 +82,8 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     goToCreateTransactionScreen?(authToken)
   }
   
-  @objc private func reloadTableView(notification: NSNotification) {
-    notification.userInfo != nil ? loadData(force: false) : loadData(force: true)
+  @objc private func refreshTableView() {
+    loadData(force: true)
   }
   
 }
@@ -146,6 +136,7 @@ extension TransactionListViewController {
         switch payload.jsonCode {
         case 200...299:
           dataSource.dataList = payload.transactionList!.isEmpty ? [] : payload.transactionList!
+          print(dataSource.dataList.count)
           isReloaded ? refreshControl.endRefreshing() : hideIndicator()
           tableView.reloadData()
         default:
