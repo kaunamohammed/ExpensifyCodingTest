@@ -20,6 +20,8 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
   private lazy var merchantInputTextField = UITextField {
     $0.placeholder = "Merchant"
     $0.borderStyle = .roundedRect
+    $0.delegate = self
+    $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
   // marked lazy so i can have self available
@@ -27,6 +29,8 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     $0.placeholder = "Amount"
     $0.borderStyle = .roundedRect
     $0.keyboardType = .numberPad
+    $0.delegate = self
+    $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
   // marked lazy so i can have self available
@@ -67,6 +71,14 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     
     setUpConstraints()
     
+    validateTextFieldInput()
+    
+  }
+  
+  @objc private func validateTextFieldInput() {
+    let isValid = (!merchantInputTextField.text.orEmpty.isEmpty && !amountInputTextField.text.orEmpty.isEmpty)
+    createTransactionButton.alpha = isValid ? 1.0 : 0.5
+    createTransactionButton.isEnabled = isValid
   }
   
   @objc private func createTransactionButtonTapped() {
@@ -85,6 +97,8 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
   }
   
 }
+
+extension CreateTransactionViewController: UITextFieldDelegate {}
 
 // MARK: - Loading Indicator
 extension CreateTransactionViewController {
@@ -159,6 +173,7 @@ private extension CreateTransactionViewController {
       hideIndicator()
       createTransactionButton.alpha = 0.5
       createTransactionButton.isEnabled = false
+      displayAlert(title: "That's great", message: "Successfully created the transaction")
     case .failure(title: let title, reason: let message):
       hideIndicator()
       createTransactionButton.alpha = 1

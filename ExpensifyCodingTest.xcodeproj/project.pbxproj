@@ -40,6 +40,8 @@
 		FC62B93C22A8B32E00A03D08 /* GenericTableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */; };
 		FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93F22A8B97C00A03D08 /* AttributedStringBuilder.swift */; };
 		FC62B94222A8C78500A03D08 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */; };
+		FC68329D22AB1A620056C082 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC68329C22AB1A620056C082 /* Observable.swift */; };
+		FC68329F22AB1FD20056C082 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC68329E22AB1FD20056C082 /* SignInViewModel.swift */; };
 		FC7E354E22A98725008C8646 /* NumberFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354D22A98725008C8646 /* NumberFormatter+Ext.swift */; };
 		FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354F22A9875D008C8646 /* CurrencyCode.swift */; };
 		FC83011622AA1117007AA66D /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83011522AA1117007AA66D /* Date+String.swift */; };
@@ -102,6 +104,8 @@
 		FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewDatasource.swift; sourceTree = "<group>"; };
 		FC62B93F22A8B97C00A03D08 /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
 		FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		FC68329C22AB1A620056C082 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		FC68329E22AB1FD20056C082 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		FC7E354D22A98725008C8646 /* NumberFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Ext.swift"; sourceTree = "<group>"; };
 		FC7E354F22A9875D008C8646 /* CurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		FC83011522AA1117007AA66D /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			children = (
 				FC0EB6F122A84F5F00BFAFC2 /* SignInViewCoordinator.swift */,
 				FC989D5822A7F2CB0066310C /* SignInViewController.swift */,
+				FC68329E22AB1FD20056C082 /* SignInViewModel.swift */,
 			);
 			path = "Sign In";
 			sourceTree = "<group>";
@@ -281,6 +286,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FC68329A22AB05B70056C082 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				FC0EB6B222A8028200BFAFC2 /* Sign In */,
+				FC55F78B22A9A6130066D3E5 /* TransactionList */,
+				FC55F78C22A9A6140066D3E5 /* CreateTransaction */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
 		FC989D4A22A7F2CA0066310C = {
 			isa = PBXGroup;
 			children = (
@@ -306,9 +321,7 @@
 			children = (
 				FC83011722AA13F4007AA66D /* README.md */,
 				FC989D7622A7F5B10066310C /* AppCoordinator */,
-				FC0EB6B222A8028200BFAFC2 /* Sign In */,
-				FC55F78B22A9A6130066D3E5 /* TransactionList */,
-				FC55F78C22A9A6140066D3E5 /* CreateTransaction */,
+				FC68329A22AB05B70056C082 /* Feature */,
 				FC0EB6B022A8016400BFAFC2 /* Networking */,
 				FC0EB6B122A8021D00BFAFC2 /* Utilities */,
 				FC0EB6EE22A84EC200BFAFC2 /* Model */,
@@ -339,6 +352,7 @@
 		FCA1D63022A88E6300D33EF5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FC68329C22AB1A620056C082 /* Observable.swift */,
 				FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */,
 				FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */,
 			);
@@ -502,9 +516,11 @@
 				FCA1D62F22A8890500D33EF5 /* APIResponse.swift in Sources */,
 				FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */,
 				FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */,
+				FC68329F22AB1FD20056C082 /* SignInViewModel.swift in Sources */,
 				FC0EB6D522A8102A00BFAFC2 /* RESTComponent.swift in Sources */,
 				FC0EB6E922A84A8700BFAFC2 /* HTTPMethod.swift in Sources */,
 				FC55F7A622A9C2690066D3E5 /* CreateTransactionParams.swift in Sources */,
+				FC68329D22AB1A620056C082 /* Observable.swift in Sources */,
 				FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */,
 				FC83011622AA1117007AA66D /* Date+String.swift in Sources */,
 				FC0EB6DD22A81A0100BFAFC2 /* Constants.swift in Sources */,

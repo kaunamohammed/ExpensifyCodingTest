@@ -46,12 +46,13 @@ class ExpensifyCodingTestTests: XCTestCase {
   func testCreateTransactionEndPointDefinedCorrectly() {
     
     let endPoint = EndPoint.createTransaction(authToken: "fake_token",
-                                              params: CreateTransactionParams(amount: 100,
+                                              params: CreateTransactionParams(amount: "100",
                                                                               created: "2019-01-01",
                                                                               merchant: "Tesco")).url
     XCTAssertTrue(endPoint == Constants.TestEndpoint.expensifyCreateTransactionEndPoint)
   }
   
+  // FIXME: - Mock api call
   func testNetworkRouterRequest() {
     
     let expectation = self.expectation(description: "Making Network Request")

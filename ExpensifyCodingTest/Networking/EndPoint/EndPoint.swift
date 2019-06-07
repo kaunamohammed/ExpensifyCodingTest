@@ -28,7 +28,6 @@ extension EndPoint: URLProducer {
   }
 }
 
-
 // static factory methods for common endpoints
 extension EndPoint {
   /**

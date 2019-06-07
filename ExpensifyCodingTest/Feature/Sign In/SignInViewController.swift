@@ -24,8 +24,8 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.borderStyle = .roundedRect
     $0.keyboardType = .emailAddress
     $0.autocapitalizationType = .none
-    //$0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .allEditingEvents)
     $0.delegate = self
+    $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
   // marked lazy so i can have self available
@@ -33,16 +33,14 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.placeholder = "Password"
     $0.isSecureTextEntry = true
     $0.borderStyle = .roundedRect
-    //$0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .allEditingEvents)
-    //$0.delegate = self
+    $0.delegate = self
+    $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
   // marked lazy so i can have self available
   private lazy var signInButton = UIButton {
     $0.backgroundColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
     $0.layer.cornerRadius = 5
-    //$0.alpha = 0.5
-    //$0.isEnabled = false
     $0.setTitle("Sign In", for: .normal)
     $0.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
   }
@@ -80,6 +78,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     title = "Sign In"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     setUpConstraints()
+    validateTextFieldInput()
     
   }
   
@@ -88,10 +87,10 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     view.endEditing(true)
   }
   
-  // FIXME: - when either textField get edited this turns the button on, need too wait for both textfields to not be empty
-  @objc func textFieldEditingChanged(_ textField: UITextField) {
-//    signInButton.alpha = textField.text.orEmpty.isEmpty ? 0.5 : 1.0
-//    signInButton.isEnabled = !textField.text.orEmpty.isEmpty
+  @objc private func validateTextFieldInput() {
+    let isValid = (!emailTextField.text.orEmpty.isEmpty && !passwordTextField.text.orEmpty.isEmpty)
+    signInButton.alpha = isValid ? 1.0 : 0.5
+    signInButton.isEnabled = isValid
   }
   
   @objc private func signInButtonTapped() {
@@ -100,19 +99,8 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   
 }
 
-extension SignInViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
-    if emailTextField.isFirstResponder {
-      emailTextField.resignFirstResponder()
-      passwordTextField.becomeFirstResponder()
-      return false
-    } else {
-      return true
-    }
-    
-  }
-}
+// MARK: - UITextFieldDelegate
+extension SignInViewController: UITextFieldDelegate {}
 
 // MARK: - Loading Indicator
 extension SignInViewController {
