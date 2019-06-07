@@ -11,5 +11,5 @@ import Foundation
 struct APIResponse: Decodable {
   let accountID, httpCode: Int?
   let jsonCode: Int
-  let authToken, email, requestID: String?
+  let authToken, email, requestID, transactionID: String?
 }

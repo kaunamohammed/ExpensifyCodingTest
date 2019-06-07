@@ -10,11 +10,11 @@ import UIKit
 
 class TransactionListViewController: UIViewController, AlertDisplayable {
   
-  let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
+  private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
   
   private lazy var tableView = UITableView {
     $0.dataSource = dataSource
-    $0.rowHeight = 70 //UITableView.automaticDimension
+    $0.rowHeight = 70
     $0.estimatedRowHeight = 80
     $0.allowsSelection = false
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -42,6 +42,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
   deinit {
     NotificationCenter.default.removeObserver(self, name: .refreshControlStartedRefreshing, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .createdTansaction, object: nil)
   }
   
   override func viewDidLoad() {
@@ -74,6 +75,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     loadData()
     
     NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .refreshControlStartedRefreshing, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .createdTansaction, object: nil)
     
   }
   
@@ -86,15 +88,18 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   }
   
   @objc private func reloadTableView(notification: NSNotification) {
-    loadData(force: true)
+    notification.userInfo != nil ? loadData(force: false) : loadData(force: true)
   }
   
+}
+
+// MARK: Networking
+extension TransactionListViewController {
   private func loadData(force: Bool = false) {
     if !force { showIndicator() }
     
     router.request(EndPoint.getTransactions(authToken: authToken, params: TransactionParams(idType: .none,
-                                                                                            startDate: "2008-01-01",
-                                                                                            endDate: "2999-12-31",
+                                                                                            endDate: Date.nowString(),
                                                                                             limit: 100.asString)),
                    completion: { [handle] result in handle(result, force) })
   }
@@ -125,12 +130,11 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
       displayAlert(message: error.errorDescription.orEmpty)
     }
   }
-  
 }
 
-// MARK: - Alerts
+// MARK: - Indicator
 extension TransactionListViewController: LoadingDisplayable {
-  func showIndicator() {
+  func showIndicator() { 
     activityIndicator = .init(style: .gray)
     view.add(activityIndicator!)
     activityIndicator!.center(in: view)

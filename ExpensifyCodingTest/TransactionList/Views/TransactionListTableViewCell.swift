@@ -68,17 +68,13 @@ class TransactionListTableViewCell: UITableViewCell {
   
   func configure(with model: TransactionList) {
     
-    #if DEBUG
     billableImageView.isHidden = false
-    #else
-    billableImageView.isHidden = !model.billable
-    #endif
     
     let formatter = DateFormatter()
+    // getting the returned created string in its format
     formatter.dateFormat = "yyyy-MM-dd"
-    
     let date = formatter.date(from: model.created.orEmpty)
-    
+    // changing it to the correct format to display in the cell
     formatter.dateFormat = "E d MMM y"
     let dateString = formatter.string(from: date!)
     

@@ -40,17 +40,16 @@ private extension ExpensifyAppCoordinator {
     signInViewCoordinator!.start()
   }
   
-  func startTransactionListViewCoordinator(with response: APIResponse = .init(accountID: nil,
-                                                                              httpCode: nil,
-                                                                              jsonCode: 200,
-                                                                              authToken: UUID().uuidString,
-                                                                              email: "email",
-                                                                              requestID: UUID().uuidString)) {
-    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
-    add(child: transactionListViewCoorinator!)
-    transactionListViewCoorinator?.apiResponse = response
-    transactionListViewCoorinator!.start()
-  }
 }
 
-//private extensi
+//  func startTransactionListViewCoordinator(with response: APIResponse = .init(accountID: nil,
+//                                                                              httpCode: nil,
+//                                                                              jsonCode: 200,
+//                                                                              authToken: UUID().uuidString,
+//                                                                              email: "email",
+//                                                                              requestID: UUID().uuidString)) {
+//    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
+//    add(child: transactionListViewCoorinator!)
+//    transactionListViewCoorinator?.apiResponse = response
+//    transactionListViewCoorinator!.start()
+//  }

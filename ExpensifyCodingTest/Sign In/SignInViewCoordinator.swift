@@ -29,11 +29,7 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
     }
     
   }
-  
-  deinit {
-    print("Bye: \(self.description)")
-  }
-  
+
 }
 
 extension SignInViewCoordinator {

@@ -18,3 +18,9 @@ public extension Optional where Wrapped == String {
     }
   }
 }
+
+extension String {
+  var asInt: Int {
+    return Int(self)!
+  }
+}

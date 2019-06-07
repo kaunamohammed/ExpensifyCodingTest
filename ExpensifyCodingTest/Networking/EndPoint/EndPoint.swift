@@ -82,30 +82,28 @@ extension EndPoint {
         URLQueryItem(name: "offset", value: params.offset)
       ])
   }
-}
-
-
-struct TransactionParams {
-  let idType: IDType
-  let id, startDate, endDate, limit, offset: String?
   
-  init(idType: IDType, id: String? = nil, startDate: String? = nil, endDate: String? = nil, limit: String? = nil, offset: String? = nil) {
-    self.idType = idType
-    self.id = id
-    self.startDate = startDate
-    self.endDate = endDate
-    self.limit = limit
-    self.offset = offset
+  static func createTransaction(authToken: String, params: CreateTransactionParams) -> EndPoint {
+    return EndPoint(
+      queryItems: [
+        URLQueryItem(name: "command", value: "CreateTransaction"),
+        URLQueryItem(name: "authToken", value: authToken),
+        URLQueryItem(name: "amount", value: params.amount),
+        URLQueryItem(name: "created", value: params.created),
+        URLQueryItem(name: "merchant", value: params.merchant),
+        URLQueryItem(name: "category", value: params.category),
+        URLQueryItem(name: "comment", value: params.comment),
+        URLQueryItem(name: "currency", value: params.currency),
+        URLQueryItem(name: "receiptID", value: params.receiptID),
+        URLQueryItem(name: "tag", value: params.tag),
+      ])
   }
   
 }
 
-extension TransactionParams {
-  enum IDType: String {
-    case none = ""
-    case cardID
-    case reportIDList
-    case transactionID
+
+extension Bool {
+  var asString: String {
+    return String(self)
   }
 }
-

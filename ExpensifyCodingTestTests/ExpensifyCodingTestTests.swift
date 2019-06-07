@@ -11,9 +11,13 @@ import XCTest
 
 class ExpensifyCodingTestTests: XCTestCase {
   
+  func testConversionOfTodaysDateToString() {
+    XCTAssertTrue(Date.nowString() == "2019-06-07")
+  }
+  
   func testNumberFormatterConvertsToExpectedCurrency() {
-    let str = NumberFormatter.currency(from: "USD", amount: 900.99)
-    XCTAssertTrue(str == "$900.99")
+    let amount = NumberFormatter.currency(from: "USD", amount: 900.99)
+    XCTAssertTrue(amount == "$900.99")
   }
   
   func testQueryItemsRemovesNilValues() {
@@ -24,28 +28,31 @@ class ExpensifyCodingTestTests: XCTestCase {
     XCTAssertFalse(items.removeNilValues().contains(item1), "Did not remove nil values") 
   }
   
-  static let expensifyAuthAPI = URL(string:"https://expensify.com/api?command=Authenticate&partnerName=applicant&partnerPassword=d7c3119c6cdab02d68d9&partnerUserID=expensifytest@mailinator.com&partnerUserSecret=hire_me")
-
-  
   func testAuthEndPointDefinedCorrectly() {
-    let authEndPoint = EndPoint.authenticateUser(partnerUserID: "expensifytest@mailinator.com",
-                                                 partnerUserSecret: "hire_me").url
+    let authEndPoint = EndPoint.authenticateUser(partnerUserID: Constants.TestUser.id,
+                                                 partnerUserSecret: Constants.TestUser.password).url
 
-    XCTAssertTrue(authEndPoint == ExpensifyCodingTestTests.expensifyAuthAPI)
+    XCTAssertTrue(authEndPoint == Constants.TestEndpoint.expensifyAuthEndPoint)
     
   }
-  
-  static let expensifyTransactionAPI = URL(string: "https://expensify.com/api?command=Get&authToken=fake_token&returnValueList=transactionList&&startDate&endDate&limit=50&offset")
   
   func testGetTransactionsEndPointDefinedCorrectly() {
     let transactionsEndPoint = EndPoint.getTransactions(authToken: "fake_token",
                                                         params: .init(idType: .none, limit: 50.asString)).url
-    print(transactionsEndPoint!)
-    XCTAssertTrue(transactionsEndPoint == ExpensifyCodingTestTests.expensifyTransactionAPI)
+    XCTAssertTrue(transactionsEndPoint == Constants.TestEndpoint.expensiftGetTransactionsEndPoint)
     
   }
   
-  func testRouterRequest() {
+  func testCreateTransactionEndPointDefinedCorrectly() {
+    
+    let endPoint = EndPoint.createTransaction(authToken: "fake_token",
+                                              params: CreateTransactionParams(amount: 100,
+                                                                              created: "2019-01-01",
+                                                                              merchant: "Tesco")).url
+    XCTAssertTrue(endPoint == Constants.TestEndpoint.expensifyCreateTransactionEndPoint)
+  }
+  
+  func testNetworkRouterRequest() {
     
     let expectation = self.expectation(description: "Making Network Request")
     var response: APIResponse!

@@ -45,9 +45,3 @@ public final class RefreshControl: NSObject {
   }
   
 }
-
-extension Notification.Name {
-  static let refreshControlStartedRefreshing = Notification.Name(rawValue: "refreshControlStartedRefreshing")
-}
-
-//NotificationCenter.default.addObserver(self, selector: #selector(startRefreshing), name: .refreshControlStartedRefreshing, object: nil)

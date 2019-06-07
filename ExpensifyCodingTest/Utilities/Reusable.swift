@@ -8,6 +8,17 @@
 
 import UIKit
 
+extension Date {
+  
+  static func nowString() -> String {
+    let formatter = DateFormatter()
+    let date = Date()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.string(from: date)
+  }
+  
+}
+
 public protocol Reusable {
     static var reuseIdentifier: String { get }
 }

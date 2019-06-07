@@ -9,15 +9,15 @@
 import Foundation
 
 // MARK: - Welcome
-struct TransactionPayload: Codable {
+struct TransactionPayload: Decodable {
   let jsonCode: Int
   let title, httpCode: Int?
   let transactionList: [TransactionList]?
-  let codeRevision, requestID: String
+  let transactionID, codeRevision, requestID: String?
 }
 
 // MARK: - TransactionList
-struct TransactionList: Codable {
+struct TransactionList: Decodable {
   let amount: Int
   let bank: String?
   let billable: Bool
@@ -39,7 +39,7 @@ struct TransactionList: Codable {
 }
 
 // MARK: - NameValuePairs
-struct NameValuePairs: Codable {
+struct NameValuePairs: Decodable {
   let comment: String
 }
 

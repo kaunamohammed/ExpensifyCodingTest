@@ -13,9 +13,11 @@ final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransa
   var authToken: String?
   
   override func start() {
-    
+
     viewController = .init(authToken: authToken.orEmpty, router: Router())
     navigate(to: viewController, with: .push, animated: true)
+    
+    viewController.uploadedTransaction = { [popViewController] in popViewController(true) }
     
   }
   
