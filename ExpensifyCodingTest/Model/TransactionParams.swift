@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct TransactionParams {
+public struct TransactionParams {
   let idType: IDType
   let id, startDate, endDate, limit, offset: String?
   
-  init(idType: IDType, id: String? = nil, startDate: String? = nil, endDate: String? = nil, limit: String? = nil, offset: String? = nil) {
+  public init(idType: IDType, id: String? = nil, startDate: String? = nil, endDate: String? = nil, limit: String? = nil, offset: String? = nil) {
     self.idType = idType
     self.id = id
     self.startDate = startDate
@@ -23,7 +23,7 @@ struct TransactionParams {
   
 }
 
-extension TransactionParams {
+public extension TransactionParams {
   enum IDType: String {
     case none = ""
     case cardID

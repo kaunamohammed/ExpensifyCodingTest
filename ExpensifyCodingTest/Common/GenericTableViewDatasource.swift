@@ -6,23 +6,23 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import UIKit.UITableView
+import UIKit
 
-class GenericTableViewDatasource<Model: Decodable, Cell: UITableViewCell>: NSObject, UITableViewDataSource {
+public class GenericTableViewDatasource<Model: Decodable, Cell: UITableViewCell>: NSObject, UITableViewDataSource {
   
-  var dataList: [Model] = []
+  public var dataList: [Model] = []
   
   private let configure: (Cell, Model) -> Void
-  init(configure: @escaping ((Cell, Model) -> Void)) {
+  public init(configure: @escaping ((Cell, Model) -> Void)) {
     self.configure = configure
     super.init() 
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataList.count
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: Cell = tableView.dequeueReusableCell(for: indexPath)
     let item = dataList[indexPath.row]
     configure(cell, item)

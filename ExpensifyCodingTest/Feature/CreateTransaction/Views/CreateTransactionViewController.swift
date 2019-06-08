@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateTransactionViewController: UIViewController, AlertDisplayable {
+public class CreateTransactionViewController: UIViewController, AlertDisplayable {
   
   private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
@@ -66,7 +66,7 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
   
   public var didSuccessfullyCreateTransaction: ((String) -> Void)?
   
-  var currencyFormatter: NumberFormatter {
+  private var currencyFormatter: NumberFormatter {
     let formatter = NumberFormatter()
     formatter.numberStyle = .currencyAccounting
     formatter.locale = Locale(identifier: "en_US")
@@ -74,40 +74,46 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     formatter.maximumFractionDigits = 2
     return formatter
   }
-
   
-  private let authToken: String
-  private let router: NetworkRouter
-  init(authToken: String, router: NetworkRouter) {
-    self.authToken = authToken
-    self.router = router
+  private var viewModel: CreateTransactionViewModel
+  public init(viewModel: CreateTransactionViewModel) {
+    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "New Expense"
     view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     
     setUpConstraints()
-    navigationController?.navigationBar.backIndicatorImage = UIImage()
-    navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage()
-    navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
-    
+    setUpNavigationBar()
     validateTextFieldInput()
+    
+    viewModel.transactionOutcome = { [updateViews] state in updateViews(state) }
 
   }
   
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
+  private func setUpNavigationBar() {
+    navigationItem.title = "New Expense"
+    navigationController?.navigationBar.backIndicatorImage = UIImage()
+    navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage()
+    navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
   }
   
-  @objc private func validateTextFieldInput() {
+}
+
+// MARK: - UITextFieldDelegate
+extension CreateTransactionViewController: UITextFieldDelegate {}
+
+// MARK: Target/Action
+private extension CreateTransactionViewController {
+  
+  @objc func validateTextFieldInput() {
     let textfieldsNotEmpty = (!merchantInputTextField.text.orEmpty.isEmpty && !amountInputTextField.text.orEmpty.isEmpty)
     let amountGreaterThanZero = amountInputTextField.text.orEmpty != "0"
     let isValid = textfieldsNotEmpty && amountGreaterThanZero
@@ -116,14 +122,13 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
     navigationItem.rightBarButtonItem?.isEnabled = isValid
   }
   
-  @objc private func createTransactionButtonTapped() {
+  @objc func createTransactionButtonTapped() {
     // here i am using `orEmpty` on the textfields just to avoid having to force unwrap the text property but since I'm alreadt
     // validating the textfields input to be empty or the button to be enabled
-    let amount = String(Int((amountInputTextField.text.orEmpty.replacingOccurrences(of: "$", with: "").asDouble * 1000.0)))
-    createTransaction(authToken: authToken,
-                      amount: amount,
-                      created: datePicker.date.expensifyDateFormat,
-                      merchant: merchantInputTextField.text.orEmpty)
+    
+    viewModel.createTransaction(amount: amountInputTextField.text.orEmpty,
+                                created: datePicker.date.expensifyDateFormat,
+                                merchant: merchantInputTextField.text.orEmpty)
   }
   
   @objc func amountChanged(_ textField: UITextField) {
@@ -136,7 +141,32 @@ class CreateTransactionViewController: UIViewController, AlertDisplayable {
   
 }
 
-extension CreateTransactionViewController: UITextFieldDelegate {}
+// MARK: CreateTransactionOutcome
+private extension CreateTransactionViewController {
+  
+  /// changes the state of views based on the sign in state
+  private func updateViews(for outcome: CreateTransactionViewModel.CreateTransactionOutcome) {
+    switch outcome {
+    case .none:
+      print("No activity")
+    case .creating:
+      showIndicator()
+      saveExpenseButton.alpha = 0.5
+      saveExpenseButton.isEnabled = false
+    case .success(transactionID: let id):
+      hideIndicator()
+      saveExpenseButton.alpha = 0.5
+      saveExpenseButton.isEnabled = false
+      didSuccessfullyCreateTransaction?(id)
+    case .failed(title: let title, reason: let message):
+      hideIndicator()
+      saveExpenseButton.alpha = 1
+      saveExpenseButton.isEnabled = true
+      displayAlert(title: title, message: message)
+    }
+  }
+  
+}
 
 // MARK: - Loading Indicator
 extension CreateTransactionViewController {
@@ -195,72 +225,3 @@ private extension CreateTransactionViewController {
   
 }
 
-// MARK: Networking
-private extension CreateTransactionViewController {
-  func createTransaction(authToken: String, amount: String, created: String, merchant: String) {
-    router.request(EndPoint.createTransaction(authToken: authToken,
-                                              params: CreateTransactionParams(amount: amount,
-                                                                              created: created,
-                                                                              merchant: merchant)),
-                   completion: { [handle] result in handle(result) })
-  }
-  
-  private enum UploadState {
-    case uploading
-    case uploaded
-    case failure(title: String?, reason: String?)
-  }
-  
-  /// changes the state of views based on the sign in state
-  private func updateViews(for state: UploadState) {
-    switch state {
-    case .uploading:
-      showIndicator()
-      saveExpenseButton.alpha = 0.5
-      saveExpenseButton.isEnabled = false
-    case .uploaded:
-      hideIndicator()
-      saveExpenseButton.alpha = 0.5
-      saveExpenseButton.isEnabled = false
-    case .failure(title: let title, reason: let message):
-      hideIndicator()
-      saveExpenseButton.alpha = 1
-      saveExpenseButton.isEnabled = true
-      displayAlert(title: title, message: message)
-    }
-  }
-  
-  private func handle(result: Result<Data, NetworkError>) {
-    updateViews(for: .uploading)
-    switch result {
-    case .success(let data):
-      do {
-        // here i'm taking advantage of the decoded() extension on `Data`
-        let response: APIResponse = try data.decoded()
-        switch response.jsonCode {
-        case 200...299:
-          updateViews(for: .uploaded)
-          didSuccessfullyCreateTransaction?(response.transactionID.orEmpty)
-        default:
-          updateViews(for: .failure(title: nil, reason: "We couldn't upload your transaction. Please try again"))
-        }
-      } catch let error {
-        print(error)
-        updateViews(for: .failure(title: nil, reason: "Looks like there was a problem. Please try again"))
-      }
-      
-    case .failure(let error):
-      updateViews(for: .failure(title: nil, reason: error.errorDescription.orEmpty))
-    }
-  }
-}
-
-extension Date {
-  
-  var expensifyDateFormat: String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.string(from: self)
-  }
-  
-}

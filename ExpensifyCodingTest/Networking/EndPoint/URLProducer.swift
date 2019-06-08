@@ -9,6 +9,6 @@
 import Foundation
 
 /// All types conforming will need to produce an optional url 
-protocol URLProducer {
+public protocol URLProducer {
   var url: URL? { get }
 }

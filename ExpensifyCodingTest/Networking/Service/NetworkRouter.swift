@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias NetworkCompletion = ((Result<Data, NetworkError>) -> Void)
+public typealias NetworkCompletion = ((Result<Data, NetworkError>) -> Void)
 
-protocol NetworkRouter: class {
+public protocol NetworkRouter: class {
   func request(_ route: URLProducer, completion: @escaping NetworkCompletion)
   func cancel()
 }

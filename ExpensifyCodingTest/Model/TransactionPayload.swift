@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct TransactionPayload: Decodable {
+public struct TransactionPayload: Decodable {
   let jsonCode: Int
   let title, httpCode: Int?
   let transactionList: [TransactionList]?
@@ -17,7 +17,7 @@ struct TransactionPayload: Decodable {
 }
 
 // MARK: - TransactionList
-struct TransactionList: Decodable {
+public struct TransactionList: Decodable {
   let amount: Int
   let bank: String?
   let billable: Bool
@@ -39,7 +39,7 @@ struct TransactionList: Decodable {
 }
 
 // MARK: - NameValuePairs
-struct NameValuePairs: Decodable {
+public struct NameValuePairs: Decodable {
   let comment: String
 }
 

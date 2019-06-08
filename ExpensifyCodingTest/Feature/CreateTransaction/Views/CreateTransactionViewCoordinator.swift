@@ -8,19 +8,19 @@
 
 import CoordinatorLibrary
 
-protocol CreateTransactionViewCoordinatorDelegate: class {
+public protocol CreateTransactionViewCoordinatorDelegate: class {
   func didCreateTransaction(_ transactionID: String)
 }
 
-final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransactionViewController> {
+public final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransactionViewController> {
   
-  var authToken: String?
+  public var authToken: String?
   
   public weak var delegate: CreateTransactionViewCoordinatorDelegate?
   
-  override func start() {
+  override public func start() {
 
-    viewController = .init(authToken: authToken.orEmpty, router: Router())
+    viewController = .init(viewModel: .init(authToken: authToken.orEmpty, router: Router()))
     navigate(to: viewController, with: .push, animated: true)
     
     viewController.didSuccessfullyCreateTransaction = { [delegate, popViewController] transactionID in

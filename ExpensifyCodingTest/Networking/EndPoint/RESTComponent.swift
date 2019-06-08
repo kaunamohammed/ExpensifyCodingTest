@@ -13,14 +13,14 @@ import Foundation
  RESTComponent is used to allow for constructing URL components
  
  */
-protocol RESTComponent {
+public protocol RESTComponent {
   var scheme: String { get }
   var host: String { get }
   var path: String { get }
 }
 
 // The expension defines the common scheme and host
-extension RESTComponent {
+public extension RESTComponent {
   var scheme: String {
     return "https"
   }

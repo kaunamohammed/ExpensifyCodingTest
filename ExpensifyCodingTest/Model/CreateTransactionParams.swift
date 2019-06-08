@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct CreateTransactionParams: Encodable { 
+public struct CreateTransactionParams: Encodable {
   
   let amount: String
   let created, merchant: String
   let currency, comment, category, tag, receiptID: String?
   let reimbursable, billable: Bool
   
-  init(amount: String, created: String, merchant: String, currency: String? = nil, comment: String? = nil, category: String? = nil, tag: String? = nil, receiptID: String? = nil, reimbursable: Bool = false, billable: Bool = true) {
+  public init(amount: String, created: String, merchant: String, currency: String? = nil, comment: String? = nil, category: String? = nil, tag: String? = nil, receiptID: String? = nil, reimbursable: Bool = false, billable: Bool = true) {
     self.amount = amount
     self.created = created
     self.merchant = merchant

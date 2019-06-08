@@ -8,37 +8,37 @@
 
 import CoordinatorLibrary
 
-final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewController> {
+public final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewController> {
   
-  public var apiResponse: APIResponse!
+  public var authToken: String!
   
-  public var createdTransactionID: ((String) -> Void)?
+  public var newlyCreatedTransactionID: ((String) -> Void)?
   
   private lazy var createTransactionViewCoordinator: CreateTransactionViewCoordinator = .init(presenter: presenter,
                                                                                               removeCoordinator: remove)
   private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
                                                                         removeCoordinator: remove)
   
-  override func start() {
+  override public func start() {
     
-    viewController = .init(authToken: apiResponse.authToken.orEmpty, router: Router(), coordinator: self)
-    
+    viewController = .init(viewModel: .init(authToken: authToken, router: Router()), coordinator: self)
     navigate(to: viewController, with: .set, animated: false)
     
     viewController.goToCreateTransactionScreen = { [startCreateTransactionViewCoordinator] authToken in
       startCreateTransactionViewCoordinator(authToken)
     }
     
-    viewController.didTapTologOut = { [startSignInViewCoordinator] in startSignInViewCoordinator() }
+    viewController.didTapToSignOut = { [startSignInViewCoordinator] in startSignInViewCoordinator() }
     
   }
   
 }
 
+// MARK: - CreateTransactionViewCoordinatorDelegate
 extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegate {
   
   func didCreateTransaction(_ transactionID: String) {
-    createdTransactionID?(transactionID)
+    newlyCreatedTransactionID?(transactionID)
   }
   
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum NetworkError {
+public enum NetworkError {
   case unknown
   case unrecognizedCommand
   case missingArgument
@@ -24,7 +24,7 @@ enum NetworkError {
 }
 
 extension NetworkError: LocalizedError {
-  var errorDescription: String? {
+  public var errorDescription: String? {
     switch self {
     case .accountDeleted: return "Looks like this account has been deleted"
     case .requestFailure: return "There was an error reaching our network. Please try again when there's better service"

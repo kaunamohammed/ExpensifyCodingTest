@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransactionListViewController: UIViewController, AlertDisplayable {
+public class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
@@ -29,50 +29,51 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 0)
   }
   
-  public var didTapTologOut: (() -> Void)?
+  public var didTapToSignOut: (() -> Void)?
   public var goToCreateTransactionScreen: ((String) -> Void)?
-  private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
-
-  private let authToken: String
-  private let router: NetworkRouter
-  private let coordinator: TransactionListViewCoorinator
   
-  init(authToken: String, router: NetworkRouter, coordinator: TransactionListViewCoorinator) {
-    self.authToken = authToken
-    self.router = router
+  private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
+  
+  private var viewModel: TransactionListViewModel
+  private let coordinator: TransactionListViewCoorinator
+
+  public init(viewModel: TransactionListViewModel, coordinator: TransactionListViewCoorinator) {
+    self.viewModel = viewModel
     self.coordinator = coordinator
     super.init(nibName: nil, bundle: nil)
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
     
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     setUpConstraints()
-    setUpNavigationItems()
+    setUpNavigationBar()
 
-    loadData()
+    viewModel.forcedReload = { [hideIndicator, showIndicator] force in
+      force ? hideIndicator() : showIndicator()
+    }
     
-    coordinator.createdTransactionID = { [loadData] transactionID in loadData(false) }
+    viewModel.transactionListOutcome = { [updateViews] outcome in updateViews(outcome) }
     
+    viewModel.loadData()
+
+    coordinator.newlyCreatedTransactionID = { [viewModel] transactionID in viewModel.loadData(force: false) }
+
   }
-  
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
-  
-  private func setUpNavigationItems() {
+
+  private func setUpNavigationBar() {
     navigationItem.title = "Expenses"
     navigationItem.backBarButtonItem = .init(title: "Cancel", style: .plain, target: self, action: nil)
     navigationItem.leftBarButtonItem = .init(title: "Log Out",
                                              style: .plain,
                                              target: self,
-                                             action: #selector(logOutButtonTapped))
+                                             action: #selector(signOutButtonTapped))
     navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
     
     navigationItem.rightBarButtonItem = .init(image: #imageLiteral(resourceName: "add"),
@@ -84,22 +85,45 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   
 }
 
+// MARK: TransactionListOutcome
 private extension TransactionListViewController {
-  @objc func logOutButtonTapped() {
-    didTapTologOut?()
+  
+  /// changes the state of views based on the sign in state
+  func updateViews(for outcome: TransactionListViewModel.TransactionListOutcome) {
+    switch outcome {
+    case .loading:
+      print("Loading")
+    case .loaded(transactions: let transactions):
+      dataSource.dataList = transactions
+      hideIndicator()
+      refreshControl.endRefreshing()
+      tableView.reloadData()
+    case .failed(title: let title, reason: let message):
+      hideIndicator()
+      refreshControl.endRefreshing()
+      displayAlert(title: title, message: message)
+    }
+  }
+  
+}
+
+// MARK: Target/Action
+private extension TransactionListViewController {
+  @objc func signOutButtonTapped() {
+    didTapToSignOut?()
   }
   
   @objc func createTransactionButtonTapped() {
-    goToCreateTransactionScreen?(authToken)
+    goToCreateTransactionScreen?(viewModel.token)
   }
   
   @objc func refreshTableView() {
-    loadData(force: true)
+    viewModel.loadData(force: true)
   }
 }
 
 // MARK: - Loading Indicator
-extension TransactionListViewController {
+private extension TransactionListViewController {
   func showIndicator() {
     view.add(activityIndicator)
     activityIndicator.startAnimating()
@@ -115,7 +139,7 @@ extension TransactionListViewController {
 }
 
 // MARK: - Constraints
-extension TransactionListViewController {
+private extension TransactionListViewController {
   func setUpConstraints() {
     view.add(tableView)
     tableView.topAnchor.constraint(equalTo: topSafeArea).isActive = true
@@ -126,44 +150,60 @@ extension TransactionListViewController {
   }
 }
 
+
+
+//  private let authToken: String
+//  private let router: NetworkRouter
+
+//  init(authToken: String, router: NetworkRouter, coordinator: TransactionListViewCoorinator) {
+//    self.authToken = authToken
+//    self.router = router
+//    self.coordinator = coordinator
+//    super.init(nibName: nil, bundle: nil)
+//  }
+
+//loadData()
+
+//    coordinator.createdTransactionID = { [loadData] transactionID in loadData(false) }
+
 // MARK: Networking
-extension TransactionListViewController {
-  private func loadData(force: Bool = false) {
-    if !force { showIndicator() }
-    
-    router.request(EndPoint.getTransactions(authToken: authToken, params: TransactionParams(idType: .none,
-                                                                                            endDate: Date.nowString(),
-                                                                                            limit: 100.asString)),
-                   completion: { [handle] result in handle(result, force) })
-  }
-  
-  private func handle(result: Result<Data, NetworkError>, isReloaded: Bool) {
-    switch result {
-    case .success(let data):
-      do {
-        // here i'm taking advantage of the decoded() extension on `Data`
-        let payload: TransactionPayload = try data.decoded()
-        switch payload.jsonCode {
-        case 200...299:
-          dataSource.dataList = payload.transactionList!.isEmpty ? [] : payload.transactionList!
-          isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-          tableView.reloadData()
-        default:
-          isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-          displayAlert(message: "We couldn't retrieve your transactions")
-        }
-      } catch let error {
-        print(error)
-        isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-        displayAlert(message: "Looks like there was a problem. Please try again")
-      }
-      
-    case .failure(let error):
-      isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-      displayAlert(message: error.errorDescription.orEmpty)
-    }
-  }
-}
+//extension TransactionListViewController {
+//  private func loadData(force: Bool = false) {
+//    if !force { showIndicator() }
+//
+//    router.request(EndPoint.getTransactions(authToken: authToken, params: TransactionParams(idType: .none,
+//                                                                                            endDate: Date.nowString(),
+//                                                                                            limit: 100.asString)),
+//                   completion: { [handle] result in handle(result, force) })
+//  }
+//
+//  private func handle(result: Result<Data, NetworkError>, isReloaded: Bool) {
+//    switch result {
+//    case .success(let data):
+//      do {
+//        // here i'm taking advantage of the decoded() extension on `Data`
+//        let payload: TransactionPayload = try data.decoded()
+//        switch payload.jsonCode {
+//        case 200...299:
+//          dataSource.dataList = payload.transactionList!.isEmpty ? [] : payload.transactionList!
+//          isReloaded ? refreshControl.endRefreshing() : hideIndicator()
+//          tableView.reloadData()
+//        default:
+//          isReloaded ? refreshControl.endRefreshing() : hideIndicator()
+//          displayAlert(message: "We couldn't retrieve your transactions")
+//        }
+//      } catch let error {
+//        print(error)
+//        isReloaded ? refreshControl.endRefreshing() : hideIndicator()
+//        displayAlert(message: "Looks like there was a problem. Please try again")
+//      }
+//
+//    case .failure(let error):
+//      isReloaded ? refreshControl.endRefreshing() : hideIndicator()
+//      displayAlert(message: error.errorDescription.orEmpty)
+//    }
+//  }
+//}
 
 //        case 401...500: print("Failure")
 //          displayAlert(message: "We couldnt retrieve your transactions")

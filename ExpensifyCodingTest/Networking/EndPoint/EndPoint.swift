@@ -9,16 +9,16 @@
 import Foundation
 
 /// An `EndPoint` composes together the api command methods i.e Get, Authenticate and appends URLQueryItems to construct a full url
-struct EndPoint: RESTComponent {
+public struct EndPoint: RESTComponent {
 
-  let path: String = "/api"
+  public let path: String = "/api"
   /// the query items
   private let queryItems: [URLQueryItem]
   
 }
 
 extension EndPoint: URLProducer {
-  var url: URL? {
+  public var url: URL? {
     var components = URLComponents()
     components.scheme = scheme
     components.host = host
@@ -29,7 +29,7 @@ extension EndPoint: URLProducer {
 }
 
 // static factory methods for common endpoints
-extension EndPoint {
+public extension EndPoint {
   /**
    
    authenticates a user

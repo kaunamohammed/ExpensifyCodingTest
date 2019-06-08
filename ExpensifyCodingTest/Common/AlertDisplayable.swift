@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import UIKit.UIViewController
+import UIKit
 
 /**
  
@@ -17,11 +17,11 @@ import UIKit.UIViewController
     - To restrict the types that can display an alert
     - To give us access to properties/methods/functions available to `UIViewController`
  */
-protocol AlertDisplayable: UIViewController {
+public protocol AlertDisplayable: UIViewController {
   func displayAlert(title: String?, message: String?)
 }
 
-extension AlertDisplayable {
+public extension AlertDisplayable {
   func displayAlert(title: String? = nil, message: String?) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)

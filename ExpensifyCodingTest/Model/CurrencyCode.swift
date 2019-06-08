@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct CurrencyCode {
+public struct CurrencyCode {
   let string: String
 }
 extension CurrencyCode: ExpressibleByStringLiteral {
-  init(stringLiteral value: String) {
+  public init(stringLiteral value: String) {
     string = value
   }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransactionListTableViewCell: UITableViewCell {
+public class TransactionListTableViewCell: UITableViewCell {
   
   private let leadingLabel = UILabel {
     $0.numberOfLines = 2
@@ -38,7 +38,7 @@ class TransactionListTableViewCell: UITableViewCell {
     return stackView
   }()
   
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+  override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
     backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -47,11 +47,11 @@ class TransactionListTableViewCell: UITableViewCell {
 
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configure(with model: TransactionList) {
+  public func configure(with model: TransactionList) {
     
     let formatter = DateFormatter()
     // getting the returned created string in its format
@@ -77,6 +77,7 @@ class TransactionListTableViewCell: UITableViewCell {
   
 }
 
+// MARK: - Constraints
 private extension TransactionListTableViewCell {
   func setUpConstraints() {
     contentView.add(leaingStackView, trailingStackView)

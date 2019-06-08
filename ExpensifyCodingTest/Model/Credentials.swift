@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Credentials {
+public struct Credentials {
   let id: String
   let password: String
 }

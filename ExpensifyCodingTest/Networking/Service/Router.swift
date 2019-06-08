@@ -8,11 +8,11 @@
 
 import UIKit
 
-final class Router: NetworkRouter {
+public final class Router: NetworkRouter {
   
   private var task: URLSessionTask?
   
-  func request(_ route: URLProducer, completion: @escaping NetworkCompletion) {
+  public func request(_ route: URLProducer, completion: @escaping NetworkCompletion) {
     let session = URLSession.shared
     guard let request = buildRequest(from: route) else { return }
 
@@ -42,7 +42,7 @@ final class Router: NetworkRouter {
     task?.resume()
   }
   
-  func cancel() {
+  public func cancel() {
     task?.cancel()
   }
   

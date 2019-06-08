@@ -58,13 +58,11 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     return stackView
   }()
   
-  // this passes a notification to the coordinator that sign in was a success and it's okay to navigate to the main screen
-  // includes information about the `APIResponse`
   public var successfullySignedIn: ((APIResponse) -> Void)?
   
-  private let router: NetworkRouter
-  init(router: NetworkRouter) {
-    self.router = router
+  private var viewModel: SignInViewModel
+  init(viewModel: SignInViewModel) {
+    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -86,31 +84,59 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     
     validateTextFieldInput()
     
+    viewModel.signInStateChanged = { [updateViews] state in updateViews(state) }
+    
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     view.endEditing(true)
   }
+
+}
+
+// MARK: - UITextFieldDelegate
+extension SignInViewController: UITextFieldDelegate {}
+
+// MARK: - Target/Action
+private extension SignInViewController {
   
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
-  
-  @objc private func validateTextFieldInput() {
+  @objc func validateTextFieldInput() {
     let isValid = (!emailTextField.text.orEmpty.isEmpty && !passwordTextField.text.orEmpty.isEmpty)
     signInButton.alpha = isValid ? 1.0 : 0.5
     signInButton.isEnabled = isValid
   }
   
-  @objc private func signInButtonTapped() {
-    attemptSignIn(with: Credentials(id: emailTextField.text.orEmpty, password: passwordTextField.text.orEmpty))
+  @objc func signInButtonTapped() {
+    viewModel.attemptSignIn(with: Credentials(id: emailTextField.text.orEmpty, password: passwordTextField.text.orEmpty))
   }
   
 }
 
-// MARK: - UITextFieldDelegate
-extension SignInViewController: UITextFieldDelegate {}
+// MARK: - SignInState
+private extension SignInViewController {
+  
+  /// changes the state of views based on the sign in state
+  private func updateViews(for state: SignInViewModel.SignInState) {
+    switch state {
+    case .signingIn:
+      showIndicator()
+      signInButton.alpha = 0.5
+      signInButton.isEnabled = false
+    case .signedIn(response: let response):
+      hideIndicator()
+      signInButton.alpha = 0.5
+      signInButton.isEnabled = false
+      successfullySignedIn?(response)
+    case .failed(title: let title, reason: let message):
+      hideIndicator()
+      signInButton.alpha = 1
+      signInButton.isEnabled = true
+      displayAlert(title: title, message: message)
+    }
+  }
+  
+}
 
 // MARK: - Loading Indicator
 extension SignInViewController {
@@ -160,69 +186,3 @@ private extension SignInViewController {
     
   }
 }
-
-// MARK: - Networking
-private extension SignInViewController {
-  
-  private enum SignInState {
-    case authenticating
-    case success
-    case failure(title: String?, reason: String?)
-  }
-  
-  /// changes the state of views based on the sign in state
-  private func updateViews(for state: SignInState) {
-    switch state {
-    case .authenticating:
-      showIndicator()
-      signInButton.alpha = 0.5
-      signInButton.isEnabled = false
-    case .success:
-      hideIndicator()
-      signInButton.alpha = 0.5
-      signInButton.isEnabled = false
-    case .failure(title: let title, reason: let message):
-      hideIndicator()
-      signInButton.alpha = 1
-      signInButton.isEnabled = true
-      displayAlert(title: title, message: message)
-    }
-  }
-  
-  func attemptSignIn(with credentials: Credentials) {
-    updateViews(for: .authenticating)
-    // I prefer to capture objects directly rather than doing the weak/unowned self dance
-    router.request(EndPoint.authenticateUser(partnerUserID: credentials.id,
-                                             partnerUserSecret: credentials.password),
-                   completion: { [handle] result in handle(result) })
-  }
-  
-  private func handle(result: Result<Data, NetworkError>) {
-    assert(Thread.isMainThread, "Get on the main thread dude")
-    switch result {
-    case .success(let data):
-      do {
-        // here i'm taking advantage of the decoded() extension on `Data`
-        let apiResponse: APIResponse = try data.decoded()
-        switch apiResponse.jsonCode {
-        case 200...299:
-          updateViews(for: .success)
-          // here i'm passing along the apiResponse if the status code is between 200...299
-          successfullySignedIn?(apiResponse)
-        case 401...500:
-          updateViews(for: .failure(title: "Uh Oh", reason: "Please check your email or password and try again"))
-        case 501...599:
-          updateViews(for: .failure(title: nil, reason: "An internal error has occured. Please try again"))
-        default:
-          updateViews(for: .failure(title: nil, reason: "An unknown problem occured. Please try again"))
-        }
-      } catch let error {
-        updateViews(for: .failure(title: nil, reason: error.localizedDescription))
-      }
-      
-    case .failure(let error):
-      updateViews(for: .failure(title: nil, reason: error.errorDescription.orEmpty))
-    }
-  }
-}
-
