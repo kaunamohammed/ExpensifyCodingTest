@@ -85,6 +85,21 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
   
 }
 
+// MARK: Target/Action
+private extension TransactionListViewController {
+  @objc func signOutButtonTapped() {
+    didTapToSignOut?()
+  }
+  
+  @objc func createTransactionButtonTapped() {
+    goToCreateTransactionScreen?(viewModel.token)
+  }
+  
+  @objc func refreshTableView() {
+    viewModel.loadData(force: true)
+  }
+}
+
 // MARK: TransactionListOutcome
 private extension TransactionListViewController {
   
@@ -105,21 +120,6 @@ private extension TransactionListViewController {
     }
   }
   
-}
-
-// MARK: Target/Action
-private extension TransactionListViewController {
-  @objc func signOutButtonTapped() {
-    didTapToSignOut?()
-  }
-  
-  @objc func createTransactionButtonTapped() {
-    goToCreateTransactionScreen?(viewModel.token)
-  }
-  
-  @objc func refreshTableView() {
-    viewModel.loadData(force: true)
-  }
 }
 
 // MARK: - Loading Indicator
@@ -149,63 +149,3 @@ private extension TransactionListViewController {
     tableView.translatesAutoresizingMaskIntoConstraints = false
   }
 }
-
-
-
-//  private let authToken: String
-//  private let router: NetworkRouter
-
-//  init(authToken: String, router: NetworkRouter, coordinator: TransactionListViewCoorinator) {
-//    self.authToken = authToken
-//    self.router = router
-//    self.coordinator = coordinator
-//    super.init(nibName: nil, bundle: nil)
-//  }
-
-//loadData()
-
-//    coordinator.createdTransactionID = { [loadData] transactionID in loadData(false) }
-
-// MARK: Networking
-//extension TransactionListViewController {
-//  private func loadData(force: Bool = false) {
-//    if !force { showIndicator() }
-//
-//    router.request(EndPoint.getTransactions(authToken: authToken, params: TransactionParams(idType: .none,
-//                                                                                            endDate: Date.nowString(),
-//                                                                                            limit: 100.asString)),
-//                   completion: { [handle] result in handle(result, force) })
-//  }
-//
-//  private func handle(result: Result<Data, NetworkError>, isReloaded: Bool) {
-//    switch result {
-//    case .success(let data):
-//      do {
-//        // here i'm taking advantage of the decoded() extension on `Data`
-//        let payload: TransactionPayload = try data.decoded()
-//        switch payload.jsonCode {
-//        case 200...299:
-//          dataSource.dataList = payload.transactionList!.isEmpty ? [] : payload.transactionList!
-//          isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-//          tableView.reloadData()
-//        default:
-//          isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-//          displayAlert(message: "We couldn't retrieve your transactions")
-//        }
-//      } catch let error {
-//        print(error)
-//        isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-//        displayAlert(message: "Looks like there was a problem. Please try again")
-//      }
-//
-//    case .failure(let error):
-//      isReloaded ? refreshControl.endRefreshing() : hideIndicator()
-//      displayAlert(message: error.errorDescription.orEmpty)
-//    }
-//  }
-//}
-
-//        case 401...500: print("Failure")
-//          displayAlert(message: "We couldnt retrieve your transactions")
-//        case 501...599: print("Failure")
-

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CryptoSwift
 
 public struct SignInViewModel {
   
@@ -17,6 +18,8 @@ public struct SignInViewModel {
   }
   
   public var signInStateChanged: ((SignInState) -> Void)?
+  
+  static let serviceName = "ExpensifyService"
   
   private let router: NetworkRouter
   public init(router: NetworkRouter) {
@@ -40,6 +43,9 @@ public struct SignInViewModel {
         let apiResponse: APIResponse = try data.decoded()
         switch apiResponse.jsonCode {
         case 200...299:
+          try KeychainPasswordItem(service: SignInViewModel.serviceName,
+                               account: apiResponse.email.orEmpty)
+            .savePassword(apiResponse.authToken.orEmpty)
           signInStateChanged?(.signedIn(response: apiResponse))
         case 401...500:
           signInStateChanged?(.failed(title: nil, reason: "Please check your email or password and try again"))

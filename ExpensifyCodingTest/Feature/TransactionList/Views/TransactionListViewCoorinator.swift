@@ -37,7 +37,7 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
 // MARK: - CreateTransactionViewCoordinatorDelegate
 extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegate {
   
-  func didCreateTransaction(_ transactionID: String) {
+  public func didCreateTransaction(_ transactionID: String) {
     newlyCreatedTransactionID?(transactionID)
   }
   

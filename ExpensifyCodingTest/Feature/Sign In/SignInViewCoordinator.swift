@@ -35,7 +35,7 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 extension SignInViewCoordinator {
   private func startTransactionListViewCoordinator(with response: APIResponse) {
     add(child: transactionListViewCoorinator)
-    transactionListViewCoorinator.apiResponse = response
+    transactionListViewCoorinator.authToken = response.authToken
     transactionListViewCoorinator.start()
   }
 }
