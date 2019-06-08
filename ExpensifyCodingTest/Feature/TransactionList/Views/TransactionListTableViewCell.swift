@@ -20,13 +20,8 @@ class TransactionListTableViewCell: UITableViewCell {
     $0.textAlignment = .center
   }
 
-  private let billableImageView = UIImageView {
-    $0.image = #imageLiteral(resourceName: "bill")
-    $0.contentMode = .scaleAspectFit
-  }
-  
   private lazy var leaingStackView: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [billableImageView, leadingLabel])
+    let stackView = UIStackView(arrangedSubviews: [leadingLabel])
     stackView.alignment = .center
     stackView.axis = .horizontal
     stackView.spacing = 10
@@ -58,8 +53,6 @@ class TransactionListTableViewCell: UITableViewCell {
   
   func configure(with model: TransactionList) {
     
-    billableImageView.isHidden = false
-    
     let formatter = DateFormatter()
     // getting the returned created string in its format
     formatter.dateFormat = "yyyy-MM-dd"
@@ -78,7 +71,7 @@ class TransactionListTableViewCell: UITableViewCell {
     let amount = NumberFormatter.currency(from: .init(string: model.currency.orEmpty), amount: abs(model.amount.asCurrency)).orEmpty
     trailingLabel.attributedText = AttributedStringBuilder()
       .append(amount + "\n",
-              attributes: [.foregroundColor: model.amount < 0 ? #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1) : #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .title3)])
+              attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .title3)])
       .build()
   }
   
@@ -88,11 +81,7 @@ private extension TransactionListTableViewCell {
   func setUpConstraints() {
     contentView.add(leaingStackView, trailingStackView)
 
-    billableImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    billableImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    billableImageView.translatesAutoresizingMaskIntoConstraints = false
-
-    leaingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+    leaingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     leaingStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
     leaingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     leaingStackView.translatesAutoresizingMaskIntoConstraints = false

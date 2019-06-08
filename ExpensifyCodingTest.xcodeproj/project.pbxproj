@@ -42,6 +42,7 @@
 		FC62B94222A8C78500A03D08 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */; };
 		FC68329D22AB1A620056C082 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC68329C22AB1A620056C082 /* Observable.swift */; };
 		FC68329F22AB1FD20056C082 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC68329E22AB1FD20056C082 /* SignInViewModel.swift */; };
+		FC6832A122AB30070056C082 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */; };
 		FC7E354E22A98725008C8646 /* NumberFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354D22A98725008C8646 /* NumberFormatter+Ext.swift */; };
 		FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354F22A9875D008C8646 /* CurrencyCode.swift */; };
 		FC83011622AA1117007AA66D /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83011522AA1117007AA66D /* Date+String.swift */; };
@@ -106,6 +107,7 @@
 		FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		FC68329C22AB1A620056C082 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		FC68329E22AB1FD20056C082 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		FC7E354D22A98725008C8646 /* NumberFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Ext.swift"; sourceTree = "<group>"; };
 		FC7E354F22A9875D008C8646 /* CurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		FC83011522AA1117007AA66D /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		FC0EB6B122A8021D00BFAFC2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */,
 				FC0EB6DE22A8210C00BFAFC2 /* String+Ext.swift */,
 				FC0EB6E022A8270800BFAFC2 /* Int+Ext.swift */,
 				FC0EB6CE22A802F400BFAFC2 /* InitConfigurable.swift */,
@@ -530,6 +533,7 @@
 				FC0EB6D022A802F400BFAFC2 /* InitConfigurable.swift in Sources */,
 				FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */,
 				FC7E354E22A98725008C8646 /* NumberFormatter+Ext.swift in Sources */,
+				FC6832A122AB30070056C082 /* KeychainPasswordItem.swift in Sources */,
 				FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */,
 				FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */,
 				FC83011A22AA8349007AA66D /* NetworkManager.swift in Sources */,

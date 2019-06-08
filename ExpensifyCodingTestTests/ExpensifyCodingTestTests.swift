@@ -32,6 +32,7 @@ class ExpensifyCodingTestTests: XCTestCase {
     let authEndPoint = EndPoint.authenticateUser(partnerUserID: Constants.TestUser.id,
                                                  partnerUserSecret: Constants.TestUser.password).url
 
+    print(authEndPoint)
     XCTAssertTrue(authEndPoint == Constants.TestEndpoint.expensifyAuthEndPoint)
     
   }

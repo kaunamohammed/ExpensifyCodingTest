@@ -23,8 +23,9 @@ final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransa
     viewController = .init(authToken: authToken.orEmpty, router: Router())
     navigate(to: viewController, with: .push, animated: true)
     
-    viewController.didSuccessfullyCreateTransaction = { [delegate] transactionID in
+    viewController.didSuccessfullyCreateTransaction = { [delegate, popViewController] transactionID in
       delegate?.didCreateTransaction(transactionID)
+      popViewController(true)
     }
     
   }

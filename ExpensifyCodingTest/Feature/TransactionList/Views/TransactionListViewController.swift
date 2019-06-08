@@ -26,7 +26,7 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.removeEmptyCells()
     $0.add(refreshControl: refreshControl)
     $0.register(TransactionListTableViewCell.self)
-    $0.separatorInset = .init(top: 0, left: 40, bottom: 0, right: 0)
+    $0.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 0)
   }
   
   public var didTapTologOut: (() -> Void)?
@@ -51,7 +51,6 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Transactions"
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     setUpConstraints()
@@ -63,17 +62,24 @@ class TransactionListViewController: UIViewController, AlertDisplayable {
     
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   private func setUpNavigationItems() {
+    navigationItem.title = "Expenses"
+    navigationItem.backBarButtonItem = .init(title: "Cancel", style: .plain, target: self, action: nil)
     navigationItem.leftBarButtonItem = .init(title: "Log Out",
                                              style: .plain,
                                              target: self,
                                              action: #selector(logOutButtonTapped))
     navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
     
-    navigationItem.rightBarButtonItem = .init(title: "Create",
+    navigationItem.rightBarButtonItem = .init(image: #imageLiteral(resourceName: "add"),
                                               style: .plain,
                                               target: self,
                                               action: #selector(createTransactionButtonTapped))
+    
   }
   
 }
@@ -140,7 +146,6 @@ extension TransactionListViewController {
         switch payload.jsonCode {
         case 200...299:
           dataSource.dataList = payload.transactionList!.isEmpty ? [] : payload.transactionList!
-          print(dataSource.dataList.count)
           isReloaded ? refreshControl.endRefreshing() : hideIndicator()
           tableView.reloadData()
         default:

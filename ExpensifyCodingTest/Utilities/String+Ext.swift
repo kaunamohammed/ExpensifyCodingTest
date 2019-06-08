@@ -22,7 +22,11 @@ public extension Optional where Wrapped == String {
 extension String {
   
   var asInt: Int {
-    return Int(self)!
+    return Int(self) ?? 0
+  }
+  
+  var asDouble: Double {
+    return Double(self) ?? 0.0
   }
   
   func truncate(by length: Int, trailing: String = "...") -> String {

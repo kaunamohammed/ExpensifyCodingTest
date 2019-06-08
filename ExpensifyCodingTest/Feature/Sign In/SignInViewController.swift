@@ -74,10 +74,16 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    title = "Sign In"
+    navigationItem.title = "Sign In"
+
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     setUpConstraints()
+    
+    #if DEBUG
+    emailTextField.text = "expensifytest@mailinator.com"
+    passwordTextField.text = "hire_me"
+    #endif
+    
     validateTextFieldInput()
     
   }
@@ -85,6 +91,10 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     view.endEditing(true)
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   @objc private func validateTextFieldInput() {
