@@ -58,7 +58,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     return stackView
   }()
   
-  public var successfullySignedIn: ((APIResponse) -> Void)?
+  public var successfullySignedIn: (() -> Void)?
   
   private var viewModel: SignInViewModel
   init(viewModel: SignInViewModel) {
@@ -123,11 +123,11 @@ private extension SignInViewController {
       showIndicator()
       signInButton.alpha = 0.5
       signInButton.isEnabled = false
-    case .signedIn(response: let response):
+    case .signedIn:
       hideIndicator()
       signInButton.alpha = 0.5
       signInButton.isEnabled = false
-      successfullySignedIn?(response)
+      successfullySignedIn?()
     case .failed(title: let title, reason: let message):
       hideIndicator()
       signInButton.alpha = 1

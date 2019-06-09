@@ -30,7 +30,7 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
   }
   
   public var didTapToSignOut: (() -> Void)?
-  public var goToCreateTransactionScreen: ((String) -> Void)?
+  public var goToCreateTransactionScreen: (() -> Void)?
   
   private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
   
@@ -61,6 +61,8 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
     
     viewModel.transactionListOutcome = { [updateViews] outcome in updateViews(outcome) }
     
+    viewModel.errorSigningOutMessage = { [displayAlert] message in displayAlert(nil, message) }
+    
     viewModel.loadData()
 
     coordinator.newlyCreatedTransactionID = { [viewModel] transactionID in viewModel.loadData(force: false) }
@@ -70,7 +72,7 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
   private func setUpNavigationBar() {
     navigationItem.title = "Expenses"
     navigationItem.backBarButtonItem = .init(title: "Cancel", style: .plain, target: self, action: nil)
-    navigationItem.leftBarButtonItem = .init(title: "Log Out",
+    navigationItem.leftBarButtonItem = .init(title: "Sign Out",
                                              style: .plain,
                                              target: self,
                                              action: #selector(signOutButtonTapped))
@@ -88,11 +90,17 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
 // MARK: Target/Action
 private extension TransactionListViewController {
   @objc func signOutButtonTapped() {
-    didTapToSignOut?()
+    
+    do {
+      try viewModel.signOut()
+      didTapToSignOut?()
+    } catch _ {
+      displayAlert(message: "There was an issue signing you out. Please try again")
+    }
   }
   
   @objc func createTransactionButtonTapped() {
-    goToCreateTransactionScreen?(viewModel.token)
+    goToCreateTransactionScreen?()
   }
   
   @objc func refreshTableView() {

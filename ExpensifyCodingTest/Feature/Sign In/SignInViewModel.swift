@@ -7,19 +7,16 @@
 //
 
 import Foundation
-import CryptoSwift
 
 public struct SignInViewModel {
   
   public enum SignInState {
     case signingIn
-    case signedIn(response: APIResponse)
+    case signedIn
     case failed(title: String?, reason: String?)
   }
   
   public var signInStateChanged: ((SignInState) -> Void)?
-  
-  static let serviceName = "ExpensifyService"
   
   private let router: NetworkRouter
   public init(router: NetworkRouter) {
@@ -43,10 +40,8 @@ public struct SignInViewModel {
         let apiResponse: APIResponse = try data.decoded()
         switch apiResponse.jsonCode {
         case 200...299:
-          try KeychainPasswordItem(service: SignInViewModel.serviceName,
-                               account: apiResponse.email.orEmpty)
-            .savePassword(apiResponse.authToken.orEmpty)
-          signInStateChanged?(.signedIn(response: apiResponse))
+          try AuthController.saveUserToKeychain(User(email: apiResponse.email.orEmpty), token: apiResponse.authToken.orEmpty)
+          signInStateChanged?(.signedIn)
         case 401...500:
           signInStateChanged?(.failed(title: nil, reason: "Please check your email or password and try again"))
         case 501...599:
@@ -55,7 +50,6 @@ public struct SignInViewModel {
           signInStateChanged?(.failed(title: nil, reason: "An unknown problem occured. Please try again"))
         }
       } catch let error {
-        print(error)
         signInStateChanged?(.failed(title: nil, reason: error.localizedDescription))
       }
       

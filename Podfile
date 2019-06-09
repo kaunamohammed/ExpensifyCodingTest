@@ -7,7 +7,6 @@ target 'ExpensifyCodingTest' do
 
   # Pods for ExpensifyCodingTest
 
-  pod 'CryptoSwift'
 	pod 'CoordinatorLibrary'
 
   target 'ExpensifyCodingTestTests' do

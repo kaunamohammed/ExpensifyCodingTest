@@ -24,8 +24,8 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
     // here I kick of the navigation with the 'AppCoordinator' viewController
     navigate(to: viewController, with: .set, animated: false)
     
-    viewController.successfullySignedIn = { [startTransactionListViewCoordinator] apiResponse in
-      startTransactionListViewCoordinator(apiResponse)
+    viewController.successfullySignedIn = { [startTransactionListViewCoordinator] in
+      startTransactionListViewCoordinator(AuthController.authToken)
     }
     
   }
@@ -33,9 +33,9 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 }
 
 extension SignInViewCoordinator {
-  private func startTransactionListViewCoordinator(with response: APIResponse) {
+  private func startTransactionListViewCoordinator(with authToken: String) {
     add(child: transactionListViewCoorinator)
-    transactionListViewCoorinator.authToken = response.authToken
+    transactionListViewCoorinator.authToken = authToken
     transactionListViewCoorinator.start()
   }
 }

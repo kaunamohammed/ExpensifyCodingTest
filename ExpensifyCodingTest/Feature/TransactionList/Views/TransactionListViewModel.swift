@@ -17,6 +17,8 @@ public struct TransactionListViewModel {
   }
   
   public var forcedReload: ((Bool) -> Void)?
+  public var signOutSuccess: (() -> Void)?
+  public var errorSigningOutMessage: ((String) -> Void)?
   public var transactionListOutcome: ((TransactionListOutcome) -> Void)?
   
   public var token: String {
@@ -29,6 +31,10 @@ public struct TransactionListViewModel {
   public init(authToken: String, router: NetworkRouter) {
     self.authToken = authToken
     self.router = router
+  }
+  
+  public func signOut() throws {
+    return try AuthController.signOut()
   }
   
   public func loadData(force: Bool = false) {

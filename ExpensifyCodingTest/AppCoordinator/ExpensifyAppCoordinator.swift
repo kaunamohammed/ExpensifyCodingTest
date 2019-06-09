@@ -29,8 +29,9 @@ public class ExpensifyAppCoordinator: AppCoordinator {
     presenter.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     presenter.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
     
-    startSignInViewCoordinator()
-    
+    AuthController.isSignedIn ?
+      startTransactionListViewCoordinator(with: AuthController.authToken) : startSignInViewCoordinator()
+
   }
   
 }
@@ -47,16 +48,12 @@ private extension ExpensifyAppCoordinator {
     signInViewCoordinator.start()
   }
   
-}
+  func startTransactionListViewCoordinator(with token: String) {
+    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
+    add(child: transactionListViewCoorinator)
+    transactionListViewCoorinator.authToken = token
+    transactionListViewCoorinator.start()
+  }
 
-//  func startTransactionListViewCoordinator(with response: APIResponse = .init(accountID: nil,
-//                                                                              httpCode: nil,
-//                                                                              jsonCode: 200,
-//                                                                              authToken: UUID().uuidString,
-//                                                                              email: "email",
-//                                                                              requestID: UUID().uuidString)) {
-//    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
-//    add(child: transactionListViewCoorinator!)
-//    transactionListViewCoorinator?.apiResponse = response
-//    transactionListViewCoorinator!.start()
-//  }
+  
+}
