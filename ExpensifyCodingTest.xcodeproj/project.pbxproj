@@ -33,6 +33,7 @@
 		FC1C7D0122AD29AE00447F7C /* TransactionListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */; };
 		FC1C7D0322AD29D900447F7C /* TransactionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */; };
 		FC48D83622AD5AF9000C4F63 /* TransparentBackgroundNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83522AD5AF8000C4F63 /* TransparentBackgroundNavController.swift */; };
+		FC48D83822AD6BA1000C4F63 /* expensify-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FC48D83722AD6BA1000C4F63 /* expensify-logo.png */; };
 		FC55F79922A9A6140066D3E5 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */; };
 		FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */; };
 		FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */; };
@@ -98,6 +99,7 @@
 		FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewCoordinator.swift; sourceTree = "<group>"; };
 		FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListTableViewCell.swift; sourceTree = "<group>"; };
 		FC48D83522AD5AF8000C4F63 /* TransparentBackgroundNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentBackgroundNavController.swift; sourceTree = "<group>"; };
+		FC48D83722AD6BA1000C4F63 /* expensify-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expensify-logo.png"; sourceTree = "<group>"; };
 		FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
 		FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewCoordinator.swift; sourceTree = "<group>"; };
 		FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionParams.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				FCA1D62622A86E2800D33EF5 /* Assets.xcassets */,
 				FCA1D62722A86E2800D33EF5 /* Info.plist */,
+				FC48D83722AD6BA1000C4F63 /* expensify-logo.png */,
 				FCA1D62322A86E0B00D33EF5 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -436,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCA1D62822A86E2800D33EF5 /* Assets.xcassets in Resources */,
+				FC48D83822AD6BA1000C4F63 /* expensify-logo.png in Resources */,
 				FCA1D62522A86E0B00D33EF5 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
