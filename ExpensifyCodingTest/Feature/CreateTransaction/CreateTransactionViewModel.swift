@@ -28,6 +28,8 @@ public struct CreateTransactionViewModel {
   }
   
   public func createTransaction(amount: String, created: String, merchant: String) {
+    transactionOutcome?(.creating)
+
     let amount = String(Int((amount.replacingOccurrences(of: "$", with: "").asDouble * 1000.0)))
     router.request(EndPoint.createTransaction(authToken: authToken,
                                               params: CreateTransactionParams(amount: amount,
@@ -37,8 +39,7 @@ public struct CreateTransactionViewModel {
   }
   
   private func handle(result: Result<Data, Error>) {
-    transactionOutcome?(.creating)
-    
+    assert(Thread.isMainThread, "get on the main thread dude")
     switch result {
     case .success(let data):
       do {

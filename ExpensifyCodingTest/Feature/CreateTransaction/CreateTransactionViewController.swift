@@ -98,6 +98,11 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
 
   }
   
+  public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    view.endEditing(true)
+  }
+  
   private func setUpNavigationBar() {
     navigationItem.title = "New Expense"
     navigationController?.navigationBar.backIndicatorImage = UIImage()
@@ -148,7 +153,8 @@ private extension CreateTransactionViewController {
   private func updateViews(for outcome: CreateTransactionViewModel.CreateTransactionOutcome) {
     switch outcome {
     case .none:
-      print("No activity")
+      saveExpenseButton.alpha = 1
+      saveExpenseButton.isEnabled = true
     case .creating:
       showIndicator()
       saveExpenseButton.alpha = 0.5
@@ -175,6 +181,7 @@ extension CreateTransactionViewController {
     activityIndicator.startAnimating()
     activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
   }
   
   func hideIndicator() {

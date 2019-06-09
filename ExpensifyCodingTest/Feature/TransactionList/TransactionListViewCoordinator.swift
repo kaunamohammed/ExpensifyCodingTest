@@ -21,6 +21,8 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
   
   override public func start() {
     
+    presenter.defaultBarPreference(shouldApply: true)
+    
     viewController = .init(viewModel: .init(authToken: authToken, manager: .init()), coordinator: self)
     navigate(to: viewController, with: .push, animated: false)
     
@@ -30,14 +32,10 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
     
     
     viewController.didTapToSignOut = { [presenter, popViewController] in
-      presenter.defaultBarPreference(shouldApply: false)
       popViewController(false)
+      presenter.defaultBarPreference(shouldApply: false)
     }
     
-  }
-  
-  deinit {
-    print("Bye")
   }
   
 }
