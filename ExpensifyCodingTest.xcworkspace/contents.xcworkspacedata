@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ExpensifyCodingTest/README.md">
-   </FileRef>
-   <FileRef
       location = "group:ExpensifyCodingTest.xcodeproj">
    </FileRef>
    <FileRef
