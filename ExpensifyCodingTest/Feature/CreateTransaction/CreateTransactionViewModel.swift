@@ -36,7 +36,7 @@ public struct CreateTransactionViewModel {
                    completion: { [handle] result in handle(result) })
   }
   
-  private func handle(result: Result<Data, NetworkError>) {
+  private func handle(result: Result<Data, Error>) {
     transactionOutcome?(.creating)
     
     switch result {
@@ -56,7 +56,7 @@ public struct CreateTransactionViewModel {
       }
       
     case .failure(let error):
-      transactionOutcome?(.failed(title: nil, reason: error.errorDescription.orEmpty))
+      transactionOutcome?(.failed(title: nil, reason: error.localizedDescription))
     }
   }
   

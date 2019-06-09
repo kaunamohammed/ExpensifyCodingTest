@@ -18,13 +18,10 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
                                                                                               removeCoordinator: remove)
   private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
                                                                         removeCoordinator: remove)
-  
-  var viewModel: TransactionListViewModel!
-  
+    
   override public func start() {
-    viewModel = TransactionListViewModel(authToken: authToken, router: Router())
 
-    viewController = .init(viewModel: viewModel, coordinator: self)
+    viewController = .init(viewModel: .init(authToken: authToken, manager: .init()), coordinator: self)
     navigate(to: viewController, with: .set, animated: false)
     
     viewController.goToCreateTransactionScreen = { [startCreateTransactionViewCoordinator, authToken] in

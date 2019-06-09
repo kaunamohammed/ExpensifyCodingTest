@@ -18,23 +18,11 @@ public final class Router: NetworkRouter {
 
     task = session.dataTask(with: request, completionHandler: { (data, response, error) in
       DispatchQueue.main.async {
-        guard error == nil else { completion(.failure(.requestFailure)); return }
-
-        if let httpResponse = response as? HTTPURLResponse {
-          switch httpResponse.statusCode {
-          case 200: completion(.success(data!))
-          case 400: completion(.failure(.unrecognizedCommand))
-          case 402: completion(.failure(.missingArgument))
-          case 407: completion(.failure(.malformedOrExpiredToken))
-          case 408: completion(.failure(.accountDeleted))
-          case 411: completion(.failure(.insufficientPrivelages))
-          case 500: completion(.failure(.aborted))
-          case 501: completion(.failure(.dbTransactionError))
-          case 502: completion(.failure(.queryError))
-          case 503: completion(.failure(.QueryResponseError))
-          case 504: completion(.failure(.unrecognizedObjectState))
-          default: completion(.failure(.unknown))
-          }
+        guard error == nil else { completion(.failure(error!)); return }
+        if let responseData = data {
+          completion(.success(responseData))
+        } else {
+          completion(.failure(NoDataError.underlying))
         }
       }
       

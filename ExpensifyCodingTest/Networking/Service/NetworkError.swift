@@ -8,27 +8,14 @@
 
 import Foundation
 
-public enum NetworkError {
-  case unknown
-  case unrecognizedCommand
-  case missingArgument
-  case malformedOrExpiredToken
-  case accountDeleted
-  case insufficientPrivelages
-  case aborted
-  case dbTransactionError
-  case queryError
-  case QueryResponseError
-  case unrecognizedObjectState
-  case requestFailure
+public enum NoDataError {
+  case underlying
 }
 
-extension NetworkError: LocalizedError {
+extension NoDataError: LocalizedError {
   public var errorDescription: String? {
     switch self {
-    case .accountDeleted: return "Looks like this account has been deleted"
-    case .requestFailure: return "There was an error reaching our network. Please try again when there's better service"
-    default: return "An internal error has occured. Please wait a little and try again"
+    case .underlying: return "We couldn't filfil this request"
     }
   }
 }

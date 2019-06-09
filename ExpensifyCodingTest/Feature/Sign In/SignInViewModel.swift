@@ -31,7 +31,7 @@ public struct SignInViewModel {
                    completion: { [handle] result in handle(result) })
   }
   
-  private func handle(result: Result<Data, NetworkError>) {
+  private func handle(result: Result<Data, Error>) {
     assert(Thread.isMainThread, "Get on the main thread dude")
     switch result {
     case .success(let data):
@@ -54,7 +54,7 @@ public struct SignInViewModel {
       }
       
     case .failure(let error):
-      signInStateChanged?(.failed(title: nil, reason: error.errorDescription.orEmpty))
+      signInStateChanged?(.failed(title: nil, reason: error.localizedDescription))
     }
   }
   

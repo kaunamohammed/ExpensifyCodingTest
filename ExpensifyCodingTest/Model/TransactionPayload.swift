@@ -11,9 +11,9 @@ import Foundation
 // MARK: - Welcome
 public struct TransactionPayload: Decodable {
   let jsonCode: Int
-  let title, httpCode: Int?
+  let httpCode: Int?
   let transactionList: [TransactionList]?
-  let transactionID, codeRevision, requestID: String?
+  let title, message, transactionID, codeRevision, requestID: String?
 }
 
 // MARK: - TransactionList
