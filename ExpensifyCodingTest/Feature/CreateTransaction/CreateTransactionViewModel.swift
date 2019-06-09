@@ -42,17 +42,17 @@ public struct CreateTransactionViewModel {
     switch result {
     case .success(let data):
       do {
-        // here i'm taking advantage of the decoded() extension on `Data`
+
         let response: APIResponse = try data.decoded()
         switch response.jsonCode {
         case 200...299:
           transactionOutcome?(.success(transactionID: response.transactionID.orEmpty))
         default:
-          transactionOutcome?(.failed(title: nil, reason: "We couldn't upload your transaction. Please try again"))
+          transactionOutcome?(.failed(title: nil, reason: "We couldn't create your expense. Please try again"))
         }
       } catch let error {
         print(error)
-        transactionOutcome?(.failed(title: nil, reason: "Looks like there was a problem. Please try again"))
+        transactionOutcome?(.failed(title: nil, reason: "Looks like there was a problem. Please try again later"))
       }
       
     case .failure(let error):
