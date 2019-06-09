@@ -1,4 +1,4 @@
-#  The Remote Mobile Challenge
+#  The Remote Mobile Challenge ![Image](./ExpensifyCodingTest/ExpensifyCodingTest/Resources/Assets.xcassets/expensify-logo.jpg)
 
 ## Summary 
 
