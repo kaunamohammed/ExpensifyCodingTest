@@ -18,12 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // Although I have initialized it from here, it is still possible to just keep a reference and then inherit from `AppCoordinator`
   // and start different flows based oon business logic i.e a notification or deeplink
   private lazy var appCoordinator: AppCoordinator = {
-    let coordinator = ExpensifyAppCoordinator(window: window!)
+    let coordinator = ExpensifyAppCoordinator(presenter: AppdNavController(), window: window!)
     return coordinator
   }()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
+        
     window = UIWindow(frame: UIScreen.main.bounds)
             
     // start the navigation

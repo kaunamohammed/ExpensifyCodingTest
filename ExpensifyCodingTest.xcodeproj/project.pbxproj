@@ -32,6 +32,7 @@
 		FC1C7CFF22AD297C00447F7C /* TransactionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CFE22AD297C00447F7C /* TransactionListViewModel.swift */; };
 		FC1C7D0122AD29AE00447F7C /* TransactionListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */; };
 		FC1C7D0322AD29D900447F7C /* TransactionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */; };
+		FC48D83622AD5AF9000C4F63 /* TransparentBackgroundNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83522AD5AF8000C4F63 /* TransparentBackgroundNavController.swift */; };
 		FC55F79922A9A6140066D3E5 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */; };
 		FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */; };
 		FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */; };
@@ -96,6 +97,7 @@
 		FC1C7CFE22AD297C00447F7C /* TransactionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewModel.swift; sourceTree = "<group>"; };
 		FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewCoordinator.swift; sourceTree = "<group>"; };
 		FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListTableViewCell.swift; sourceTree = "<group>"; };
+		FC48D83522AD5AF8000C4F63 /* TransparentBackgroundNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentBackgroundNavController.swift; sourceTree = "<group>"; };
 		FC55F78E22A9A6140066D3E5 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
 		FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewCoordinator.swift; sourceTree = "<group>"; };
 		FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionParams.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		FC0EB6B122A8021D00BFAFC2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FC48D83522AD5AF8000C4F63 /* TransparentBackgroundNavController.swift */,
 				FC1C7CDE22AC81B200447F7C /* AuthController.swift */,
 				FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */,
 				FC1C7CE222AC81E800447F7C /* Settings.swift */,
@@ -255,12 +258,12 @@
 		FC55F78B22A9A6130066D3E5 /* TransactionList */ = {
 			isa = PBXGroup;
 			children = (
-				FC1C7CEF22AD258C00447F7C /* TransactionListDatasource.swift */,
-				FC1C7CF022AD258D00447F7C /* TransactionListManager.swift */,
+				FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */,
 				FC1C7CF122AD258D00447F7C /* TransactionListViewController.swift */,
 				FC1C7CFE22AD297C00447F7C /* TransactionListViewModel.swift */,
-				FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */,
 				FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */,
+				FC1C7CEF22AD258C00447F7C /* TransactionListDatasource.swift */,
+				FC1C7CF022AD258D00447F7C /* TransactionListManager.swift */,
 				FC1C7CFD22AD285B00447F7C /* TransactionDetail */,
 			);
 			path = TransactionList;
@@ -521,6 +524,7 @@
 				FC1C7D0322AD29D900447F7C /* TransactionListTableViewCell.swift in Sources */,
 				FC6832A122AB30070056C082 /* KeychainPasswordItem.swift in Sources */,
 				FC1C7CF522AD258D00447F7C /* TransactionListDatasource.swift in Sources */,
+				FC48D83622AD5AF9000C4F63 /* TransparentBackgroundNavController.swift in Sources */,
 				FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */,
 				FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */,
 				FC1C7CDF22AC81B200447F7C /* AuthController.swift in Sources */,

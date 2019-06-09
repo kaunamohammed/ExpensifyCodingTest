@@ -68,6 +68,10 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
     coordinator.newlyCreatedTransactionID = { [viewModel] transactionID in viewModel.loadData(force: false) }
 
   }
+  
+  deinit {
+    print("Bye")
+  }
 
   private func setUpNavigationBar() {
     navigationItem.title = "Expenses"

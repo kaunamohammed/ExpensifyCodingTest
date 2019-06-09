@@ -10,7 +10,18 @@ import UIKit
 
 final class SignInViewController: UIViewController, AlertDisplayable {
   
-  lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+  private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
+  
+  private let backgroundImageView = UIImageView {
+    $0.image = #imageLiteral(resourceName: "expensifythis-1")
+    $0.contentMode = .scaleAspectFill
+    $0.clipsToBounds = true
+  }
+  
+  private let backgroundView = UIView {
+    $0.alpha = 0.2
+    $0.backgroundColor = #colorLiteral(red: 0.06274509804, green: 0.05882352941, blue: 0.05882352941, alpha: 1)
+  }
   
   private let logoImageView = UIImageView {
     $0.image = #imageLiteral(resourceName: "expensify-logo")
@@ -40,6 +51,10 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   // marked lazy so i can have self available
   private lazy var signInButton = UIButton {
     $0.backgroundColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
+    $0.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    $0.layer.shadowRadius = 1
+    $0.layer.shadowOffset = CGSize(width: 0, height: 0)
+    $0.layer.shadowOpacity = 0.5
     $0.layer.cornerRadius = 5
     $0.setTitle("Sign In", for: .normal)
     $0.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
@@ -52,8 +67,8 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     stackView.spacing = 20
     stackView.distribution = .fill
     if #available(iOS 11.0, *) {
-      stackView.setCustomSpacing(50, after: logoImageView)
-      stackView.setCustomSpacing(30, after: passwordTextField)
+      stackView.setCustomSpacing(30, after: logoImageView)
+      stackView.setCustomSpacing(25, after: passwordTextField)
     }
     return stackView
   }()
@@ -72,7 +87,6 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "Sign In"
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     setUpConstraints()
@@ -86,6 +100,12 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     
     viewModel.signInStateChanged = { [updateViews] state in updateViews(state) }
     
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    emailTextField.text = ""
+    passwordTextField.text = ""
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -121,11 +141,11 @@ private extension SignInViewController {
     switch state {
     case .signingIn:
       showIndicator()
-      signInButton.alpha = 0.5
+      signInButton.alpha = 0.7
       signInButton.isEnabled = false
     case .signedIn:
       hideIndicator()
-      signInButton.alpha = 0.5
+      signInButton.alpha = 0.7
       signInButton.isEnabled = false
       successfullySignedIn?()
     case .failed(title: let title, reason: let message):
@@ -141,10 +161,10 @@ private extension SignInViewController {
 // MARK: - Loading Indicator
 extension SignInViewController {
   func showIndicator() {
-    view.add(activityIndicator)
+    signInButton.add(activityIndicator)
     activityIndicator.startAnimating()
-    activityIndicator.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10).isActive = true
-    activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor).isActive = true
+    activityIndicator.trailingAnchor.constraint(equalTo: signInButton.trailingAnchor, constant: -10).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
   }
   
@@ -158,9 +178,21 @@ extension SignInViewController {
 private extension SignInViewController {
   
   func setUpConstraints() {
-    view.add(containerStackView)
+    view.add(backgroundImageView, backgroundView, containerStackView)
     
-    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 30).isActive = true
+    backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+    
+    backgroundView.topAnchor.constraint(equalTo: backgroundImageView.topAnchor).isActive = true
+    backgroundView.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor).isActive = true
+    backgroundView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor).isActive = true
+    backgroundView.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor).isActive = true
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
+    
+    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 15).isActive = true
     containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     containerStackView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -180,7 +212,7 @@ private extension SignInViewController {
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
     
     signInButton.heightAnchor.constraint(equalToConstant: height).isActive = true
-    signInButton.widthAnchor.constraint(equalToConstant: width).isActive = true
+    signInButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
     signInButton.translatesAutoresizingMaskIntoConstraints = false
     
     

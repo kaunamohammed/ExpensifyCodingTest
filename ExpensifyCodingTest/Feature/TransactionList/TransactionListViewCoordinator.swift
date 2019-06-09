@@ -22,15 +22,22 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
   override public func start() {
     
     viewController = .init(viewModel: .init(authToken: authToken, manager: .init()), coordinator: self)
-    navigate(to: viewController, with: .set, animated: false)
+    navigate(to: viewController, with: .push, animated: false)
     
     viewController.goToCreateTransactionScreen = { [startCreateTransactionViewCoordinator, authToken] in
       startCreateTransactionViewCoordinator(authToken.orEmpty)
     }
     
     
-    viewController.didTapToSignOut = { [startSignInViewCoordinator] in startSignInViewCoordinator() }
+    viewController.didTapToSignOut = { [presenter, popViewController] in
+      presenter.defaultBarPreference(shouldApply: false)
+      popViewController(false)
+    }
     
+  }
+  
+  deinit {
+    print("Bye")
   }
   
 }

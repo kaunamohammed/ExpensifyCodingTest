@@ -15,7 +15,7 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
                                                                                         removeCoordinator: remove)
   
   override func start() {
-    
+        
     // initialize the viewController
     // If someone tried to use a `TransactionListViewController` here we won't be able to compile, enforcing type-safety
     // also using type inference to leave out a full definition i.e SignInViewCoordinator(router: Router())
@@ -34,8 +34,24 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 
 extension SignInViewCoordinator {
   private func startTransactionListViewCoordinator(with authToken: String) {
+    presenter.defaultBarPreference(shouldApply: true)
     add(child: transactionListViewCoorinator)
     transactionListViewCoorinator.authToken = authToken
     transactionListViewCoorinator.start()
+  }
+}
+
+extension UINavigationController {
+  func defaultBarPreference(shouldApply: Bool) {
+    if shouldApply {
+      navigationBar.shadowImage = nil
+      navigationBar.setBackgroundImage(nil, for: .default)
+      view.backgroundColor = .clear
+      navigationBar.barTintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+    } else {
+      navigationBar.shadowImage = UIImage()
+      navigationBar.setBackgroundImage(UIImage(), for: .default)
+      view.backgroundColor = .clear
+    }
   }
 }

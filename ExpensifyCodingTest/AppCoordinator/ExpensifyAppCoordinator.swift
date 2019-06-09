@@ -24,11 +24,7 @@ public class ExpensifyAppCoordinator: AppCoordinator {
                                                                                         removeCoordinator: remove)
   
   override public func start() {
-    
-    presenter.navigationBar.barTintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-    presenter.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    presenter.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
-    
+        
     AuthController.isSignedIn ?
       startTransactionListViewCoordinator(with: AuthController.authToken) : startSignInViewCoordinator()
 
