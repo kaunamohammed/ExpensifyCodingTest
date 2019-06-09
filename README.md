@@ -1,5 +1,5 @@
 <p align="center">
-    <img src ="https://github.com/kaunamohammed/ExpensifyCodingTest/blob/master/ExpensifyCodingTest/Resources/expensify-logo.png" />
+    <img src ="https://firebasestorage.googleapis.com/v0/b/outnow-backend.appspot.com/o/expensify-logo.png?alt=media&token=2fb0c6df-f9d1-4339-a8de-75bc0a673791" />
 </p>
 
 # Remote Mobile Challenge
