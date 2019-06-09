@@ -2,7 +2,7 @@
     <img src ="https://github.com/kaunamohammed/ExpensifyCodingTest/blob/master/ExpensifyCodingTest/Resources/expensify-logo.png" />
 </p>
 
-#  The Remote Mobile Challenge
+# Remote Mobile Challenge
 
 ## Summary 
 
@@ -37,7 +37,7 @@ Together, I was able to achieve a good level of separation between different lay
 
 - I used closures to facilitate the communication between the ViewModel and ViewController. Usually I qould use a reactive framework like RxSwift or ReactiveCocoa to bind the data directly to the UI
 
-### Challenge 2 - 455
+## Challenge 2 - 455
 
 ## Caveat
 
