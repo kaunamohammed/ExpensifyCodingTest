@@ -9,6 +9,12 @@
 import UIKit
 import CoordinatorLibrary
 
+func delay(seconds: Double, _ block: @escaping (() -> Void)) {
+  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+    block()
+  }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

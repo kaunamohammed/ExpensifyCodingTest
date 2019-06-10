@@ -71,7 +71,11 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
 
   private func setUpNavigationBar() {
     navigationItem.title = "Expenses"
-    navigationItem.backBarButtonItem = .init(title: "Cancel", style: .plain, target: self, action: nil)
+    navigationController?.defaultBarPreference(shouldApply: true)
+    
+    navigationItem.backBarButtonItem = coordinator.isNavigatedTo ?
+      .init(title: "Cancel", style: .plain, target: self, action: nil) : nil
+    
     navigationItem.leftBarButtonItem = .init(title: "Sign Out",
                                              style: .plain,
                                              target: self,
@@ -90,11 +94,15 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
 // MARK: Target/Action
 private extension TransactionListViewController {
   @objc func signOutButtonTapped() {
-    
+    showIndicator()
     do {
       try viewModel.signOut()
-      didTapToSignOut?()
+      //delay(seconds: 5) {
+        self.hideIndicator()
+        self.didTapToSignOut?()
+      //}
     } catch _ {
+      hideIndicator()
       displayAlert(message: "There was an issue signing you out. Please try again")
     }
   }

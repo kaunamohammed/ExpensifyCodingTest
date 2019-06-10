@@ -15,15 +15,15 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
                                                                                         removeCoordinator: remove)
   
   override func start() {
-        
+    
     // initialize the viewController
     // If someone tried to use a `TransactionListViewController` here we won't be able to compile, enforcing type-safety
     // also using type inference to leave out a full definition i.e SignInViewCoordinator(router: Router())
-
+    
     viewController = .init(viewModel: .init(router: Router()))
     // here I kick of the navigation with the 'AppCoordinator' viewController
-    navigate(to: viewController, with: .set, animated: false)
-    
+    navigate(to: viewController, with: .push, animated: false)
+
     viewController.successfullySignedIn = { [startTransactionListViewCoordinator] in
       startTransactionListViewCoordinator(AuthController.authToken)
     }
@@ -32,10 +32,12 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 
 }
 
-extension SignInViewCoordinator {
-  private func startTransactionListViewCoordinator(with authToken: String) {
-    presenter.defaultBarPreference(shouldApply: true)
+private extension SignInViewCoordinator {
+  func startTransactionListViewCoordinator(with authToken: String) {
+    printChildCount()
     add(child: transactionListViewCoorinator)
+    printChildCount()
+    transactionListViewCoorinator.isNavigatedTo = true
     transactionListViewCoorinator.authToken = authToken
     transactionListViewCoorinator.start()
   }

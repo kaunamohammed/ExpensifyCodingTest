@@ -13,13 +13,13 @@ final class SignInViewController: UIViewController, AlertDisplayable {
   private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
   private let backgroundImageView = UIImageView {
-    $0.image = #imageLiteral(resourceName: "expensifythis-1")
+    $0.image = #imageLiteral(resourceName: "expensifythis-6")
     $0.contentMode = .scaleAspectFill
     $0.clipsToBounds = true
   }
   
   private let backgroundView = UIView {
-    $0.alpha = 0.2
+    $0.alpha = 0.4
     $0.backgroundColor = #colorLiteral(red: 0.06274509804, green: 0.05882352941, blue: 0.05882352941, alpha: 1)
   }
   
@@ -90,16 +90,21 @@ final class SignInViewController: UIViewController, AlertDisplayable {
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     setUpConstraints()
-    
-    #if DEBUG
-    emailTextField.text = "expensifytest@mailinator.com"
-    passwordTextField.text = "hire_me"
-    #endif
-    
+    navigationController?.defaultBarPreference(shouldApply: false)
+
     validateTextFieldInput()
     
     viewModel.signInStateChanged = { [updateViews] state in updateViews(state) }
     
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    #if DEBUG
+    emailTextField.text = "expensifytest@mailinator.com"
+    passwordTextField.text = "hire_me"
+    #endif
+    navigationController?.defaultBarPreference(shouldApply: false)
   }
   
   override func viewDidDisappear(_ animated: Bool) {

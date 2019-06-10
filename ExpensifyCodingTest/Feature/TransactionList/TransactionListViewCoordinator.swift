@@ -19,10 +19,10 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
   private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
                                                                         removeCoordinator: remove)
   
+  public var isNavigatedTo = false
+  
   override public func start() {
-    
-    presenter.defaultBarPreference(shouldApply: true)
-    
+        
     viewController = .init(viewModel: .init(authToken: authToken, manager: .init()), coordinator: self)
     navigate(to: viewController, with: .push, animated: false)
     
@@ -30,10 +30,8 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
       startCreateTransactionViewCoordinator(authToken.orEmpty)
     }
     
-    
-    viewController.didTapToSignOut = { [presenter, popViewController] in
-      popViewController(false)
-      presenter.defaultBarPreference(shouldApply: false)
+    viewController.didTapToSignOut = { [isNavigatedTo, popViewController, startSignInViewCoordinator] in
+      isNavigatedTo ? popViewController(true) : startSignInViewCoordinator()
     }
     
   }
@@ -52,14 +50,23 @@ extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegat
 private extension TransactionListViewCoorinator {
   
   func startCreateTransactionViewCoordinator(with token: String) {
+    printChildCount()
     add(child: createTransactionViewCoordinator)
+    printChildCount()
     createTransactionViewCoordinator.authToken = token
     createTransactionViewCoordinator.delegate = self
     createTransactionViewCoordinator.start()
   }
   
   func startSignInViewCoordinator() {
+    isNavigatedTo = false
+    printChildCount()
     add(child: signInViewCoordinator)
-    signInViewCoordinator.start()
+    printChildCount()
+    presenter.defaultBarPreference(shouldApply: false)
+    delay(seconds: 0.1) {
+      self.signInViewCoordinator.start()
+    }
   }
+  
 }
