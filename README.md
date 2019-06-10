@@ -8,7 +8,7 @@
 
 The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. 
 
-I wanted to get a true feel of what it meant to be an Expensify Mobile Engineer, and so I spent some time immersing myself in your product to try and understand the thought processes around it and how it aligned and resonated with what I want to be spending my time working on. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code. There were a few distractions from WWDC, especially SwiftUI :o.
+I wanted to get a true feel of what it meant to be an Expensify Mobile Engineer, and so I spent some time immersing myself in your product to try and understand the thought processes around it and how it aligned and resonated with what I want to be spending my time working on. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code. Taking me to a tital of 5 days, taking into account a few distractions from WWDC, especially SwiftUI :o.
 
 The key challenge I encountered was in deciding and implementing the right architecture that will allow me to achieve a good level of code separation, scalability and testability. I have detailed the challenges and solutions below.
 
@@ -35,7 +35,7 @@ Together, I was able to achieve a good level of separation between different lay
 
 ## Solution
 
-- I used closures to facilitate the communication between the ViewModel and ViewController. Usually I would use a reactive framework like RxSwift or ReactiveCocoa to bind the data directly to the UI and just observe the changes
+- I used closures to facilitate the communication between the ViewModel and ViewController so that whenever there was a change in the model, the view cotroller will receive the new model data and react by configuring it's views based on the state. Usually I would use a reactive framework like RxSwift or ReactiveCocoa to bind the data directly to the UI and just observe the changes
 
 ## Challenge 2 - Enabling/Disabling buttons
 
