@@ -26,8 +26,8 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
     navigate(to: viewController, with: .set, animated: false)
 
     // when the user successfully signs in, the coordinator receives a allback notifying it to start the `TransactionListViewCoorinator`
-    viewController.successfullySignedIn = { [startTransactionListViewCoordinator] in
-      startTransactionListViewCoordinator(AuthController.authToken)
+    viewController.successfullySignedIn = { [weak self] in
+      self?.startTransactionListViewCoordinator(with: AuthController.authToken)
     }
     
   }

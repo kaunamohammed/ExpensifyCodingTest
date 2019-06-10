@@ -36,14 +36,14 @@ public struct CreateTransactionViewModel {
                                               params: CreateTransactionParams(amount: amount,
                                                                               created: created,
                                                                               merchant: merchant)),
-                   completion: { [handle] result in handle(result) })
+                   completion: { result in self.handle(result: result) })
   }
   
 }
 
 private extension CreateTransactionViewModel {
   func handle(result: Result<Data, Error>) {
-    assert(Thread.isMainThread, "get on the main thread dude")
+    assert(Thread.isMainThread, "You are not on the main thread, please switch to the main thread")
     switch result {
     case .success(let data):
       do {

@@ -10,7 +10,7 @@ import CoordinatorLibrary
 
 public final class TransactionListViewCoorinator: ChildCoordinator<TransactionListViewController> {
   
-  public var authToken: String!
+  public var authToken: String?
       
   public var newlyCreatedTransactionID: ((String) -> Void)?
   
@@ -24,15 +24,16 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
   
   override public func start() {
         
-    viewController = .init(viewModel: .init(authToken: authToken, manager: .init()), coordinator: self)
+    viewController = .init(viewModel: .init(authToken: authToken.orEmpty, manager: .init()), coordinator: self)
     navigate(to: viewController, with: .push, animated: false)
     
-    viewController.goToTransactionDetailScreen = { [startTransactionDetailViewCoordinator] detail in
-      startTransactionDetailViewCoordinator(detail)
+    viewController.goToTransactionDetailScreen = { [weak self] detail in
+      self?.startTransactionDetailViewCoordinator(with: detail)
     }
     
-    viewController.goToCreateTransactionScreen = { [startCreateTransactionViewCoordinator, authToken] in
-      startCreateTransactionViewCoordinator(authToken.orEmpty)
+    viewController.goToCreateTransactionScreen = { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.startCreateTransactionViewCoordinator(with: strongSelf.authToken.orEmpty)
     }
     
     viewController.didTapToSignOut = { [startSignInViewCoordinator] in startSignInViewCoordinator()

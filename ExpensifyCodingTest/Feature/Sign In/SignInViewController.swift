@@ -163,7 +163,7 @@ extension SignInViewController {
   func showIndicator() {
     signInButton.add(activityIndicator)
     activityIndicator.startAnimating()
-    activityIndicator.trailingAnchor.constraint(equalTo: signInButton.trailingAnchor, constant: -10).isActive = true
+    activityIndicator.trailingAnchor.constraint(equalTo: signInButton.trailingAnchor, constant: Self.Constants.activityIndicatorTrailingPadding).isActive = true
     activityIndicator.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
   }
@@ -177,6 +177,13 @@ extension SignInViewController {
 // MARK: - Constraints
 private extension SignInViewController {
   
+  private struct Constants {
+    static let topPadding: CGFloat = 15
+    static let height: CGFloat = 45
+    static let width: CGFloat = 320
+    static let activityIndicatorTrailingPadding: CGFloat = -15
+  }
+  
   func setUpConstraints() {
     view.add(backgroundImageView, backgroundView, containerStackView)
     
@@ -186,27 +193,24 @@ private extension SignInViewController {
     backgroundView.pin(to: backgroundImageView)
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     
-    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 15).isActive = true
+    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: Self.Constants.topPadding).isActive = true
     containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     containerStackView.translatesAutoresizingMaskIntoConstraints = false
     
-    let height = view.frame.size.height * 0.06
-    let width = view.frame.size.width * 0.95
-    
-    logoImageView.heightAnchor.constraint(equalToConstant: height).isActive = true
-    logoImageView.widthAnchor.constraint(equalToConstant: width).isActive = true
+    logoImageView.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
+    logoImageView.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
     logoImageView.translatesAutoresizingMaskIntoConstraints = false
     
-    emailTextField.heightAnchor.constraint(equalToConstant: height).isActive = true
-    emailTextField.widthAnchor.constraint(equalToConstant: width).isActive = true
+    emailTextField.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
+    emailTextField.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
     emailTextField.translatesAutoresizingMaskIntoConstraints = false
     
-    passwordTextField.heightAnchor.constraint(equalToConstant: height).isActive = true
-    passwordTextField.widthAnchor.constraint(equalToConstant: width).isActive = true
+    passwordTextField.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
+    passwordTextField.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
     
-    signInButton.heightAnchor.constraint(equalToConstant: height).isActive = true
-    signInButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+    signInButton.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
+    signInButton.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
     signInButton.translatesAutoresizingMaskIntoConstraints = false
     
   }

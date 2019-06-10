@@ -36,7 +36,7 @@ public struct SignInViewModel {
 
 private extension SignInViewModel {
   func handle(result: Result<Data, Error>) {
-    assert(Thread.isMainThread, "Get on the main thread dude")
+    assert(Thread.isMainThread, "You are not on the main thread, please switch to the main thread")
     switch result {
     case .success(let data):
       do {

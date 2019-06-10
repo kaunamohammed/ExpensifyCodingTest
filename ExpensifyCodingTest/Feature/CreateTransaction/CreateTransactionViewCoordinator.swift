@@ -19,19 +19,19 @@ public protocol CreateTransactionViewCoordinatorDelegate: class {
 
 public final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransactionViewController> {
   
-  public var authToken: String!
+  public var authToken: String?
   
   /// weak reference to delegate to avoid retain cycle
   public weak var delegate: CreateTransactionViewCoordinatorDelegate?
   
   override public func start() {
 
-    viewController = .init(viewModel: .init(authToken: authToken, router: Router()))
+    viewController = .init(viewModel: .init(authToken: authToken.orEmpty, router: Router()))
     navigate(to: viewController, with: .push, animated: true)
     
-    viewController.didSuccessfullyCreateTransaction = { [delegate, popViewController] transactionID in
-      delegate?.didCreateTransaction(transactionID)
-      popViewController(true)
+    viewController.didSuccessfullyCreateTransaction = { [weak self] transactionID in
+      self?.delegate?.didCreateTransaction(transactionID)
+      self?.popViewController(animated: true)
     }
     
   }

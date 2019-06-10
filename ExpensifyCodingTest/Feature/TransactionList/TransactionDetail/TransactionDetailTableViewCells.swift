@@ -9,6 +9,13 @@
 import UIKit
 
 public class TransactionDetailTableViewCell1: UITableViewCell {
+  
+  private struct Constants {
+    static let topPadding: CGFloat = 10
+    static let bottomPadding: CGFloat = -5
+    static let leadingPadding: CGFloat = 20
+    static let trailingPadding: CGFloat = -20
+  }
 
   let label = UILabel {
     $0.textAlignment = .left
@@ -19,10 +26,10 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(label)
     
-    label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-    label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-    label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-    label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+    label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Self.Constants.topPadding).isActive = true
+    label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Self.Constants.leadingPadding).isActive = true
+    label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Self.Constants.trailingPadding).isActive = true
+    label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Self.Constants.bottomPadding).isActive = true
     label.translatesAutoresizingMaskIntoConstraints = false
     
   }
@@ -43,6 +50,14 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
 
 public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
   
+  private struct Constants {
+    static let width: CGFloat = 15
+    static let height: CGFloat = 15
+    static let trailingPadding: CGFloat = -20
+    static let topPadding: CGFloat = 30
+    static let backgroundViewMultiplier: CGFloat = 0.95
+  }
+  
   private let checkmarkImageView = UIImageView {
     $0.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     $0.contentMode = .scaleAspectFit
@@ -52,10 +67,10 @@ public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
   override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(checkmarkImageView)
-    checkmarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    checkmarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Self.Constants.trailingPadding).isActive = true
     checkmarkImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
-    checkmarkImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
-    checkmarkImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    checkmarkImageView.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
+    checkmarkImageView.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
     checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
   }
   

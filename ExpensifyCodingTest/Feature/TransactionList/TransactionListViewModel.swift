@@ -16,6 +16,9 @@ public struct TransactionListViewModel {
     case failed(title: String?, reason: String?)
   }
   
+  ///
+  public var dateFormatter = DateFormatter()
+    
   /// notifies the view controller if it was force reloaded
   public var forcedReload: ((Bool) -> Void)?
   
@@ -45,6 +48,14 @@ public struct TransactionListViewModel {
     return try AuthController.signOut()
   }
   
+  public func currency(from currencyCode: CurrencyCode, amount: Double) -> String? {
+    let formatter = NumberFormatter()
+    formatter.usesGroupingSeparator = true
+    formatter.numberStyle = .currency
+    formatter.currencyCode = currencyCode.string
+    return formatter.string(from: NSNumber(value: amount))
+  }
+  
   /**
    
    loads the data to be confused
@@ -57,12 +68,12 @@ public struct TransactionListViewModel {
     forcedReload?(isInitialLoad)
     
     manager.getTransactions(authToken: authToken,
-                            completion: { [transactionListOutcome] result in
+                            completion: { result in
                               switch result {
                               case .success(let transactions):
-                                transactionListOutcome?(.loaded(transactions: transactions))
+                                self.transactionListOutcome?(.loaded(transactions: transactions))
                               case .failure(let error):
-                                transactionListOutcome?(.failed(title: nil, reason: error.errorDescription))
+                                self.transactionListOutcome?(.failed(title: nil, reason: error.errorDescription))
                               }
     })
     

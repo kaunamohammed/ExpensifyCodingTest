@@ -34,15 +34,15 @@ public class TransactionListTableViewCell: UITableViewCell {
   }
   
   
-  public func configure(with model: TransactionList) {
+  public func configure(with model: TransactionList, dateFormatter: DateFormatter) {
     
-    let formatter = DateFormatter()
+    // FIXME - wahala
     // getting the returned created string in its format
-    formatter.dateFormat = "yyyy-MM-dd"
-    let date = formatter.date(from: model.created.orEmpty)
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let date = dateFormatter.date(from: model.created.orEmpty)
     // changing it to the correct format to display in the cell
-    formatter.dateFormat = "E d MMM y"
-    let dateString = formatter.string(from: date!)
+    dateFormatter.dateFormat = "E d MMM y"
+    let dateString = dateFormatter.string(from: date!)
     
     leadingLabel.attributedText = AttributedStringBuilder()
       .append(model.merchant.truncate(by: 15) + "\n",
@@ -62,16 +62,23 @@ public class TransactionListTableViewCell: UITableViewCell {
 
 // MARK: - Constraints
 private extension TransactionListTableViewCell {
+  
+  private struct Constants {
+    static let leadingLabelWidth: CGFloat = 200
+    static let leadingPadding: CGFloat = 20
+    static let trailingPadding: CGFloat = -20
+  }
+  
   func setUpConstraints() {
     contentView.add(leadingLabel, trailingLabel)
     
-    leadingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-    leadingLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    leadingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Self.Constants.leadingPadding).isActive = true
+    leadingLabel.widthAnchor.constraint(equalToConstant: Self.Constants.leadingLabelWidth).isActive = true
     leadingLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     leadingLabel.translatesAutoresizingMaskIntoConstraints = false
     
     trailingLabel.topAnchor.constraint(equalTo: leadingLabel.topAnchor).isActive = true
-    trailingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    trailingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Self.Constants.trailingPadding).isActive = true
     trailingLabel.translatesAutoresizingMaskIntoConstraints = false
     
   }

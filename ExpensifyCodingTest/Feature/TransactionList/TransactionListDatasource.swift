@@ -11,18 +11,16 @@ import UIKit
 // this can easily be put in the TransactionListViewController but incase of future development
 final class TransactionListDatasource: GenericTableViewDatasource<TransactionList, TransactionListTableViewCell> {
   
-  var dateFormatter = DateFormatter()
+  private var dateFormatter = DateFormatter()
   
   private var transactionListGroupedByDate = [[TransactionList]]()
-  
-  private var groupedByDate: [Date: [TransactionList]] = .init()
   
   override init(dataList: [TransactionList], configure: @escaping ((TransactionListTableViewCell, TransactionList) -> Void)) {
     super.init(dataList: dataList, configure: configure)
     
     dateFormatter.dateFormat = "yyyy-MM-dd"
     
-    groupedByDate = Dictionary(grouping: dataList) { (element) -> Date in
+    let groupedByDate = Dictionary(grouping: dataList) { (element) -> Date in
       let date = dateFormatter.date(from: element.created.orEmpty)
       return date!
     }

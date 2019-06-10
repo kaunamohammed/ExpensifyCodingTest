@@ -62,18 +62,18 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
     setUpConstraints()
     setUpNavigationBar()
 
-    viewModel.forcedReload = { [hideIndicator, showIndicator] force in
-      force ? hideIndicator() : showIndicator()
+    viewModel.forcedReload = { [weak self] force in
+      force ? self?.hideIndicator() : self?.showIndicator()
     }
     
-    viewModel.transactionListOutcome = { [updateViews] outcome in updateViews(outcome) }
+    viewModel.transactionListOutcome = { [weak self] outcome in self?.updateViews(for: outcome) }
     
-    viewModel.errorSigningOutMessage = { [displayAlert] message in displayAlert(nil, message) }
+    viewModel.errorSigningOutMessage = { [weak self] message in self?.displayAlert(title: nil, message: message) }
     
     viewModel.loadData()
     
-    coordinator.newlyCreatedTransactionID = { [viewModel] _ in
-      viewModel.loadData(isInitialLoad: false)
+    coordinator.newlyCreatedTransactionID = { [weak self] _ in
+      self?.viewModel.loadData(isInitialLoad: false)
     }
     
   }
@@ -105,8 +105,8 @@ extension TransactionListViewController: UITableViewDelegate {
     
     let transaction = dataSource.dataList[indexPath.row]
     let detail = TransactionDetail(merchant: transaction.merchant,
-                                   amount: NumberFormatter.currency(from: .init(string: transaction.currency.orEmpty),
-                                                                    amount: Double(abs(transaction.amount)) / 1000).orEmpty,
+                                   amount: viewModel.currency(from: .init(string: transaction.currency.orEmpty),
+                                                              amount: Double(abs(transaction.amount)) / 1000).orEmpty,
                                    date: transaction.created.orEmpty,
                                    comment: transaction.comment.orEmpty,
                                    reimbursable: transaction.reimbursable)
@@ -149,7 +149,10 @@ private extension TransactionListViewController {
       tableView.dataSource = nil
       showIndicator()
     case .loaded(transactions: let transactions):
-      dataSource = .init(dataList: transactions, configure: { (cell, model) in cell.configure(with: model) })
+      dataSource = .init(dataList: transactions,
+                         configure: { [weak self] (cell, model) in
+                          guard let strongSelf = self else { return }
+                          cell.configure(with: model, dateFormatter: strongSelf.viewModel.dateFormatter) })
       tableView.dataSource = dataSource
       hideIndicator()
       refreshControl.endRefreshing()
