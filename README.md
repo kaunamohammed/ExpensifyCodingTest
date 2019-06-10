@@ -56,7 +56,7 @@ In order to solve the problems, I used the ``` .editingChanged ``` event on the 
 
 Authentication was fairly straightforward to begin with. Hit the auth endpoint and get back an auth token. 
 
-## Challenge 1 - Quiting and reopening the app
+## Challenge 1 - Quitting and reopening the app
 
 When a user quits the app, they would have had to reauthenticate, this hurts the user experience.
 
