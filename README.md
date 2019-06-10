@@ -76,6 +76,6 @@ I decided to persist the auth token to the user keychain for both security and t
 
 I did not want to hit ``` pod install ``` too much in this project as I wanted to showcase my skills. However, I introduced;
 
-- [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary) by me
-- [KeychainPasswordItem](https://developer.apple.com/library/content/samplecode/GenericKeychain/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007797-Intro-DontLinkElementID_2) by Apple
-- [AuthController](https://www.raywenderlich.com/129-basic-ios-security-keychain-and-hashing) by RayWenderlich
+- [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary) by me. I used this library to handle navigation.
+- [KeychainPasswordItem](https://developer.apple.com/library/content/samplecode/GenericKeychain/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007797-Intro-DontLinkElementID_2) by Apple. I used this lirary to handle interacting with the keychain.
+- [AuthController & Settings](https://www.raywenderlich.com/129-basic-ios-security-keychain-and-hashing) by RayWenderlich. I used this library to interact with the user current session state.
