@@ -8,12 +8,13 @@
 
 import UIKit
 
-public class TransactionListViewController: UIViewController, AlertDisplayable {
+public final class TransactionListViewController: UIViewController, AlertDisplayable {
   
   private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
   private lazy var refreshControl = UIRefreshControl {
-    $0.attributedTitle = AttributedStringBuilder().append("Checking for updates", attributes: [.foregroundColor: #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)]).build()
+    $0.attributedTitle = AttributedStringBuilder()
+      .append("Checking for updates", attributes: [.foregroundColor: #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)]).build()
     $0.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
   }
   
@@ -106,13 +107,8 @@ extension TransactionListViewController: UITableViewDelegate {
                                    amount: NumberFormatter.currency(from: .init(string: transaction.currency.orEmpty),
                                                                     amount: Double(abs(transaction.amount)) / 1000).orEmpty,
                                    date: transaction.created.orEmpty,
-                                   cardName: transaction.cardName.orEmpty,
-                                   cardNumber: transaction.cardNumber.orEmpty,
                                    category: transaction.category.orEmpty,
-                                   comment: transaction.comment.orEmpty,
-                                   billable: transaction.billable,
-                                   reimbursable: transaction.reimbursable,
-                                   unverified: transaction.unverified)
+                                   reimbursable: transaction.reimbursable)
     goToTransactionDetailScreen?(detail)
   }
   

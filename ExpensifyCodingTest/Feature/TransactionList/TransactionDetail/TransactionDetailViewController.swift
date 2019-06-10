@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TransactionDetailViewController: UIViewController {
+public final class TransactionDetailViewController: UIViewController {
   
   private lazy var transactionDetailTableView: UITableView = {
     let table = UITableView(frame: .zero, style: .grouped)
@@ -23,14 +23,7 @@ public class TransactionDetailViewController: UIViewController {
   private let amountCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
   private let dateCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
 
-  private let cardNameCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
-  private let cardNumberCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
-  private let categoryCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
-  private let commentCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
-
   private let reimbursableCell: TransactionDetailTableViewCell2 = .init(style: .default, reuseIdentifier: nil)
-  private let billableCell: TransactionDetailTableViewCell2 = .init(style: .default, reuseIdentifier: nil)
-  private let unverifiedCell: TransactionDetailTableViewCell2 = .init(style: .default, reuseIdentifier: nil)
   
   private let transactionDetail: TransactionDetail
 
@@ -53,14 +46,7 @@ public class TransactionDetailViewController: UIViewController {
     amountCell.configure(topText: "Amount", bottomText: transactionDetail.amount)
     dateCell.configure(topText: "Date", bottomText: transactionDetail.date)
     
-    cardNameCell.configure(topText: "Card Name", bottomText: transactionDetail.cardName)
-    cardNumberCell.configure(topText: "Card Number", bottomText: transactionDetail.cardNumber)
-    categoryCell.configure(topText: "Category", bottomText: transactionDetail.category)
-    commentCell.configure(topText: "Comments", bottomText: transactionDetail.comment)
-    
     reimbursableCell.configure(bottomText: "Reimbursable", checkmark: transactionDetail.reimbursable)
-    billableCell.configure(bottomText: "Billable", checkmark: transactionDetail.billable)
-    unverifiedCell.configure(bottomText: "Verified", checkmark: transactionDetail.unverified)
 
   }
   
@@ -88,14 +74,13 @@ extension TransactionDetailViewController: UITableViewDelegate {
 extension TransactionDetailViewController: UITableViewDataSource {
   
   public func numberOfSections(in tableView: UITableView) -> Int {
-    return 3
+    return 2
   }
   
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 0: return 3
-    case 1: return 4
-    case 2: return 3
+    case 1: return 1
     default: fatalError("Unknown section")
     }
   }
@@ -111,18 +96,8 @@ extension TransactionDetailViewController: UITableViewDataSource {
       }
     case 1:
       switch indexPath.row {
-      case 0: return cardNameCell
-      case 1: return cardNumberCell
-      case 2: return categoryCell
-      case 3: return commentCell
-      default: fatalError("Unknown row in section: 1")
-      }
-    case 2:
-      switch indexPath.row {
       case 0: return reimbursableCell
-      case 1: return billableCell
-      case 2: return unverifiedCell
-      default: fatalError("Unknown row in section: 2")
+      default: fatalError("Unknown row in section: 1")
       }
     default: fatalError("Unknown section")
     }

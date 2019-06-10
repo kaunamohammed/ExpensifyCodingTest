@@ -89,10 +89,11 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   override public func viewDidLoad() {
     super.viewDidLoad()
     
+    navigationItem.title = "New Expense"
+    
     view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     
     setUpConstraints()
-    setUpNavigationBar()
     validateTextFieldInput()
     
     viewModel.transactionOutcome = { [updateViews] state in updateViews(state) }
@@ -102,13 +103,6 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     view.endEditing(true)
-  }
-  
-  private func setUpNavigationBar() {
-    navigationItem.title = "New Expense"
-    navigationController?.navigationBar.backIndicatorImage = UIImage()
-    navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage()
-    navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
   }
   
 }

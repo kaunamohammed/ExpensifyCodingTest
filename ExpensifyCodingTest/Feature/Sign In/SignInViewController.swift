@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SignInViewController: UIViewController, AlertDisplayable {
+public final class SignInViewController: UIViewController, AlertDisplayable {
   
   private lazy var activityIndicator: UIActivityIndicatorView = .init(style: .gray)
   
@@ -79,11 +79,11 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     super.init(nibName: nil, bundle: nil)
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -100,7 +100,7 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     
   }
   
-  override func viewDidAppear(_ animated: Bool) {
+  override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     #if DEBUG
     emailTextField.text = "expensifytest@mailinator.com"
@@ -109,13 +109,13 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     navigationController?.defaultBarPreference(shouldApply: false)
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
+  override public func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     emailTextField.text = ""
     passwordTextField.text = ""
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+  override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     view.endEditing(true)
   }

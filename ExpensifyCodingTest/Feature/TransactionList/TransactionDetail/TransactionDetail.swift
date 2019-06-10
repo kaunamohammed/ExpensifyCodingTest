@@ -13,12 +13,7 @@ public struct TransactionDetail {
   let merchant: String
   let amount: String
   let date: String
-  let cardName: String
-  let cardNumber: String
   let category: String
-  let comment: String
-  let billable: Bool
   let reimbursable: Bool
-  let unverified: Bool
   
 }
