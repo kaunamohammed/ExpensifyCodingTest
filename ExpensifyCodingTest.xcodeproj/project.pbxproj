@@ -34,7 +34,7 @@
 		FC1C7D0322AD29D900447F7C /* TransactionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */; };
 		FC48D83622AD5AF9000C4F63 /* AppNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83522AD5AF8000C4F63 /* AppNavController.swift */; };
 		FC48D83A22ADDB5B000C4F63 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83922ADDB5B000C4F63 /* TransactionDetailViewController.swift */; };
-		FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCell1.swift */; };
+		FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift */; };
 		FC48D83E22ADE02B000C4F63 /* TransactionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83D22ADE02B000C4F63 /* TransactionDetail.swift */; };
 		FC48D84022ADE198000C4F63 /* TransactionDetailViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83F22ADE198000C4F63 /* TransactionDetailViewCoordinator.swift */; };
 		FC48D84222ADFA93000C4F63 /* NavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D84122ADFA93000C4F63 /* NavigationController+Ext.swift */; };
@@ -60,6 +60,7 @@
 		FCA1D62822A86E2800D33EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA1D62622A86E2800D33EF5 /* Assets.xcassets */; };
 		FCA1D62B22A8773E00D33EF5 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D62A22A8773E00D33EF5 /* Credentials.swift */; };
 		FCA1D62F22A8890500D33EF5 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D62E22A8890500D33EF5 /* APIResponse.swift */; };
+		FCD53AF122AE6F9B0000AB54 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD53AF022AE6F9B0000AB54 /* UIView+Constraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +105,7 @@
 		FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListTableViewCell.swift; sourceTree = "<group>"; };
 		FC48D83522AD5AF8000C4F63 /* AppNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavController.swift; sourceTree = "<group>"; };
 		FC48D83922ADDB5B000C4F63 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
-		FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTableViewCell1.swift; sourceTree = "<group>"; };
+		FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTableViewCells.swift; sourceTree = "<group>"; };
 		FC48D83D22ADE02B000C4F63 /* TransactionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetail.swift; sourceTree = "<group>"; };
 		FC48D83F22ADE198000C4F63 /* TransactionDetailViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewCoordinator.swift; sourceTree = "<group>"; };
 		FC48D84122ADFA93000C4F63 /* NavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 		FCA1D62722A86E2800D33EF5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA1D62A22A8773E00D33EF5 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		FCA1D62E22A8890500D33EF5 /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		FCD53AF022AE6F9B0000AB54 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				FC62B93722A8AE1B00A03D08 /* URLQueryItem+RemoveNilValues.swift */,
 				FC0EB6DC22A81A0100BFAFC2 /* Constants.swift */,
 				FC1C7CFB22AD270D00447F7C /* extensions.swift */,
+				FCD53AF022AE6F9B0000AB54 /* UIView+Constraints.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -262,7 +265,7 @@
 			children = (
 				FC48D83D22ADE02B000C4F63 /* TransactionDetail.swift */,
 				FC48D83F22ADE198000C4F63 /* TransactionDetailViewCoordinator.swift */,
-				FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCell1.swift */,
+				FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift */,
 				FC48D83922ADDB5B000C4F63 /* TransactionDetailViewController.swift */,
 			);
 			path = TransactionDetail;
@@ -522,7 +525,7 @@
 				FC1C7CF722AD258D00447F7C /* TransactionListViewController.swift in Sources */,
 				FC0EB6D922A8119900BFAFC2 /* EndPoint.swift in Sources */,
 				FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */,
-				FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCell1.swift in Sources */,
+				FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift in Sources */,
 				FCA1D62F22A8890500D33EF5 /* APIResponse.swift in Sources */,
 				FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */,
 				FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */,
@@ -547,6 +550,7 @@
 				FC5F9FD922A7F65400598548 /* AppDelegate.swift in Sources */,
 				FC1C7CFC22AD270D00447F7C /* extensions.swift in Sources */,
 				FC0EB6D722A8117600BFAFC2 /* URLProducer.swift in Sources */,
+				FCD53AF122AE6F9B0000AB54 /* UIView+Constraints.swift in Sources */,
 				FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */,
 				FCA1D62222A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift in Sources */,
 				FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */,

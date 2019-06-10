@@ -107,7 +107,7 @@ extension TransactionListViewController: UITableViewDelegate {
                                    amount: NumberFormatter.currency(from: .init(string: transaction.currency.orEmpty),
                                                                     amount: Double(abs(transaction.amount)) / 1000).orEmpty,
                                    date: transaction.created.orEmpty,
-                                   category: transaction.category.orEmpty,
+                                   comment: transaction.comment.orEmpty,
                                    reimbursable: transaction.reimbursable)
     goToTransactionDetailScreen?(detail)
   }

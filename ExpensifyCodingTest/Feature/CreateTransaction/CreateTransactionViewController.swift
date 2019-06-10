@@ -190,10 +190,7 @@ private extension CreateTransactionViewController {
   func setUpConstraints() {
     view.add(scrollView)
     
-    scrollView.topAnchor.constraint(equalTo: topSafeArea).isActive = true
-    scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    scrollView.bottomAnchor.constraint(equalTo: bottomSafeArea).isActive = true
+    scrollView.pin(to: self)
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     
     let height = (view.frame.size.height * 0.05)
@@ -207,8 +204,7 @@ private extension CreateTransactionViewController {
     backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.95).isActive = true
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
-    containerStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-    containerStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
+    containerStackView.center(in: backgroundView)
     containerStackView.translatesAutoresizingMaskIntoConstraints = false
 
     datePicker.heightAnchor.constraint(equalToConstant: 100).isActive = true

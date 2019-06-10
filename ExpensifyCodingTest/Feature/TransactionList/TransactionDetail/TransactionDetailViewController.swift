@@ -22,6 +22,7 @@ public final class TransactionDetailViewController: UIViewController {
   private let merchantNameCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
   private let amountCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
   private let dateCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
+  private let commentCell: TransactionDetailTableViewCell1 = .init(style: .default, reuseIdentifier: nil)
 
   private let reimbursableCell: TransactionDetailTableViewCell2 = .init(style: .default, reuseIdentifier: nil)
   
@@ -45,6 +46,7 @@ public final class TransactionDetailViewController: UIViewController {
     merchantNameCell.configure(topText: "Merchant", bottomText: transactionDetail.merchant)
     amountCell.configure(topText: "Amount", bottomText: transactionDetail.amount)
     dateCell.configure(topText: "Date", bottomText: transactionDetail.date)
+    commentCell.configure(topText: "Comment", bottomText: transactionDetail.comment)
     
     reimbursableCell.configure(bottomText: "Reimbursable", checkmark: transactionDetail.reimbursable)
 
@@ -79,7 +81,7 @@ extension TransactionDetailViewController: UITableViewDataSource {
   
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
-    case 0: return 3
+    case 0: return 4
     case 1: return 1
     default: fatalError("Unknown section")
     }
@@ -92,6 +94,7 @@ extension TransactionDetailViewController: UITableViewDataSource {
       case 0: return merchantNameCell
       case 1: return amountCell
       case 2: return dateCell
+      case 3: return commentCell
       default: fatalError("Unknown row in section: 0")
       }
     case 1:

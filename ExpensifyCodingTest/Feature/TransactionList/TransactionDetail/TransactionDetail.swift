@@ -13,7 +13,7 @@ public struct TransactionDetail {
   let merchant: String
   let amount: String
   let date: String
-  let category: String
+  let comment: String
   let reimbursable: Bool
   
 }

@@ -188,16 +188,10 @@ private extension SignInViewController {
   func setUpConstraints() {
     view.add(backgroundImageView, backgroundView, containerStackView)
     
-    backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    backgroundImageView.pin(to: view)
     backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
     
-    backgroundView.topAnchor.constraint(equalTo: backgroundImageView.topAnchor).isActive = true
-    backgroundView.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor).isActive = true
-    backgroundView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor).isActive = true
-    backgroundView.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor).isActive = true
+    backgroundView.pin(to: backgroundImageView)
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     
     containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: 15).isActive = true

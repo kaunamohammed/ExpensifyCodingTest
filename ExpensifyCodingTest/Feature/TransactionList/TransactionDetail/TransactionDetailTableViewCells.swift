@@ -43,8 +43,8 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
 public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
   
   private let checkmarkImageView = UIImageView {
-    $0.image = #imageLiteral(resourceName: "verified")
-    $0.contentMode = .scaleAspectFill
+    $0.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    $0.contentMode = .scaleAspectFit
     $0.clipsToBounds = true
   }
   
@@ -53,8 +53,8 @@ public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
     contentView.add(checkmarkImageView)
     checkmarkImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     checkmarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-    checkmarkImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-    checkmarkImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+    checkmarkImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    checkmarkImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
     checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
   }
   
@@ -64,7 +64,7 @@ public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
   
   public func configure(bottomText: String, checkmark: Bool) {
     configure(topText: nil, bottomText: bottomText)
-    checkmarkImageView.tintColor = checkmark ? #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1) : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    checkmarkImageView.image = checkmark ?  #imageLiteral(resourceName: "verification-checkmark-symbol") : #imageLiteral(resourceName: "cancel")
   }
   
 }
