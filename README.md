@@ -8,7 +8,7 @@
 
 The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. 
 
-I have worked on the challenge part-time for 5 days, primarily due to the distractions from WWDC and SwiftUI. I also wanted to get a true feel of what it meant to be an Expensify Engineer, I immersed myself in your product to try and understand the thought processes around them and how it aligned and resonated with mine. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code.
+I have worked on the challenge for about 5 days, primarily due to the distractions from WWDC and especially SwiftUI :o. I also wanted to get a true feel of what it meant to be an Expensify Engineer, I immersed myself in your product to try and understand the thought processes around them and how it aligned and resonated with mine. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code.
 
 The key challenge I encountered was in deciding and implementing the right architecture that will allow me to achieve a good level of code separation, scalability and testability. I have detailed the challenges and solutions below.
 
@@ -35,7 +35,7 @@ Together, I was able to achieve a good level of separation between different lay
 
 ## Solution
 
-- I used closures to facilitate the communication between the ViewModel and ViewController. Usually I qould use a reactive framework like RxSwift or ReactiveCocoa to bind the data directly to the UI
+- I used closures to facilitate the communication between the ViewModel and ViewController. Usually I would use a reactive framework like RxSwift or ReactiveCocoa to bind the data directly to the UI and just observe the changes
 
 ## Challenge 2 - Enabling/Disabling buttons
 
@@ -56,7 +56,7 @@ In order to solve the problems, I used the ``` .editingChanged ``` event on the 
 
 Authentication was fairly straightforward to begin with. Hit the auth endpoint and get back an auth token. 
 
-## Challenge 1 - Quiting the app
+## Challenge 1 - Quiting and reopening the app
 
 When a user quits the app, they would have had to reauthenticate, this hurts the user experience.
 
