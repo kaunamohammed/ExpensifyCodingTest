@@ -35,6 +35,8 @@ Together, I was able to achieve a good level of separation between different lay
 
 ## Solution
 
+- Naturally, using closurs in this scenario brought about strong references and potentially could've led to a retain cycle. I solved this issue by maintaining only weak references
+
 - I used closures to facilitate the communication between the ViewModel and ViewController so that whenever there was a change in the model, the view cotroller will receive the new model data and react by configuring it's views based on the state. Usually I would use a reactive framework like RxSwift or ReactiveCocoa to bind the data directly to the UI and just observe the changes
 
 ## Challenge 2 - Enabling/Disabling buttons
