@@ -20,7 +20,7 @@ I think one of the most debated topics in iOS development is the choice of archi
 - Scalability
 - Testability
 
-I eventually went with the MVVM-C architecture. It has three key players, ```Model``` ```ViewController```, ```ViewModel``` and ```Coordinator```. I went with this architecture because it offered me the ability to separate core components like navigation, networking and presentation.
+I eventually went with the MVVM-C architecture. It has three key players, ```Model``` ```View```, ```ViewModel``` and ```Coordinator```. I went with this architecture because it offered me the ability to separate core components like navigation, networking and presentation.
 It can be argued that MVVM-C might have been overengineering and simply navigating in the traditional way and sticking with **MVC** will have been better for an app of this scale, that would be a credible arguement. 
 
 However, as iOS developers we rarely write basic apps and from personal experience, business requirements often changes as the app scales, our ViewControllers become massive, testing is not as straightforward and it becomes harder to reason about the code or make changes.
