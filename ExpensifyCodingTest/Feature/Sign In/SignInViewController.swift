@@ -51,7 +51,7 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
     $0.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     $0.layer.shadowRadius = 1
     $0.layer.shadowOffset = CGSize(width: 0, height: 0)
-    $0.layer.shadowOpacity = 0.5
+    $0.layer.shadowOpacity = 0.95
     $0.layer.cornerRadius = 5
     $0.setTitle("Sign In", for: .normal)
     $0.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
@@ -87,25 +87,17 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
     super.viewDidLoad()
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    setUpConstraints()
     
-    #if DEBUG
-    emailTextField.text = "expensifytest@mailinator.com"
-    passwordTextField.text = "hire_me"
-    #endif
-
+    setUpConstraints()
     validateTextFieldInput()
     
-    viewModel.signInStateChanged = { [updateViews] state in updateViews(state) }
+    viewModel.authStateChanged = { [updateViews] state in updateViews(state) }
     
   }
   
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    #if DEBUG
-    emailTextField.text = "expensifytest@mailinator.com"
-    passwordTextField.text = "hire_me"
-    #endif
+
     navigationController?.defaultBarPreference(shouldApply: false)
   }
   

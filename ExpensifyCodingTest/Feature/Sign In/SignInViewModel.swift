@@ -16,7 +16,7 @@ public struct SignInViewModel {
     case failed(title: String?, reason: String?)
   }
   
-  public var signInStateChanged: ((SignInState) -> Void)?
+  public var authStateChanged: ((SignInState) -> Void)?
   
   private let router: NetworkRouter
   public init(router: NetworkRouter) {
@@ -25,7 +25,7 @@ public struct SignInViewModel {
   
   /// attempts to sign in the user
   public func attemptSignIn(with credentials: Credentials) {
-    signInStateChanged?(.signingIn)
+    authStateChanged?(.signingIn)
 
     router.request(EndPoint.authenticateUser(partnerUserID: credentials.id,
                                              partnerUserSecret: credentials.password),
@@ -45,20 +45,20 @@ private extension SignInViewModel {
         switch apiResponse.jsonCode {
         case 200...299:
           try AuthController.saveUserToKeychain(User(email: apiResponse.email.orEmpty), token: apiResponse.authToken.orEmpty)
-          signInStateChanged?(.signedIn)
+          authStateChanged?(.signedIn)
         case 401...500:
-          signInStateChanged?(.failed(title: nil, reason: "Please check your email or password and try again"))
+          authStateChanged?(.failed(title: nil, reason: "Please check your email or password and try again"))
         case 501...599:
-          signInStateChanged?(.failed(title: nil, reason: "An internal error has occured. Please try again"))
+          authStateChanged?(.failed(title: nil, reason: "An internal error has occured. Please try again"))
         default:
-          signInStateChanged?(.failed(title: nil, reason: "An unknown problem occured. Please try again"))
+          authStateChanged?(.failed(title: nil, reason: "An unknown problem occured. Please try again"))
         }
       } catch let error {
-        signInStateChanged?(.failed(title: nil, reason: error.localizedDescription))
+        authStateChanged?(.failed(title: nil, reason: error.localizedDescription))
       }
       
     case .failure(let error):
-      signInStateChanged?(.failed(title: nil, reason: error.localizedDescription))
+      authStateChanged?(.failed(title: nil, reason: error.localizedDescription))
     }
   }
 }
