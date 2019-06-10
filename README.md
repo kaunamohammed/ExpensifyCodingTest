@@ -64,14 +64,6 @@ When a user quits the app, they would have had to reauthenticate, this hurts the
 
 I decided to persist the auth token to the user keychain for both security and to prevent the user from reauthentcating. Instead I save the token and use it until it expires, then prompt the user to reauthenticate. A possible improvement for security would have been to encrypt the token to prevent hackers from gaining access to confidential information of the user.
 
-# Improvements
-
-- Currently the auth token is stored in the keychain as is, but it's vulnerable to a hack and users sensitive information can be stolen. An improvement would be to encrypt the token before passing it to the keychain and then decrypting it when in use
-
-- Currently the app does not do any sort of data persistence and in an environment with poor cell signals, it would be better to prompt the user they're in offline mode and then have data persistence frameworks like Core Data or Realm to save and read data on disk to show to the user
-
-- Pagination would have also been a great thing to do because currently, all the data is being displayed for the user and it can hurt performance when we start dropping frames i/e. < 60 fps
-
 # Third-Party
 
 I did not want to hit ``` pod install ``` too much in this project as I wanted to showcase my skills. However, I introduced;
