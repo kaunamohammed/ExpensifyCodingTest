@@ -10,7 +10,7 @@ import UIKit
 
 public class TransactionDetailTableViewCell1: UITableViewCell {
 
-  private let label = UILabel {
+  let label = UILabel {
     $0.textAlignment = .left
     $0.numberOfLines = 4
   }
@@ -18,12 +18,13 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
   override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(label)
+    
     label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
     label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
     label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
-
     label.translatesAutoresizingMaskIntoConstraints = false
+    
   }
   
   required public init?(coder aDecoder: NSCoder) {
@@ -51,10 +52,10 @@ public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
   override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(checkmarkImageView)
-    checkmarkImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     checkmarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-    checkmarkImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    checkmarkImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    checkmarkImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+    checkmarkImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    checkmarkImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
     checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
   }
   

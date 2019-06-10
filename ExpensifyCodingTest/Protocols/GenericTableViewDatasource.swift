@@ -10,12 +10,21 @@ import UIKit
 
 public class GenericTableViewDatasource<Model: Decodable, Cell: UITableViewCell>: NSObject, UITableViewDataSource {
   
-  public var dataList: [Model] = []
+  public var dataList: [Model]
   
-  private let configure: (Cell, Model) -> Void
-  public init(configure: @escaping ((Cell, Model) -> Void)) {
+  public let configure: (Cell, Model) -> Void
+  public init(dataList: [Model], configure: @escaping ((Cell, Model) -> Void)) {
+    self.dataList = dataList
     self.configure = configure
     super.init() 
+  }
+  
+  public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return ""
+  }
+  
+  public func numberOfSections(in tableView: UITableView) -> Int {
+    return 0
   }
   
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

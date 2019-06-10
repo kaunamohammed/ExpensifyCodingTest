@@ -20,7 +20,6 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   
   private lazy var tableView = UITableView {
     $0.delegate = self
-    $0.dataSource = dataSource
     $0.rowHeight = 70
     $0.estimatedRowHeight = 80
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -40,7 +39,7 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   public var goToTransactionDetailScreen: ((TransactionDetail) -> Void)?
  
   /// the datasource of the tableview
-  private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
+  private var dataSource: TransactionListDatasource!
   
   private var viewModel: TransactionListViewModel
   private let coordinator: TransactionListViewCoorinator
@@ -146,9 +145,12 @@ private extension TransactionListViewController {
   func updateViews(for outcome: TransactionListViewModel.TransactionListOutcome) {
     switch outcome {
     case .loading:
+      dataSource = nil
+      tableView.dataSource = nil
       showIndicator()
     case .loaded(transactions: let transactions):
-      dataSource.dataList = transactions
+      dataSource = .init(dataList: transactions, configure: { (cell, model) in cell.configure(with: model) })
+      tableView.dataSource = dataSource
       hideIndicator()
       refreshControl.endRefreshing()
       tableView.reloadData()
