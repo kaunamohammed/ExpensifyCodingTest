@@ -90,7 +90,13 @@ final class SignInViewController: UIViewController, AlertDisplayable {
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     setUpConstraints()
+    
     navigationController?.defaultBarPreference(shouldApply: false)
+    
+    #if DEBUG
+    emailTextField.text = "expensifytest@mailinator.com"
+    passwordTextField.text = "hire_me"
+    #endif
 
     validateTextFieldInput()
     

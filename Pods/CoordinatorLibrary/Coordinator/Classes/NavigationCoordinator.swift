@@ -40,7 +40,7 @@ open class NavigationCoordinator<T: UIViewController>: NSObject, UINavigationCon
     guard let viewController = navigationController.transitionCoordinator?.viewController(forKey: .from), !navigationController.viewControllers.contains(viewController) else { return }
     
     if viewController is T  {
-      removeCoordinator(self)
+        removeCoordinator(self)
     }
     
   }

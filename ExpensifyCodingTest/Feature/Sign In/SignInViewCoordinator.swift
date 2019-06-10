@@ -22,7 +22,7 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
     
     viewController = .init(viewModel: .init(router: Router()))
     // here I kick of the navigation with the 'AppCoordinator' viewController
-    navigate(to: viewController, with: .push, animated: false)
+    navigate(to: viewController, with: .set, animated: false)
 
     viewController.successfullySignedIn = { [startTransactionListViewCoordinator] in
       startTransactionListViewCoordinator(AuthController.authToken)
@@ -34,10 +34,7 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 
 private extension SignInViewCoordinator {
   func startTransactionListViewCoordinator(with authToken: String) {
-    printChildCount()
     add(child: transactionListViewCoorinator)
-    printChildCount()
-    transactionListViewCoorinator.isNavigatedTo = true
     transactionListViewCoorinator.authToken = authToken
     transactionListViewCoorinator.start()
   }

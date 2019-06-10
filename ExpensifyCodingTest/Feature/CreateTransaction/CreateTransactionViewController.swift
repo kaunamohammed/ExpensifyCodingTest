@@ -110,6 +110,10 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
     navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
   }
   
+  deinit {
+    print("DEINIT -> \(self.description)")
+  }
+  
 }
 
 // MARK: - UITextFieldDelegate

@@ -31,6 +31,7 @@ public final class CreateTransactionViewCoordinator: NavigationCoordinator<Creat
   }
   
   deinit {
+    print("DEINIT -> \(self.description)")
     delegate = nil
   }
   

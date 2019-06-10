@@ -18,10 +18,10 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
   }
   
   private lazy var tableView = UITableView {
+    $0.delegate = self
     $0.dataSource = dataSource
     $0.rowHeight = 70
     $0.estimatedRowHeight = 80
-    $0.allowsSelection = false
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     $0.removeEmptyCells()
     $0.add(refreshControl: refreshControl)
@@ -31,7 +31,8 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
   
   public var didTapToSignOut: (() -> Void)?
   public var goToCreateTransactionScreen: (() -> Void)?
-  
+  public var goToTransactionDetailScreen: ((TransactionDetail) -> Void)?
+ 
   private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
   
   private var viewModel: TransactionListViewModel
@@ -49,7 +50,7 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
   
   override public func viewDidLoad() {
     super.viewDidLoad()
-    
+  
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     setUpConstraints()
@@ -73,9 +74,6 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
     navigationItem.title = "Expenses"
     navigationController?.defaultBarPreference(shouldApply: true)
     
-    navigationItem.backBarButtonItem = coordinator.isNavigatedTo ?
-      .init(title: "Cancel", style: .plain, target: self, action: nil) : nil
-    
     navigationItem.leftBarButtonItem = .init(title: "Sign Out",
                                              style: .plain,
                                              target: self,
@@ -88,6 +86,29 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
                                               action: #selector(createTransactionButtonTapped))
     
   }
+
+}
+
+// MARK: - UITableViewDelegate
+extension TransactionListViewController: UITableViewDelegate {
+  
+  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    
+    let transaction = dataSource.dataList[indexPath.row]
+    let detail = TransactionDetail(merchant: transaction.merchant,
+                                   amount: NumberFormatter.currency(from: .init(string: transaction.currency.orEmpty),
+                                                                    amount: Double(abs(transaction.amount)) / 1000).orEmpty,
+                                   date: transaction.created.orEmpty,
+                                   cardName: transaction.cardName.orEmpty,
+                                   cardNumber: transaction.cardNumber.orEmpty,
+                                   category: transaction.category.orEmpty,
+                                   comment: transaction.comment.orEmpty,
+                                   billable: transaction.billable,
+                                   reimbursable: transaction.reimbursable,
+                                   unverified: transaction.unverified)
+    goToTransactionDetailScreen?(detail)
+  }
   
 }
 
@@ -97,10 +118,8 @@ private extension TransactionListViewController {
     showIndicator()
     do {
       try viewModel.signOut()
-      //delay(seconds: 5) {
-        self.hideIndicator()
-        self.didTapToSignOut?()
-      //}
+        hideIndicator()
+        didTapToSignOut?()
     } catch _ {
       hideIndicator()
       displayAlert(message: "There was an issue signing you out. Please try again")
