@@ -20,24 +20,6 @@ public class TransactionListTableViewCell: UITableViewCell {
     $0.textAlignment = .center
   }
   
-  private lazy var leaingStackView: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [leadingLabel])
-    stackView.alignment = .center
-    stackView.axis = .horizontal
-    stackView.spacing = 10
-    stackView.distribution = .fill
-    return stackView
-  }()
-  
-  private lazy var trailingStackView: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [trailingLabel])
-    stackView.alignment = .center
-    stackView.axis = .vertical
-    stackView.spacing = 15
-    stackView.distribution = .fill
-    return stackView
-  }()
-  
   override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -50,6 +32,7 @@ public class TransactionListTableViewCell: UITableViewCell {
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   
   public func configure(with model: TransactionList) {
     
@@ -80,16 +63,16 @@ public class TransactionListTableViewCell: UITableViewCell {
 // MARK: - Constraints
 private extension TransactionListTableViewCell {
   func setUpConstraints() {
-    contentView.add(leaingStackView, trailingStackView)
+    contentView.add(leadingLabel, trailingLabel)
     
-    leaingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-    leaingStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-    leaingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    leaingStackView.translatesAutoresizingMaskIntoConstraints = false
+    leadingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+    leadingLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    leadingLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    leadingLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    trailingStackView.topAnchor.constraint(equalTo: leaingStackView.topAnchor).isActive = true
-    trailingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-    trailingStackView.translatesAutoresizingMaskIntoConstraints = false
+    trailingLabel.topAnchor.constraint(equalTo: leadingLabel.topAnchor).isActive = true
+    trailingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    trailingLabel.translatesAutoresizingMaskIntoConstraints = false
     
   }
 }

@@ -72,9 +72,11 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
     viewModel.errorSigningOutMessage = { [displayAlert] message in displayAlert(nil, message) }
     
     viewModel.loadData()
-
-    coordinator.newlyCreatedTransactionID = { [viewModel] transactionID in viewModel.loadData(isInitialLoad: false) }
-
+    
+    coordinator.newlyCreatedTransactionID = { [viewModel] _ in
+      viewModel.loadData(isInitialLoad: false)
+    }
+    
   }
 
   private func setUpNavigationBar() {

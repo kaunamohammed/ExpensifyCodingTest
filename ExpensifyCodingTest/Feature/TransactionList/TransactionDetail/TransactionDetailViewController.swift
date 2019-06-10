@@ -40,7 +40,7 @@ public final class TransactionDetailViewController: UIViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.title = "Details"
+    navigationItem.title = "Expense"
     setUpConstraints()
 
     merchantNameCell.configure(topText: "Merchant", bottomText: transactionDetail.merchant)

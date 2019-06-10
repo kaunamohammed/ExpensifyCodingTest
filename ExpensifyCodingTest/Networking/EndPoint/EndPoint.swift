@@ -82,6 +82,18 @@ public extension EndPoint {
       ])
   }
   
+  /**
+   
+   create a transactionsfor the currently signed in user
+   
+   - parameter authToken: The authToken for the current session
+   - parameter params: The params to create the transaction with
+   
+   - returns: A new `EndPoint` consisting of the parameters above
+   
+   - note: Although this meets the minimum requirements of the checklist, If I were to develop this further, I would most likely use a protocol to compose some of the params in the returnValueList options in order to reduce code duplication and reuse this function
+   
+   */
   static func createTransaction(authToken: String, params: CreateTransactionParams) -> EndPoint {
     return EndPoint(
       queryItems: [
@@ -98,11 +110,4 @@ public extension EndPoint {
       ])
   }
   
-}
-
-
-extension Bool {
-  var asString: String {
-    return String(self)
-  }
 }

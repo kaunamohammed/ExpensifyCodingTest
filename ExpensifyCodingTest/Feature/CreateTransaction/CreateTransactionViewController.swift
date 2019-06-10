@@ -28,7 +28,6 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
-  // marked lazy so i can have self available
   private lazy var amountInputTextField = UITextField {
     $0.placeholder = currencyFormatter.string(from: 0)
     $0.borderStyle = .roundedRect
@@ -38,7 +37,6 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
-  // marked lazy so i can have self available
   private lazy var saveExpenseButton = UIButton {
     $0.setTitle("Save", for: .normal)
     $0.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
@@ -90,7 +88,8 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
     super.viewDidLoad()
     
     navigationItem.title = "New Expense"
-    
+    navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
+
     view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     
     setUpConstraints()

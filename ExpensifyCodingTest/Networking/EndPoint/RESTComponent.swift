@@ -14,12 +14,15 @@ import Foundation
  
  */
 public protocol RESTComponent {
+  /// the url scheme e.g. http/https
   var scheme: String { get }
+  /// the url ost
   var host: String { get }
+  /// url path 
   var path: String { get }
 }
 
-// The expension defines the common scheme and host
+// common scheme and host
 public extension RESTComponent {
   var scheme: String {
     return "https"
