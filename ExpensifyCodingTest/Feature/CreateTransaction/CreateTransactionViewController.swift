@@ -64,6 +64,7 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
     return stackView
   }()
   
+  /// notifies the coordinator that the transaction was successfully created
   public var didSuccessfullyCreateTransaction: ((String) -> Void)?
   
   private var currencyFormatter: NumberFormatter {
@@ -108,10 +109,6 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
     navigationController?.navigationBar.backIndicatorImage = UIImage()
     navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage()
     navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
-  }
-  
-  deinit {
-    print("DEINIT -> \(self.description)")
   }
   
 }

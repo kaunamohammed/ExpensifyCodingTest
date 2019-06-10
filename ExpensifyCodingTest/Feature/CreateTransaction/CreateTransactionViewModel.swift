@@ -17,6 +17,7 @@ public struct CreateTransactionViewModel {
     case failed(title: String?, reason: String?)
   }
   
+  /// notifies the view controller of the current state of the outcome of creating the transaction
   public var transactionOutcome: ((CreateTransactionOutcome) -> Void)?
   
   private let authToken: String
@@ -38,12 +39,15 @@ public struct CreateTransactionViewModel {
                    completion: { [handle] result in handle(result) })
   }
   
-  private func handle(result: Result<Data, Error>) {
+}
+
+private extension CreateTransactionViewModel {
+  func handle(result: Result<Data, Error>) {
     assert(Thread.isMainThread, "get on the main thread dude")
     switch result {
     case .success(let data):
       do {
-
+        
         let response: APIResponse = try data.decoded()
         switch response.jsonCode {
         case 200...299:
@@ -60,5 +64,4 @@ public struct CreateTransactionViewModel {
       transactionOutcome?(.failed(title: nil, reason: error.localizedDescription))
     }
   }
-  
 }

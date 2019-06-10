@@ -21,5 +21,4 @@ public struct TransactionDetail {
   let reimbursable: Bool
   let unverified: Bool
   
-  
 }

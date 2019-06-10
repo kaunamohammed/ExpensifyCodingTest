@@ -29,7 +29,6 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.clipsToBounds = true
   }
   
-  // marked lazy so i can have self available
   private lazy var emailTextField = UITextField {
     $0.placeholder = "Email"
     $0.borderStyle = .roundedRect
@@ -39,7 +38,6 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
-  // marked lazy so i can have self available
   private lazy var passwordTextField = UITextField {
     $0.placeholder = "Password"
     $0.isSecureTextEntry = true
@@ -48,7 +46,6 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
-  // marked lazy so i can have self available
   private lazy var signInButton = UIButton {
     $0.backgroundColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
     $0.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -73,10 +70,11 @@ final class SignInViewController: UIViewController, AlertDisplayable {
     return stackView
   }()
   
+  /// callback to receive success sign in notification
   public var successfullySignedIn: (() -> Void)?
   
   private var viewModel: SignInViewModel
-  init(viewModel: SignInViewModel) {
+  public init(viewModel: SignInViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
@@ -90,8 +88,6 @@ final class SignInViewController: UIViewController, AlertDisplayable {
 
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     setUpConstraints()
-    
-    navigationController?.defaultBarPreference(shouldApply: false)
     
     #if DEBUG
     emailTextField.text = "expensifytest@mailinator.com"
@@ -132,6 +128,7 @@ extension SignInViewController: UITextFieldDelegate {}
 // MARK: - Target/Action
 private extension SignInViewController {
   
+  /// validates the input from the textFields
   @objc func validateTextFieldInput() {
     let isValid = (!emailTextField.text.orEmpty.isEmpty && !passwordTextField.text.orEmpty.isEmpty)
     signInButton.alpha = isValid ? 1.0 : 0.5
@@ -225,7 +222,6 @@ private extension SignInViewController {
     signInButton.heightAnchor.constraint(equalToConstant: height).isActive = true
     signInButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
     signInButton.translatesAutoresizingMaskIntoConstraints = false
-    
     
   }
 }

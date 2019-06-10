@@ -17,13 +17,15 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
   override func start() {
     
     // initialize the viewController
-    // If someone tried to use a `TransactionListViewController` here we won't be able to compile, enforcing type-safety
-    // also using type inference to leave out a full definition i.e SignInViewCoordinator(router: Router())
+    // If someone tried to use a `TransactionListViewController` here the code won't compile, enforcing type-safety
     
+    // also using type inference to leave out a full definition i.e SignInViewCoordinator(viewModel: SignInViewModel(router: Router()))
     viewController = .init(viewModel: .init(router: Router()))
-    // here I kick of the navigation with the 'AppCoordinator' viewController
+    
+    // here I kick of the navigation with the 'AppCoordinator' presenter to `SignInViewController`
     navigate(to: viewController, with: .set, animated: false)
 
+    // when the user successfully signs in, the coordinator receives a allback notifying it to start the `TransactionListViewCoorinator`
     viewController.successfullySignedIn = { [startTransactionListViewCoordinator] in
       startTransactionListViewCoordinator(AuthController.authToken)
     }
@@ -32,25 +34,11 @@ final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
 
 }
 
+// MARK: Child Coordinators
 private extension SignInViewCoordinator {
   func startTransactionListViewCoordinator(with authToken: String) {
     add(child: transactionListViewCoorinator)
     transactionListViewCoorinator.authToken = authToken
     transactionListViewCoorinator.start()
-  }
-}
-
-extension UINavigationController {
-  func defaultBarPreference(shouldApply: Bool) {
-    if shouldApply {
-      navigationBar.shadowImage = nil
-      navigationBar.setBackgroundImage(nil, for: .default)
-      view.backgroundColor = .clear
-      navigationBar.barTintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-    } else {
-      navigationBar.shadowImage = UIImage()
-      navigationBar.setBackgroundImage(UIImage(), for: .default)
-      view.backgroundColor = .clear
-    }
   }
 }

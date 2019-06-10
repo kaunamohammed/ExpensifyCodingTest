@@ -29,10 +29,16 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
     $0.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 0)
   }
   
+  /// notifies the coordinator when the sign out button was tapped
   public var didTapToSignOut: (() -> Void)?
+  
+  /// notifies the coordinator to go to the create transation screen
   public var goToCreateTransactionScreen: (() -> Void)?
+  
+  /// notifies the coordinator to go to the transation detail screen
   public var goToTransactionDetailScreen: ((TransactionDetail) -> Void)?
  
+  /// the datasource of the tableview
   private let dataSource = TransactionListDatasource(configure: { (cell, model) in cell.configure(with: model) })
   
   private var viewModel: TransactionListViewModel
@@ -66,7 +72,7 @@ public class TransactionListViewController: UIViewController, AlertDisplayable {
     
     viewModel.loadData()
 
-    coordinator.newlyCreatedTransactionID = { [viewModel] transactionID in viewModel.loadData(force: false) }
+    coordinator.newlyCreatedTransactionID = { [viewModel] transactionID in viewModel.loadData(isInitialLoad: false) }
 
   }
 
@@ -131,7 +137,7 @@ private extension TransactionListViewController {
   }
   
   @objc func refreshTableView() {
-    viewModel.loadData(force: true)
+    viewModel.loadData(isInitialLoad: true)
   }
 }
 

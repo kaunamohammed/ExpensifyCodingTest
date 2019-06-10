@@ -9,12 +9,6 @@
 import UIKit
 import CoordinatorLibrary
 
-func delay(seconds: Double, _ block: @escaping (() -> Void)) {
-  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-    block()
-  }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -31,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
     window = UIWindow(frame: UIScreen.main.bounds)
-            
+                
     // start the navigation
     appCoordinator.start()
     
@@ -40,3 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+func delay(seconds: Double, _ block: @escaping (() -> Void)) {
+  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+    block()
+  }
+}

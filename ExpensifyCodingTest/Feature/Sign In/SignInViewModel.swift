@@ -23,15 +23,19 @@ public struct SignInViewModel {
     self.router = router
   }
   
+  /// attempts to sign in the user
   public func attemptSignIn(with credentials: Credentials) {
     signInStateChanged?(.signingIn)
-    // I prefer to capture objects directly rather than doing the weak/unowned self dance
+
     router.request(EndPoint.authenticateUser(partnerUserID: credentials.id,
                                              partnerUserSecret: credentials.password),
                    completion: { [handle] result in handle(result) })
   }
   
-  private func handle(result: Result<Data, Error>) {
+}
+
+private extension SignInViewModel {
+  func handle(result: Result<Data, Error>) {
     assert(Thread.isMainThread, "Get on the main thread dude")
     switch result {
     case .success(let data):
@@ -57,5 +61,4 @@ public struct SignInViewModel {
       signInStateChanged?(.failed(title: nil, reason: error.localizedDescription))
     }
   }
-  
 }

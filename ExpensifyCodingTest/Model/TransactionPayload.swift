@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - TransactionPayload
 public struct TransactionPayload: Decodable {
   let jsonCode: Int
   let httpCode: Int?

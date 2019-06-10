@@ -16,11 +16,19 @@ public struct TransactionListViewModel {
     case failed(title: String?, reason: String?)
   }
   
+  /// notifies the view controller if it was force reloaded
   public var forcedReload: ((Bool) -> Void)?
+  
+  /// notifies the view controller if sign out was successful
   public var signOutSuccess: (() -> Void)?
+  
+  /// notifies the view controller of an error while signing out
   public var errorSigningOutMessage: ((String) -> Void)?
+  
+  /// notifies the view controller of the current state of the data retrieval from the API
   public var transactionListOutcome: ((TransactionListOutcome) -> Void)?
   
+  /// a read-only property to access the authToken
   public var token: String {
     return authToken
   }
@@ -37,9 +45,16 @@ public struct TransactionListViewModel {
     return try AuthController.signOut()
   }
   
-  public func loadData(force: Bool = false) {
+  /**
+   
+   loads the data to be confused
+   
+   - parameter isInitialLoad: whether this is the initial loading of data
+   
+   */
+  public func loadData(isInitialLoad: Bool = false) {
     transactionListOutcome?(.loading)
-    forcedReload?(force)
+    forcedReload?(isInitialLoad)
     
     manager.getTransactions(authToken: authToken,
                             completion: { [transactionListOutcome] result in

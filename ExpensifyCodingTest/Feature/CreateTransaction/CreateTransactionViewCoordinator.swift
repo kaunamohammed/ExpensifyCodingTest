@@ -8,19 +8,25 @@
 
 import CoordinatorLibrary
 
+/**
+ 
+ A delegate that offers the implementation for when a transaction was created
+ 
+ */
 public protocol CreateTransactionViewCoordinatorDelegate: class {
   func didCreateTransaction(_ transactionID: String)
 }
 
 public final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransactionViewController> {
   
-  public var authToken: String?
+  public var authToken: String!
   
+  /// weak reference to delegate to avoid retain cycle
   public weak var delegate: CreateTransactionViewCoordinatorDelegate?
   
   override public func start() {
 
-    viewController = .init(viewModel: .init(authToken: authToken.orEmpty, router: Router()))
+    viewController = .init(viewModel: .init(authToken: authToken, router: Router()))
     navigate(to: viewController, with: .push, animated: true)
     
     viewController.didSuccessfullyCreateTransaction = { [delegate, popViewController] transactionID in
@@ -31,7 +37,6 @@ public final class CreateTransactionViewCoordinator: NavigationCoordinator<Creat
   }
   
   deinit {
-    print("DEINIT -> \(self.description)")
     delegate = nil
   }
   

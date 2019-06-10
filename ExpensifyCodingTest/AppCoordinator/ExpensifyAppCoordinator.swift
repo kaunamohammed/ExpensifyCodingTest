@@ -32,15 +32,12 @@ public class ExpensifyAppCoordinator: AppCoordinator {
   
 }
 
+// MARK: Child Coordinators
 private extension ExpensifyAppCoordinator {
   
   func startSignInViewCoordinator() {
-    signInViewCoordinator = SignInViewCoordinator(presenter: presenter,
-                                                  removeCoordinator: remove)
-    
-    // adding the signInViewCoordinator to the Coordinator Hierachy
+    signInViewCoordinator = SignInViewCoordinator(presenter: presenter, removeCoordinator: remove)    
     add(child: signInViewCoordinator)
-    // calling start to trigger the navigation to signInViewCoordinator
     signInViewCoordinator.start()
   }
   
