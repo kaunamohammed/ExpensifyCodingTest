@@ -8,7 +8,7 @@
 
 The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. 
 
-I have worked on the challenge for about 5 days, primarily due to the distractions from WWDC and especially SwiftUI :o. I also wanted to get a true feel of what it meant to be an Expensify Engineer, I immersed myself in your product to try and understand the thought processes around it and how it aligned and resonated with mine. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code.
+I wanted to get a true feel of what it meant to be an Expensify Mobile Engineer, and so I spent some time immersing myself in your product to try and understand the thought processes around it and how it aligned and resonated with what I want to be spending my time working on. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code. There were a few distractions from WWDC, especially SwiftUI :o.
 
 The key challenge I encountered was in deciding and implementing the right architecture that will allow me to achieve a good level of code separation, scalability and testability. I have detailed the challenges and solutions below.
 
@@ -68,6 +68,10 @@ I decided to persist the auth token to the user keychain for both security and t
 
 I did not want to hit ``` pod install ``` too much in this project as I wanted to showcase my skills. However, I introduced;
 
-- [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary) by me
-- [KeychainPasswordItem](https://developer.apple.com/library/content/samplecode/GenericKeychain/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007797-Intro-DontLinkElementID_2) by Apple
-- [AuthController](https://www.raywenderlich.com/129-basic-ios-security-keychain-and-hashing) by RayWenderlich
+- [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary) by me. I used this library to handle navigation.
+- [KeychainPasswordItem](https://developer.apple.com/library/content/samplecode/GenericKeychain/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007797-Intro-DontLinkElementID_2) by Apple. I used this lirary to handle interacting with the keychain.
+- [AuthController & Settings](https://www.raywenderlich.com/129-basic-ios-security-keychain-and-hashing) by RayWenderlich. I used this library to interact with the user current session state.
+
+# Finally
+
+I would like to express my gratitude for the opportunity to work on this project. I look forward to hearing back from you.
