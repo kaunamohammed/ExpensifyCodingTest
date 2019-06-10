@@ -33,9 +33,7 @@ final class AuthController {
   static let serviceName = "ExpensifyService"
   
   static var isSignedIn: Bool {
-    guard let currentUser = Settings.currentUser else {
-      return false
-    }
+    guard let currentUser = Settings.currentUser else { return false }
     
     do {
       let token = try KeychainPasswordItem(service: serviceName, account: currentUser.email).readPassword()
@@ -46,9 +44,7 @@ final class AuthController {
   }
   
   static var authToken: String {
-    guard let currentUser = Settings.currentUser else {
-      return ""
-    }
+    guard let currentUser = Settings.currentUser else { return "" }
 
     do {
       let token = try KeychainPasswordItem(service: serviceName, account: currentUser.email).readPassword()
