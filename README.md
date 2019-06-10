@@ -46,7 +46,7 @@ Together, I was able to achieve a good level of separation between different lay
 
 In order to solve the problems, I used the ``` .editingChanged ``` event on the textFields and then validated the text inputs with a custom function using a `Target/Action`. When the buttons had been clicked on the ViewControllers, I used a closure callback to notify the ViewControllers to disable the buttons while the request was taking place
 
-## Caveat with MVVM-C
+## Notes on MVVM-C
 
 - There is still a chance for *Massive View Model* and it becoming a code dumping ground
 - The major issue would be that what happens when someone unfamiliar with the subject of MVVM-C but understands another architecture looks at the code. It may be confusing and they may not know where to get started.
