@@ -20,14 +20,14 @@ I think one of the most debated topics in iOS development is the choice of archi
 - Scalability
 - Testability
 
-I eventually went with the MVVM-C architecture. It has three key players, **Model** **ViewController**, **ViewModel** and **Coordinator**. I went with this architecture because it offered me the ability to separate core components like navigation, networking and presentation.
+I eventually went with the MVVM-C architecture. It has three key players, ```Model``` ```ViewController```, ```ViewModel``` and ```Coordinator```. I went with this architecture because it offered me the ability to separate core components like navigation, networking and presentation.
 It can be argued that MVVM-C might have been overengineering and simply navigating in the traditional way and sticking with **MVC** will have been better for an app of this scale, that would be a credible arguement. 
 
 However, as iOS developers we rarely write basic apps and from personal experience, business requirements often changes as the app scales, our ViewControllers become massive, testing is not as straightforward and it becomes harder to reason about the code or make changes.
 
-The **Coordinator** abstracted away the navigation and dependency injection from the ViewControllers, it also injected the ViewController dependencies and has a one-to-one communication with its ViewController. Furthermore, it is also easier to spin up a completely different navigation flow based on a new feature and write unit tests to test the navigation logic without having to launch the app.
+The ```Coordinator``` abstracted away the navigation and dependency injection from the ViewControllers, it also injected the ViewController dependencies and has a one-to-one communication with its ViewController. Furthermore, it is also easier to spin up a completely different navigation flow based on a new feature and write unit tests to test the navigation logic without having to launch the app.
 
-The **ViewModel** allowed me to handle business logic seperately and it made the code more easily testable. It was also responsible for interacting with the networking layer and passing data to/from the ViewController.
+The ```ViewModel``` allowed me to handle business logic seperately and it made the code more easily testable. It was also responsible for interacting with the networking layer and passing data to/from the ViewController.
 
 Together, I was able to achieve a good level of separation between different layers of the app.
 
@@ -63,3 +63,11 @@ When a user quits the app, they would have had to reauthenticate, this hurts the
 ## Solution - Keychain persistence
 
 I decided to persist the auth token to the user keychain for both security and to prevent the user from reauthentcating. Instead I save the token and use it until it expires, then prompt the user to reauthenticate. A possible improvement for security would have been to encrypt the token to prevent hackers from gaining access to confidential information of the user.
+
+# Third-Party
+
+I did not want to hit ``` pod install ``` too much in this project as I wanted to showcase my skills. However, I introduced;
+
+- [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary) by me
+- [KeychainPasswordItem](https://developer.apple.com/library/content/samplecode/GenericKeychain/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007797-Intro-DontLinkElementID_2) by Apple
+- [AuthController](https://www.raywenderlich.com/129-basic-ios-security-keychain-and-hashing) by RayWenderlich
