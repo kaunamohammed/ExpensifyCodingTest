@@ -58,13 +58,23 @@ In order to solve the problems, I used the ``` .editingChanged ``` event on the 
 
 Authentication was fairly straightforward to begin with. Hit the auth endpoint and get back an auth token. 
 
-## Challenge 1 - Quitting and reopening the app
+## Challenge 3 - Quitting and reopening the app
 
 When a user quits the app, they would have had to reauthenticate, this hurts the user experience.
 
 ## Solution - Keychain persistence
 
 I decided to persist the auth token to the user keychain for both security and to prevent the user from reauthentcating. Instead I save the token and use it until it expires, then prompt the user to reauthenticate. A possible improvement for security would have been to encrypt the token to prevent hackers from gaining access to confidential information of the user.
+
+# Data Persistence
+
+## Challenge 4 - Offline mode / Network error
+
+When a network error occured, and the user subsequently went offline the screen would become blank, this is not a very nice user experience so my challenge was to find a way to display data in offline mode.
+
+## Solution - Data persistence
+
+To solve the problem, I used data persistence (Core Data). This allowed me to save the data retrieved from the backend and show it to the user in offline mode.
 
 # Third-Party
 
