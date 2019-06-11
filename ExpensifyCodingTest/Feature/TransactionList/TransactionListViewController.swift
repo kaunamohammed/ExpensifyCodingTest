@@ -14,7 +14,7 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   
   private lazy var refreshControl = UIRefreshControl {
     $0.attributedTitle = AttributedStringBuilder()
-      .append("Checking for updates", attributes: [.foregroundColor: #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)]).build()
+      .append(NSLocalizedString("Checking for updates", comment: "refresh control title"), attributes: [.foregroundColor: #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)]).build()
     $0.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
   }
   
@@ -79,10 +79,10 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   }
 
   private func setUpNavigationBar() {
-    navigationItem.title = "Expenses"
+    navigationItem.title = NSLocalizedString("Expenses", comment: "title")
     navigationController?.defaultBarPreference(shouldApply: true)
     
-    navigationItem.leftBarButtonItem = .init(title: "Sign Out",
+    navigationItem.leftBarButtonItem = .init(title: NSLocalizedString("Sign Out", comment: "sign out"),
                                              style: .plain,
                                              target: self,
                                              action: #selector(signOutButtonTapped))
