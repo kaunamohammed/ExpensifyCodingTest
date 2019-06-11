@@ -40,10 +40,9 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
   
   public func configure(topText: String? = nil, bottomText: String? = nil) {
     label.attributedText = AttributedStringBuilder()
-      .append(NSLocalizedString(topText.orEmpty + "\n", comment: "top text"),
-              attributes: [.font: UIFont.italicSystemFont(ofSize: 10), .foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)])
-      .append(NSLocalizedString(bottomText.orEmpty, comment: "bottom test"),
-              attributes: [.font: UIFont.preferredFont(forTextStyle: .headline), .foregroundColor: #colorLiteral(red: 0.06274509804, green: 0.05882352941, blue: 0.05882352941, alpha: 1)])
+      .append(topText.orEmpty, attributes: [.font: UIFont.italicSystemFont(ofSize: 10), .foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)])
+      .append("\n", attributes: [:])
+      .append(bottomText.orEmpty, attributes: [.font: UIFont.preferredFont(forTextStyle: .headline), .foregroundColor: #colorLiteral(red: 0.06274509804, green: 0.05882352941, blue: 0.05882352941, alpha: 1)])
       .build()
     
   }

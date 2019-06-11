@@ -45,16 +45,15 @@ public class TransactionListTableViewCell: UITableViewCell {
     let dateString = dateFormatter.string(from: date!)
     
     leadingLabel.attributedText = AttributedStringBuilder()
-      .append(NSLocalizedString(model.merchant.truncate(by: 15) + "\n", comment: "merchant title"),
+      .append(model.merchant.truncate(by: 15) + "\n",
               attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
       .append(dateString,
               attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .footnote)])
       .build()
     
-    print(model.currency.orEmpty)
     let amount = NumberFormatter.currency(from: .init(string: model.currency.orEmpty), amount: abs(model.amount.asCurrency)).orEmpty
     trailingLabel.attributedText = AttributedStringBuilder()
-      .append(NSLocalizedString(amount + "\n", comment: "amount"),
+      .append(amount + "\n",
               attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .title3)])
       .build()
   }

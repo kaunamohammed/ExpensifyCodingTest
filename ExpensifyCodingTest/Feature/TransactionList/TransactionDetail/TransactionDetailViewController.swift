@@ -27,6 +27,7 @@ public final class TransactionDetailViewController: UIViewController {
   private let reimbursableCell: TransactionDetailTableViewCell2 = .init(style: .default, reuseIdentifier: nil)
   
   private let transactionDetail: TransactionDetail
+
   public init(transactionDetail: TransactionDetail) {
     self.transactionDetail = transactionDetail
     super.init(nibName: nil, bundle: nil)
@@ -39,15 +40,20 @@ public final class TransactionDetailViewController: UIViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.title = "Expense"
+    navigationItem.title = NSLocalizedString("Expenses", comment: "expense title")
     setUpConstraints()
 
-    merchantNameCell.configure(topText: "Merchant", bottomText: transactionDetail.merchant)
-    amountCell.configure(topText: "Amount", bottomText: transactionDetail.amount)
-    dateCell.configure(topText: "Date", bottomText: transactionDetail.date)
-    commentCell.configure(topText: "Comment", bottomText: transactionDetail.comment)
+    merchantNameCell.configure(topText:  NSLocalizedString("Merchant", comment: "title"),
+                               bottomText: transactionDetail.merchant)
+    amountCell.configure(topText: NSLocalizedString("Amount", comment: "title")
+      , bottomText: transactionDetail.amount)
+    dateCell.configure(topText: NSLocalizedString("Date", comment: "title"),
+                       bottomText: transactionDetail.date)
+    commentCell.configure(topText: NSLocalizedString("Comment", comment: "title"),
+                          bottomText: transactionDetail.comment)
     
-    reimbursableCell.configure(bottomText: "Reimbursable", checkmark: transactionDetail.reimbursable)
+    reimbursableCell.configure(bottomText: NSLocalizedString("Reimbursable", comment: "title"),
+                               checkmark: transactionDetail.reimbursable)
 
   }
   
