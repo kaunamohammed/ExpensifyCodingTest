@@ -26,10 +26,10 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(label)
     
-    label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Self.Constants.topPadding).isActive = true
-    label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Self.Constants.leadingPadding).isActive = true
-    label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Self.Constants.trailingPadding).isActive = true
-    label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Self.Constants.bottomPadding).isActive = true
+    label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
+    label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
+    label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
+    label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomPadding).isActive = true
     label.translatesAutoresizingMaskIntoConstraints = false
     
   }
@@ -67,10 +67,10 @@ public class TransactionDetailTableViewCell2: TransactionDetailTableViewCell1 {
   override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.add(checkmarkImageView)
-    checkmarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Self.Constants.trailingPadding).isActive = true
+    checkmarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
     checkmarkImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
-    checkmarkImageView.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    checkmarkImageView.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    checkmarkImageView.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    checkmarkImageView.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
   }
   

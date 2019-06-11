@@ -72,13 +72,13 @@ private extension TransactionListTableViewCell {
   func setUpConstraints() {
     contentView.add(leadingLabel, trailingLabel)
     
-    leadingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Self.Constants.leadingPadding).isActive = true
-    leadingLabel.widthAnchor.constraint(equalToConstant: Self.Constants.leadingLabelWidth).isActive = true
+    leadingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
+    leadingLabel.widthAnchor.constraint(equalToConstant: Constants.leadingLabelWidth).isActive = true
     leadingLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     leadingLabel.translatesAutoresizingMaskIntoConstraints = false
     
     trailingLabel.topAnchor.constraint(equalTo: leadingLabel.topAnchor).isActive = true
-    trailingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Self.Constants.trailingPadding).isActive = true
+    trailingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
     trailingLabel.translatesAutoresizingMaskIntoConstraints = false
     
   }

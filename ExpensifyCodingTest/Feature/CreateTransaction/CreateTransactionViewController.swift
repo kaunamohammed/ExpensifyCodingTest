@@ -204,25 +204,25 @@ private extension CreateTransactionViewController {
     scrollView.add(backgroundView)
     backgroundView.add(containerStackView)
 
-    backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: Self.Constants.topPadding).isActive = true
+    backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: Constants.topPadding).isActive = true
     backgroundView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-    backgroundView.heightAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
-    backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: Self.Constants.backgroundViewMultiplier).isActive = true
+    backgroundView.heightAnchor.constraint(equalToConstant: Constants.width).isActive = true
+    backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: Constants.backgroundViewMultiplier).isActive = true
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
     containerStackView.center(in: backgroundView)
     containerStackView.translatesAutoresizingMaskIntoConstraints = false
 
-    datePicker.heightAnchor.constraint(equalToConstant: Self.Constants.datePickerHeight).isActive = true
-    datePicker.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    datePicker.heightAnchor.constraint(equalToConstant: Constants.datePickerHeight).isActive = true
+    datePicker.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     datePicker.translatesAutoresizingMaskIntoConstraints = false
     
-    merchantInputTextField.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    merchantInputTextField.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    merchantInputTextField.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    merchantInputTextField.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     merchantInputTextField.translatesAutoresizingMaskIntoConstraints = false
 
-    amountInputTextField.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    amountInputTextField.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    amountInputTextField.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    amountInputTextField.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     amountInputTextField.translatesAutoresizingMaskIntoConstraints = false
 
   }

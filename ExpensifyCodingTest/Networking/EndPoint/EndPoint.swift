@@ -42,8 +42,8 @@ public extension EndPoint {
    - returns: A new `EndPoint` consisting of the parameters above
 
    */
-  static func authenticateUser(with partnerName: String = Constants.Partner.name,
-                               partnerPassword: String = Constants.Partner.password,
+  static func authenticateUser(with partnerName: String = GlobalConstants.Partner.name,
+                               partnerPassword: String = GlobalConstants.Partner.password,
                                partnerUserID: String,
                                partnerUserSecret: String) -> EndPoint {
     return EndPoint(

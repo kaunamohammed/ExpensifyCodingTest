@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  GlobalConstants.swift
 //  ExpensifyCodingTest
 //
 //  Created by Kauna Mohammed on 05/06/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Constants {
+public struct GlobalConstants {
   
   public struct Partner {
     public static let name = "applicant"

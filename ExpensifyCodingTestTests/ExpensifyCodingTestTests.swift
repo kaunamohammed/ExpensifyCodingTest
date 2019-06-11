@@ -29,18 +29,18 @@ class ExpensifyCodingTestTests: XCTestCase {
   }
   
   func testAuthEndPointDefinedCorrectly() {
-    let authEndPoint = EndPoint.authenticateUser(partnerUserID: Constants.TestUser.id,
-                                                 partnerUserSecret: Constants.TestUser.password).url
+    let authEndPoint = EndPoint.authenticateUser(partnerUserID: GlobalConstants.TestUser.id,
+                                                 partnerUserSecret: GlobalConstants.TestUser.password).url
 
     print(authEndPoint)
-    XCTAssertTrue(authEndPoint == Constants.TestEndpoint.expensifyAuthEndPoint)
+    XCTAssertTrue(authEndPoint == GlobalConstants.TestEndpoint.expensifyAuthEndPoint)
     
   }
   
   func testGetTransactionsEndPointDefinedCorrectly() {
     let transactionsEndPoint = EndPoint.getTransactions(authToken: "fake_token",
                                                         params: .init(idType: .none, limit: 50.asString)).url
-    XCTAssertTrue(transactionsEndPoint == Constants.TestEndpoint.expensiftGetTransactionsEndPoint)
+    XCTAssertTrue(transactionsEndPoint == GlobalConstants.TestEndpoint.expensiftGetTransactionsEndPoint)
     
   }
   
@@ -50,7 +50,7 @@ class ExpensifyCodingTestTests: XCTestCase {
                                               params: CreateTransactionParams(amount: "100",
                                                                               created: "2019-01-01",
                                                                               merchant: "Tesco")).url
-    XCTAssertTrue(endPoint == Constants.TestEndpoint.expensifyCreateTransactionEndPoint)
+    XCTAssertTrue(endPoint == GlobalConstants.TestEndpoint.expensifyCreateTransactionEndPoint)
   }
   
   // FIXME: - Mock api call
@@ -60,7 +60,7 @@ class ExpensifyCodingTestTests: XCTestCase {
     var response: APIResponse!
 
     let router = Router()
-    router.request(EndPoint.authenticateUser(partnerUserID: Constants.TestUser.id, partnerUserSecret: Constants.TestUser.password)) { (result) in
+    router.request(EndPoint.authenticateUser(partnerUserID: GlobalConstants.TestUser.id, partnerUserSecret: GlobalConstants.TestUser.password)) { (result) in
       switch result {
       case .success(let data):
       do {
@@ -84,7 +84,7 @@ class ExpensifyCodingTestTests: XCTestCase {
     default: print("failiure")
     }
 
-    XCTAssertTrue(response.email == Constants.TestUser.id)
+    XCTAssertTrue(response.email == GlobalConstants.TestUser.id)
   }
   
 }

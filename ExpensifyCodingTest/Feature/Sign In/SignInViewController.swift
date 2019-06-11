@@ -193,24 +193,24 @@ private extension SignInViewController {
     backgroundView.pin(to: backgroundImageView)
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     
-    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: Self.Constants.topPadding).isActive = true
+    containerStackView.topAnchor.constraint(equalTo: topSafeArea, constant: Constants.topPadding).isActive = true
     containerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     containerStackView.translatesAutoresizingMaskIntoConstraints = false
     
-    logoImageView.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    logoImageView.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    logoImageView.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    logoImageView.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     logoImageView.translatesAutoresizingMaskIntoConstraints = false
     
-    emailTextField.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    emailTextField.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    emailTextField.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    emailTextField.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     emailTextField.translatesAutoresizingMaskIntoConstraints = false
     
-    passwordTextField.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    passwordTextField.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    passwordTextField.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    passwordTextField.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
     
-    signInButton.heightAnchor.constraint(equalToConstant: Self.Constants.height).isActive = true
-    signInButton.widthAnchor.constraint(equalToConstant: Self.Constants.width).isActive = true
+    signInButton.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    signInButton.widthAnchor.constraint(equalToConstant: Constants.width).isActive = true
     signInButton.translatesAutoresizingMaskIntoConstraints = false
     
   }

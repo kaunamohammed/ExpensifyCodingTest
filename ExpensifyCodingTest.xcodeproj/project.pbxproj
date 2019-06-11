@@ -15,7 +15,7 @@
 		FC0EB6D522A8102A00BFAFC2 /* RESTComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6D422A8102A00BFAFC2 /* RESTComponent.swift */; };
 		FC0EB6D722A8117600BFAFC2 /* URLProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6D622A8117600BFAFC2 /* URLProducer.swift */; };
 		FC0EB6D922A8119900BFAFC2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6D822A8119900BFAFC2 /* EndPoint.swift */; };
-		FC0EB6DD22A81A0100BFAFC2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6DC22A81A0100BFAFC2 /* Constants.swift */; };
+		FC0EB6DD22A81A0100BFAFC2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6DC22A81A0100BFAFC2 /* GlobalConstants.swift */; };
 		FC0EB6E322A83AA400BFAFC2 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */; };
 		FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6E422A83BAD00BFAFC2 /* Router.swift */; };
 		FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */; };
@@ -88,7 +88,7 @@
 		FC0EB6D422A8102A00BFAFC2 /* RESTComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTComponent.swift; sourceTree = "<group>"; };
 		FC0EB6D622A8117600BFAFC2 /* URLProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProducer.swift; sourceTree = "<group>"; };
 		FC0EB6D822A8119900BFAFC2 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		FC0EB6DC22A81A0100BFAFC2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FC0EB6DC22A81A0100BFAFC2 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		FC0EB6E422A83BAD00BFAFC2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -127,7 +127,6 @@
 		FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		FC7E354F22A9875D008C8646 /* CurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		FC83228C22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensifyCodingTest.xcdatamodel; sourceTree = "<group>"; };
-		FC83229022AF0B230023D5DC /* TestCDObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCDObject.swift; sourceTree = "<group>"; };
 		FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		FC989D5322A7F2CB0066310C /* ExpensifyCodingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensifyCodingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC989D5822A7F2CB0066310C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -205,7 +204,7 @@
 				FC62B93F22A8B97C00A03D08 /* AttributedStringBuilder.swift */,
 				FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */,
 				FC62B93722A8AE1B00A03D08 /* URLQueryItem+RemoveNilValues.swift */,
-				FC0EB6DC22A81A0100BFAFC2 /* Constants.swift */,
+				FC0EB6DC22A81A0100BFAFC2 /* GlobalConstants.swift */,
 				FC1C7CFB22AD270D00447F7C /* extensions.swift */,
 				FCD53AF022AE6F9B0000AB54 /* UIView+Constraints.swift */,
 			);
@@ -251,7 +250,6 @@
 				FC7E354F22A9875D008C8646 /* CurrencyCode.swift */,
 				FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */,
 				FC55F7A522A9C2690066D3E5 /* CreateTransactionParams.swift */,
-				FC83229022AF0B230023D5DC /* TestCDObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -552,7 +550,7 @@
 				FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */,
 				FC48D84022ADE198000C4F63 /* TransactionDetailViewCoordinator.swift in Sources */,
 				FC1C7CD922AC35E100447F7C /* CreateTransactionViewModel.swift in Sources */,
-				FC0EB6DD22A81A0100BFAFC2 /* Constants.swift in Sources */,
+				FC0EB6DD22A81A0100BFAFC2 /* GlobalConstants.swift in Sources */,
 				FC0EB6D122A802F400BFAFC2 /* Reusable.swift in Sources */,
 				FC0EB6D022A802F400BFAFC2 /* InitConfigurable.swift in Sources */,
 				FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */,
