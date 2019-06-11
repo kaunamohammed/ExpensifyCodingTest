@@ -8,7 +8,7 @@
 
 The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. 
 
-I wanted to get a true feel of what it meant to be an Expensify Mobile Engineer, and so I spent some time immersing myself in your product to try and understand the thought processes around it and how it aligned and resonated with what I want to be spending my time working on. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code. Taking me to a tital of 5 days, taking into account a few distractions from WWDC, especially SwiftUI :o.
+I wanted to get a true feel of what it meant to be an Expensify Mobile Engineer, and so I spent some time immersing myself in your product to try and understand the thought processes around it and how it aligned and resonated with what I want to be spending my time working on. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code. Taking me to a total of 5 days, taking into account a few distractions from WWDC, especially SwiftUI :o.
 
 The key challenge I encountered was in deciding and implementing the right architecture that will allow me to achieve a good level of code separation, scalability and testability. I have detailed the challenges and solutions below.
 
@@ -70,11 +70,13 @@ I decided to persist the auth token to the user keychain for both security and t
 
 ## Challenge 4 - Offline mode / Network error
 
-When a network error occured, and the user subsequently went offline the screen would become blank, this is not a very nice user experience so my challenge was to find a way to display data in offline mode.
+- When a network error occured, and the user subsequently went offline the screen would become blank, this is not a very nice user experience so my challenge was to find a way to display data in offline mode.
+- Core Data Thread safety
 
 ## Solution - Data persistence
 
-To solve the problem, I used data persistence (Core Data). This allowed me to save the data retrieved from the backend and show it to the user in offline mode.
+- To solve the problem, I used data persistence (Core Data). This allowed me to save the data retrieved from the backend and show it to the user in offline mode.
+- Ensured thread safety by using the `-com.apple.CoreData.ConcurrencyDebug 1` flag and having separate models between DBModels and presentation models
 
 # Third-Party
 
