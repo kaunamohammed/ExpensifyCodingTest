@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // Although I have initialized it from here, it is still possible to just keep a reference and then inherit from `AppCoordinator`
   // and start different flows based oon business logic i.e a notification or deeplink
   private lazy var appCoordinator: AppCoordinator = {
-    let coordinator = ExpensifyAppCoordinator(presenter: AppdNavController(), window: window!)
+    let coordinator = ExpensifyAppCoordinator(persistenceManager: .shared, presenter: AppdNavController(), window: window!)
     return coordinator
   }()
 
@@ -31,12 +31,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     return true
     
-  }
-
-}
-
-func delay(seconds: Double, _ block: @escaping (() -> Void)) {
-  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-    block()
   }
 }

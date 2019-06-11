@@ -6,11 +6,13 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public final class Router: NetworkRouter {
   
   private var task: URLSessionTask?
+  
+  public init() {}
   
   public func request(_ route: URLProducer, completion: @escaping NetworkCompletion) {
     let session = URLSession.shared

@@ -34,7 +34,6 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
     $0.borderStyle = .roundedRect
     $0.keyboardType = .emailAddress
     $0.autocapitalizationType = .none
-    $0.delegate = self
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
@@ -42,7 +41,6 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
     $0.placeholder = NSLocalizedString("Password", comment: "password")
     $0.isSecureTextEntry = true
     $0.borderStyle = .roundedRect
-    $0.delegate = self
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
@@ -102,7 +100,6 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
   
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-
     navigationController?.defaultBarPreference(shouldApply: false)
   }
   
@@ -119,13 +116,9 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
 
 }
 
-// MARK: - UITextFieldDelegate
-extension SignInViewController: UITextFieldDelegate {}
-
 // MARK: - Target/Action
 private extension SignInViewController {
   
-  /// validates the input from the textFields
   @objc func validateTextFieldInput() {
     let isValid = (!emailTextField.text.orEmpty.isEmpty && !passwordTextField.text.orEmpty.isEmpty)
     signInButton.alpha = isValid ? 1.0 : 0.5
@@ -142,8 +135,8 @@ private extension SignInViewController {
 private extension SignInViewController {
   
   /// changes the state of views based on the sign in state
-  private func updateViews(for state: SignInViewModel.SignInState) {
-    switch state {
+  private func updateViews(for outcome: SignInViewModel.SignInState) {
+    switch outcome {
     case .signingIn:
       showIndicator()
       signInButton.alpha = 0.7
@@ -153,7 +146,7 @@ private extension SignInViewController {
       signInButton.alpha = 0.7
       signInButton.isEnabled = false
       successfullySignedIn?()
-    case .failed(title: let title, reason: let message):
+    case .failed(title: let title, message: let message):
       hideIndicator()
       signInButton.alpha = 1
       signInButton.isEnabled = true

@@ -15,7 +15,6 @@ public final class PersistenceManager {
   static let shared = PersistenceManager()
   
   lazy var persistentContainer: NSPersistentContainer = {
-    
     let container = NSPersistentContainer(name: "ExpensifyCodingTest")
     container.loadPersistentStores { (storeDescription, error) in
       if let error = error as NSError? {
@@ -31,20 +30,13 @@ public final class PersistenceManager {
   
   
   func save() {
-    
     if context.hasChanges {
-      
       do {
         try context.save()
       } catch let error {
-        
         let nserror = error as NSError
         fatalError("Unresolved error: \(nserror), \(nserror.userInfo)")
-        
       }
-      
     }
-    
   }
-  
 }

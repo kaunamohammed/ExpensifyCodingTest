@@ -33,10 +33,8 @@ public class TransactionListTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
   public func configure(with model: TransactionList, dateFormatter: DateFormatter) {
     
-    // FIXME - wahala
     // getting the returned created string in its format
     dateFormatter.dateFormat = "yyyy-MM-dd"
     let date = dateFormatter.date(from: model.created.orEmpty)
@@ -51,7 +49,8 @@ public class TransactionListTableViewCell: UITableViewCell {
               attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .footnote)])
       .build()
     
-    let amount = NumberFormatter.currency(from: .init(string: model.currency.orEmpty), amount: abs(model.amount.asCurrency)).orEmpty
+    let amount = NumberFormatter.currency(from: .init(string: model.currency.orEmpty),
+                                          amount: abs(model.amount.asCurrency)).orEmpty
     trailingLabel.attributedText = AttributedStringBuilder()
       .append(amount + "\n",
               attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .title3)])

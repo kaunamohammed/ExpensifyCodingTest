@@ -18,19 +18,19 @@
 		FC0EB6E322A83AA400BFAFC2 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */; };
 		FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6E422A83BAD00BFAFC2 /* Router.swift */; };
 		FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */; };
-		FC0EB6F022A84F1900BFAFC2 /* TransactionPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6EF22A84F1900BFAFC2 /* TransactionPayload.swift */; };
 		FC0EB6F222A84F5F00BFAFC2 /* SignInViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6F122A84F5F00BFAFC2 /* SignInViewCoordinator.swift */; };
 		FC1C7CD922AC35E100447F7C /* CreateTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CD822AC35E100447F7C /* CreateTransactionViewModel.swift */; };
 		FC1C7CDF22AC81B200447F7C /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CDE22AC81B200447F7C /* AuthController.swift */; };
 		FC1C7CE122AC81DB00447F7C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CE022AC81DB00447F7C /* User.swift */; };
 		FC1C7CE322AC81E900447F7C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CE222AC81E800447F7C /* Settings.swift */; };
-		FC1C7CF522AD258D00447F7C /* TransactionListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CEF22AD258C00447F7C /* TransactionListDatasource.swift */; };
 		FC1C7CF622AD258D00447F7C /* TransactionListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CF022AD258D00447F7C /* TransactionListManager.swift */; };
 		FC1C7CF722AD258D00447F7C /* TransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CF122AD258D00447F7C /* TransactionListViewController.swift */; };
 		FC1C7CFC22AD270D00447F7C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CFB22AD270D00447F7C /* extensions.swift */; };
 		FC1C7CFF22AD297C00447F7C /* TransactionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7CFE22AD297C00447F7C /* TransactionListViewModel.swift */; };
 		FC1C7D0122AD29AE00447F7C /* TransactionListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */; };
 		FC1C7D0322AD29D900447F7C /* TransactionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */; };
+		FC361A4722AFECBC0099CEB9 /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC361A4622AFECBC0099CEB9 /* SignInManager.swift */; };
+		FC361A4922AFF4650099CEB9 /* TransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC361A4822AFF4650099CEB9 /* TransactionResponse.swift */; };
 		FC48D83622AD5AF9000C4F63 /* AppNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83522AD5AF8000C4F63 /* AppNavController.swift */; };
 		FC48D83A22ADDB5B000C4F63 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83922ADDB5B000C4F63 /* TransactionDetailViewController.swift */; };
 		FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift */; };
@@ -47,7 +47,6 @@
 		FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */; };
 		FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */; };
 		FC62B93822A8AE1C00A03D08 /* URLQueryItem+RemoveNilValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93722A8AE1B00A03D08 /* URLQueryItem+RemoveNilValues.swift */; };
-		FC62B93C22A8B32E00A03D08 /* GenericTableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */; };
 		FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93F22A8B97C00A03D08 /* AttributedStringBuilder.swift */; };
 		FC62B94222A8C78500A03D08 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */; };
 		FC68329F22AB1FD20056C082 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC68329E22AB1FD20056C082 /* SignInViewModel.swift */; };
@@ -91,19 +90,19 @@
 		FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		FC0EB6E422A83BAD00BFAFC2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		FC0EB6EF22A84F1900BFAFC2 /* TransactionPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionPayload.swift; path = ../../Model/TransactionPayload.swift; sourceTree = "<group>"; };
 		FC0EB6F122A84F5F00BFAFC2 /* SignInViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewCoordinator.swift; sourceTree = "<group>"; };
 		FC1C7CD822AC35E100447F7C /* CreateTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewModel.swift; sourceTree = "<group>"; };
 		FC1C7CDE22AC81B200447F7C /* AuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		FC1C7CE022AC81DB00447F7C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC1C7CE222AC81E800447F7C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		FC1C7CEF22AD258C00447F7C /* TransactionListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListDatasource.swift; sourceTree = "<group>"; };
 		FC1C7CF022AD258D00447F7C /* TransactionListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListManager.swift; sourceTree = "<group>"; };
 		FC1C7CF122AD258D00447F7C /* TransactionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewController.swift; sourceTree = "<group>"; };
 		FC1C7CFB22AD270D00447F7C /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		FC1C7CFE22AD297C00447F7C /* TransactionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewModel.swift; sourceTree = "<group>"; };
 		FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewCoordinator.swift; sourceTree = "<group>"; };
 		FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListTableViewCell.swift; sourceTree = "<group>"; };
+		FC361A4622AFECBC0099CEB9 /* SignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
+		FC361A4822AFF4650099CEB9 /* TransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResponse.swift; sourceTree = "<group>"; };
 		FC48D83522AD5AF8000C4F63 /* AppNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavController.swift; sourceTree = "<group>"; };
 		FC48D83922ADDB5B000C4F63 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		FC48D83B22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTableViewCells.swift; sourceTree = "<group>"; };
@@ -120,7 +119,6 @@
 		FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensifyAppCoordinator.swift; sourceTree = "<group>"; };
 		FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DecodableModel+JSONDecoder.swift"; sourceTree = "<group>"; };
 		FC62B93722A8AE1B00A03D08 /* URLQueryItem+RemoveNilValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLQueryItem+RemoveNilValues.swift"; sourceTree = "<group>"; };
-		FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewDatasource.swift; sourceTree = "<group>"; };
 		FC62B93F22A8B97C00A03D08 /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
 		FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		FC68329E22AB1FD20056C082 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -217,6 +215,7 @@
 				FC0EB6F122A84F5F00BFAFC2 /* SignInViewCoordinator.swift */,
 				FC68329E22AB1FD20056C082 /* SignInViewModel.swift */,
 				FC989D5822A7F2CB0066310C /* SignInViewController.swift */,
+				FC361A4622AFECBC0099CEB9 /* SignInManager.swift */,
 			);
 			path = "Sign In";
 			sourceTree = "<group>";
@@ -278,12 +277,11 @@
 		FC55F78B22A9A6130066D3E5 /* TransactionList */ = {
 			isa = PBXGroup;
 			children = (
-				FC0EB6EF22A84F1900BFAFC2 /* TransactionPayload.swift */,
+				FC361A4822AFF4650099CEB9 /* TransactionResponse.swift */,
 				FC1C7D0022AD29AE00447F7C /* TransactionListViewCoordinator.swift */,
 				FC1C7CFE22AD297C00447F7C /* TransactionListViewModel.swift */,
 				FC1C7D0222AD29D900447F7C /* TransactionListTableViewCell.swift */,
 				FC1C7CF122AD258D00447F7C /* TransactionListViewController.swift */,
-				FC1C7CEF22AD258C00447F7C /* TransactionListDatasource.swift */,
 				FC1C7CF022AD258D00447F7C /* TransactionListManager.swift */,
 				FC1C7CFD22AD285B00447F7C /* TransactionDetail */,
 			);
@@ -379,7 +377,6 @@
 				FC0EB6CE22A802F400BFAFC2 /* InitConfigurable.swift */,
 				FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */,
 				FC0EB6D222A8056500BFAFC2 /* AddableAndRemovable.swift */,
-				FC62B93B22A8B32E00A03D08 /* GenericTableViewDatasource.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -548,6 +545,7 @@
 				FC68329F22AB1FD20056C082 /* SignInViewModel.swift in Sources */,
 				FC0EB6D522A8102A00BFAFC2 /* RESTComponent.swift in Sources */,
 				FC55F7A622A9C2690066D3E5 /* CreateTransactionParams.swift in Sources */,
+				FC361A4922AFF4650099CEB9 /* TransactionResponse.swift in Sources */,
 				FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */,
 				FC48D84022ADE198000C4F63 /* TransactionDetailViewCoordinator.swift in Sources */,
 				FC1C7CD922AC35E100447F7C /* CreateTransactionViewModel.swift in Sources */,
@@ -556,7 +554,6 @@
 				FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */,
 				FC1C7D0322AD29D900447F7C /* TransactionListTableViewCell.swift in Sources */,
 				FC6832A122AB30070056C082 /* KeychainPasswordItem.swift in Sources */,
-				FC1C7CF522AD258D00447F7C /* TransactionListDatasource.swift in Sources */,
 				FC48D83622AD5AF9000C4F63 /* AppNavController.swift in Sources */,
 				FC62B94022A8B97D00A03D08 /* AttributedStringBuilder.swift in Sources */,
 				FC48D84222ADFA93000C4F63 /* NavigationController+Ext.swift in Sources */,
@@ -571,7 +568,6 @@
 				FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */,
 				FCA1D62B22A8773E00D33EF5 /* Credentials.swift in Sources */,
 				FC48D83A22ADDB5B000C4F63 /* TransactionDetailViewController.swift in Sources */,
-				FC62B93C22A8B32E00A03D08 /* GenericTableViewDatasource.swift in Sources */,
 				FC1C7CFF22AD297C00447F7C /* TransactionListViewModel.swift in Sources */,
 				FC0EB6D322A8056600BFAFC2 /* AddableAndRemovable.swift in Sources */,
 				FC62B93822A8AE1C00A03D08 /* URLQueryItem+RemoveNilValues.swift in Sources */,
@@ -580,10 +576,10 @@
 				FC0EB6E322A83AA400BFAFC2 /* NetworkRouter.swift in Sources */,
 				FC5F3EAC22AF44E9007A9A50 /* PersistenceManager.swift in Sources */,
 				FC55F79922A9A6140066D3E5 /* CreateTransactionViewController.swift in Sources */,
+				FC361A4722AFECBC0099CEB9 /* SignInManager.swift in Sources */,
 				FC1C7D0122AD29AE00447F7C /* TransactionListViewCoordinator.swift in Sources */,
 				FC48D83E22ADE02B000C4F63 /* TransactionDetail.swift in Sources */,
 				FC62B94222A8C78500A03D08 /* UITableView+Ext.swift in Sources */,
-				FC0EB6F022A84F1900BFAFC2 /* TransactionPayload.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

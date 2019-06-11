@@ -15,7 +15,7 @@ public enum NoDataError {
 extension NoDataError: LocalizedError {
   public var errorDescription: String? {
     switch self {
-    case .underlying: return "We couldn't filfil this request"
+    case .underlying: return "We couldn't fulfil this request"
     }
   }
 }

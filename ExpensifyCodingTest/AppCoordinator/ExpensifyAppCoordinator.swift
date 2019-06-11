@@ -9,7 +9,7 @@
 import CoordinatorLibrary
 
 /**
- 'AppCoordinator' is similar to the 'AppDelegate' class in the sense that it launches all other coordinators used in the app
+ 'ExpensifyAppCoordinator' is similar to the 'AppDelegate' class in the sense that it starts all other coordinators used in the app. It is also used to pass dependencies down the hierachies
  
  It inherits from the `ChildCoordinator` base class which encapsulates the implementation details having to do with navigation and child coordinator management i.e adding/removing a child coordinator
  
@@ -26,9 +26,7 @@ public class ExpensifyAppCoordinator: AppCoordinator {
                                                                                         removeCoordinator: remove)
   
   private let persistenceManager: PersistenceManager
-  init(persistenceManager: PersistenceManager = .shared,
-       presenter: UINavigationController,
-       window: UIWindow) {
+  public init(persistenceManager: PersistenceManager, presenter: UINavigationController, window: UIWindow) {
     self.persistenceManager = persistenceManager
     super.init(presenter: presenter, window: window)
   }
@@ -50,9 +48,9 @@ private extension ExpensifyAppCoordinator {
     signInViewCoordinator.start()
   }
   
-  func startTransactionListViewCoordinator(with token: String) {
+  func startTransactionListViewCoordinator(with authToken: String) {
     add(child: transactionListViewCoorinator)
-    transactionListViewCoorinator.authToken = token
+    transactionListViewCoorinator.authToken = authToken
     transactionListViewCoorinator.start()
   }
 

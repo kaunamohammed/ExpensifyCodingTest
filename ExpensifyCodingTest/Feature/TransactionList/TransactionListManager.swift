@@ -10,7 +10,10 @@ import Foundation
 
 public class TransactionListManager {
 
-  private let router = Router()
+  private let router: NetworkRouter
+  public init(router: NetworkRouter) {
+    self.router = router
+  }
   
   public func getTransactions(authToken: String, completion: @escaping (Result<[TransactionList], ApiJsonCodeResponse>) -> Void) {
     router.request(EndPoint.getTransactions(authToken: authToken,
@@ -23,7 +26,7 @@ public class TransactionListManager {
                       
                     case .success(let data):
                       do {
-                        let response: TransactionPayload = try data.decoded()
+                        let response: TransactionResponse = try data.decoded()
                         switch response.jsonCode {
                         case 200: completion(.success(response.transactionList ?? []))
                         case 400: completion(.failure(.unrecognizedCommand))

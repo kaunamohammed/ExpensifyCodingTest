@@ -8,6 +8,13 @@
 
 import Foundation
 
+/// small helper for testing purposes
+func delay(seconds: Double, _ block: @escaping (() -> Void)) {
+  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+    block()
+  }
+}
+
 public extension Optional where Wrapped == String {
   var orEmpty: String {
     switch self {
@@ -58,7 +65,7 @@ extension NumberFormatter {
   static func currency(from currencyCode: CurrencyCode, amount: Double) -> String? {
     let formatter = NumberFormatter()
     formatter.usesGroupingSeparator = true
-    formatter.numberStyle = .currency
+    formatter.numberStyle = .currencyAccounting
     formatter.currencyCode = currencyCode.string
     return formatter.string(from: NSNumber(value: amount))
   }

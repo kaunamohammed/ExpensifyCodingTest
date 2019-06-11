@@ -17,9 +17,9 @@ public class TransactionDetailTableViewCell1: UITableViewCell {
     static let trailingPadding: CGFloat = -20
   }
 
-  let label = UILabel {
+  public let label = UILabel {
     $0.textAlignment = .left
-    $0.numberOfLines = 4
+    $0.numberOfLines = 3
   }
   
   override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

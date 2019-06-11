@@ -14,7 +14,7 @@ import CoordinatorLibrary
  
  */
 public protocol CreateTransactionViewCoordinatorDelegate: class {
-  func didCreateTransaction(_ transactionID: String)
+  func didCreateTransaction()
 }
 
 public final class CreateTransactionViewCoordinator: NavigationCoordinator<CreateTransactionViewController> {
@@ -22,15 +22,15 @@ public final class CreateTransactionViewCoordinator: NavigationCoordinator<Creat
   public var authToken: String?
   
   /// weak reference to delegate to avoid retain cycle
-  public weak var delegate: CreateTransactionViewCoordinatorDelegate?
+  public weak var delegate: CreateTransactionViewCoordinatorDelegate? = nil
   
   override public func start() {
 
     viewController = .init(viewModel: .init(authToken: authToken.orEmpty, router: Router()))
     navigate(to: viewController, with: .push, animated: true)
     
-    viewController.didSuccessfullyCreateTransaction = { [weak self] transactionID in
-      self?.delegate?.didCreateTransaction(transactionID)
+    viewController.didSuccessfullyCreateTransaction = { [weak self] in
+      self?.delegate?.didCreateTransaction()
       self?.popViewController(animated: true)
     }
     

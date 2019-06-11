@@ -20,6 +20,7 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   
   private lazy var tableView = UITableView {
     $0.delegate = self
+    $0.dataSource = self
     $0.rowHeight = 70
     $0.estimatedRowHeight = 80
     $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -37,9 +38,9 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   
   /// notifies the coordinator to go to the transation detail screen
   public var goToTransactionDetailScreen: ((TransactionDetail) -> Void)?
- 
+   
   /// the datasource of the tableview
-  private var dataSource: TransactionListDatasource!
+  //private var dataSource: TransactionListDatasource!
   
   private var viewModel: TransactionListViewModel
   private let coordinator: TransactionListViewCoorinator
@@ -62,9 +63,7 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
     setUpConstraints()
     setUpNavigationBar()
 
-    viewModel.forcedReload = { [weak self] force in
-      force ? self?.hideIndicator() : self?.showIndicator()
-    }
+    viewModel.forcedReload = { [weak self] force in force ? self?.hideIndicator() : self?.showIndicator() }
     
     viewModel.transactionListOutcome = { [weak self] outcome in self?.updateViews(for: outcome) }
     
@@ -72,9 +71,7 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
     
     viewModel.loadData()
     
-    coordinator.newlyCreatedTransactionID = { [weak self] _ in
-      self?.viewModel.loadData(isInitialLoad: false)
-    }
+    coordinator.transactionNewlyCreated = { [weak self] in self?.viewModel.loadData(isInitialLoad: false) }
     
   }
 
@@ -97,19 +94,47 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
 
 }
 
+// MARK: - UITableViewDatasource
+extension TransactionListViewController: UITableViewDataSource {
+  
+  public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return viewModel.title(for: section)
+  }
+  
+  public func numberOfSections(in tableView: UITableView) -> Int {
+    return viewModel.numberOfSections()
+  }
+  
+  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return viewModel.numberOfRows(for: section) 
+  }
+  
+  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    let cell: TransactionListTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+    let item = viewModel.item(for: indexPath)
+    
+    cell.configure(with: item, dateFormatter: viewModel.dateFormatter)
+    
+    return cell
+  }
+  
+}
+
+
 // MARK: - UITableViewDelegate
 extension TransactionListViewController: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    let transaction = dataSource.dataList[indexPath.row]
-    let detail = TransactionDetail(merchant: transaction.merchant,
-                                   amount: viewModel.currency(from: .init(string: transaction.currency.orEmpty),
-                                                              amount: Double(abs(transaction.amount)) / 1000).orEmpty,
-                                   date: transaction.created.orEmpty,
-                                   comment: transaction.comment.orEmpty,
-                                   reimbursable: transaction.reimbursable)
+    let item = viewModel.item(for: indexPath)
+    let detail = TransactionDetail(merchant: item.merchant,
+                                   amount: viewModel.currency(from: .init(string: item.currency.orEmpty),
+                                                              amount: Double(abs(item.amount)) / 1000).orEmpty,
+                                   date: item.created.orEmpty,
+                                   comment: item.comment.orEmpty,
+                                   reimbursable: item.reimbursable)
     goToTransactionDetailScreen?(detail)
   }
   
@@ -145,25 +170,12 @@ private extension TransactionListViewController {
   func updateViews(for outcome: TransactionListViewModel.TransactionListOutcome) {
     switch outcome {
     case .loading:
-      dataSource = nil
-      tableView.dataSource = nil
       showIndicator()
-    case .loaded(transactions: let transactions):
-      dataSource = .init(dataList: transactions,
-                         configure: { [weak self] (cell, model) in
-                          guard let strongSelf = self else { return }
-                          cell.configure(with: model, dateFormatter: strongSelf.viewModel.dateFormatter) })
-      tableView.dataSource = dataSource
+    case .loaded:
       hideIndicator()
       refreshControl.endRefreshing()
       tableView.reloadData()
-    case .failed(title: let title, reason: let message, offlineData: let offlineData):
-      dataSource = .init(dataList: offlineData,
-                         configure: { [weak self] (cell, model) in
-                          guard let strongSelf = self else { return }
-                          cell.configure(with: model, dateFormatter: strongSelf.viewModel.dateFormatter) })
-    
-      tableView.dataSource = dataSource
+    case .failed(title: let title, message: let message):
       hideIndicator()
       refreshControl.endRefreshing()
       tableView.reloadData()

@@ -12,7 +12,7 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
   
   public var authToken: String?
       
-  public var newlyCreatedTransactionID: ((String) -> Void)?
+  public var transactionNewlyCreated: (() -> Void)?
   
   private lazy var transactionDetailViewCoordinator: TransactionDetailViewCoordinator = .init(presenter: presenter,
                                                                                               removeCoordinator: remove)
@@ -25,16 +25,14 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
                                                                         removeCoordinator: remove)
   
   private let persistenceManager: PersistenceManager
-  public init(persistenceManager: PersistenceManager,
-              presenter: UINavigationController,
-              removeCoordinator: @escaping ((Coordinatable) -> ())) {
+  public init(persistenceManager: PersistenceManager, presenter: UINavigationController, removeCoordinator: @escaping ((Coordinatable) -> ())) {
     self.persistenceManager = persistenceManager
     super.init(presenter: presenter, removeCoordinator: removeCoordinator)
   }
   
   override public func start() {
         
-    viewController = .init(viewModel: .init(authToken: authToken.orEmpty, manager: .init()), coordinator: self)
+    viewController = .init(viewModel: .init(authToken: authToken.orEmpty, manager: .init(router: Router())), coordinator: self)
     navigate(to: viewController, with: .push, animated: false)
     
     viewController.goToTransactionDetailScreen = { [weak self] detail in
@@ -50,14 +48,13 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
     }
     
   }
-  
 }
 
 // MARK: - CreateTransactionViewCoordinatorDelegate
-extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegate {
+extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegate { 
   
-  public func didCreateTransaction(_ transactionID: String) {
-    newlyCreatedTransactionID?(transactionID)
+  public func didCreateTransaction() {
+    transactionNewlyCreated?()
   }
   
 }

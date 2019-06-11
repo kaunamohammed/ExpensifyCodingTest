@@ -13,7 +13,7 @@ public struct CreateTransactionViewModel {
   public enum CreateTransactionOutcome {
     case none
     case creating
-    case success(transactionID: String)
+    case success
     case failed(title: String?, reason: String?)
   }
   
@@ -43,7 +43,7 @@ public struct CreateTransactionViewModel {
 
 private extension CreateTransactionViewModel {
   func handle(result: Result<Data, Error>) {
-    assert(Thread.isMainThread, "You are not on the main thread, please switch to the main thread")
+    assert(Thread.isMainThread, GlobalConstants.ErrorMessage.notOnMainThread)
     switch result {
     case .success(let data):
       do {
@@ -51,13 +51,12 @@ private extension CreateTransactionViewModel {
         let response: APIResponse = try data.decoded()
         switch response.jsonCode {
         case 200...299:
-          transactionOutcome?(.success(transactionID: response.transactionID.orEmpty))
+          transactionOutcome?(.success)
         default:
-          transactionOutcome?(.failed(title: nil, reason: "We couldn't create your expense. Please try again"))
+          transactionOutcome?(.failed(title: nil, reason: GlobalConstants.ErrorMessage.couldntRetrieveExpenses))
         }
-      } catch let error {
-        print(error)
-        transactionOutcome?(.failed(title: nil, reason: "Looks like there was a problem. Please try again later"))
+      } catch _ {
+        transactionOutcome?(.failed(title: nil, reason: GlobalConstants.ErrorMessage.internalError2))
       }
       
     case .failure(let error):

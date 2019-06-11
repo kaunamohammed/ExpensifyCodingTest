@@ -12,8 +12,8 @@ public class TransactionListViewModel {
   
   public enum TransactionListOutcome {
     case loading
-    case loaded(transactions: [TransactionList])
-    case failed(title: String?, reason: String?, offlineData: [TransactionList])
+    case loaded
+    case failed(title: String?, message: String?)
   }
   
   ///
@@ -47,14 +47,9 @@ public class TransactionListViewModel {
     
     do {
       dbtransactions = try (self.persistenceManager.context.fetch(DBTransactionList.fetchRequest()) as? [DBTransactionList] ?? [])
-      print(dbtransactions.count)
       
-      transactionListOutcome?(.loaded(transactions: dbtransactions.map(TransactionList.init) ))
-
     } catch _ {
-      transactionListOutcome?(.failed(title: nil,
-                                      reason: "Couldn't retrieve your transactions.",
-                                      offlineData: []))
+      transactionListOutcome?(.failed(title: nil, message: "Couldn't retrieve your transactions."))
     }
     
   }
@@ -88,13 +83,13 @@ public class TransactionListViewModel {
                               switch result {
                               case .success(let transactions):
                                 
-                                // deletes all objects currently in the data store
+//                                // deletes all objects currently in the data store
                                 strongSelf.dbtransactions.forEach { strongSelf.persistenceManager.context.delete($0) }
                                 
                                 // maps transactions received from .success to an array of DBTransactionList
                                 transactions.forEach { $0
-                                    .mapTo(dbTransactionList: .init(context: strongSelf.persistenceManager.context))  }
-                               
+                                  .mapTo(dbTransactionList: .init(context: strongSelf.persistenceManager.context))  }
+                                
                                 // saves the data to the store
                                 strongSelf.persistenceManager.save()
                                 
@@ -102,20 +97,60 @@ public class TransactionListViewModel {
                                 do {
                                   strongSelf.dbtransactions = try strongSelf.persistenceManager.context.fetch(DBTransactionList.fetchRequest()) as? [DBTransactionList] ?? []
                                   
-                                  // forwards a message that new transactions are available
-                                  strongSelf.transactionListOutcome?(.loaded(transactions: strongSelf.dbtransactions.map(TransactionList.init) ))
+                                  strongSelf.transactionListOutcome?(.loaded)
                                   
                                 } catch _ {
-                                  strongSelf.transactionListOutcome?(.failed(title: nil, reason: "Couldn't retrieve your transactions.", offlineData: []))
+                                  strongSelf.transactionListOutcome?(.failed(title: nil, message: "Couldn't retrieve your transactions."))
                                 }
                                 
                               case .failure(let error):
-                                strongSelf.transactionListOutcome?(.failed(title: "Offline mode enabled",
-                                                                           reason: error.errorDescription,
-                                                                           offlineData: strongSelf.dbtransactions.map(TransactionList.init)))
+                                strongSelf.transactionListOutcome?(.failed(title: "Offline mode enabled", message: error.errorDescription))
                               }
     })
     
+  }
+  
+}
+
+// MARK: - Helpers
+extension TransactionListViewModel {
+  
+  private var transactions: [[TransactionList]] {
+    return groupByDate(list: dbtransactions.map(TransactionList.init))
+  }
+  
+  public func item(for indexPath: IndexPath) -> TransactionList {
+    return transactions[indexPath.section][indexPath.row]
+  }
+  
+  public func title(for section: Int) -> String? {
+    return transactions[section].first?.created
+  }
+  
+  public func numberOfSections() -> Int {
+    return transactions.count
+  }
+  
+  public func numberOfRows(for section: Int) -> Int {
+    return transactions[section].count
+  }
+  
+  private func groupByDate(list: [TransactionList]) -> [[TransactionList]] {
+    
+    var transactionListGroupedByDate: [[TransactionList]] = [[]]
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    
+    let groupedByDate = Dictionary(grouping: list) { (element) -> Date in
+      let date = dateFormatter.date(from: element.created.orEmpty)
+      return date!
+    }
+    groupedByDate.keys.sorted(by: { $0 > $1 }).forEach { key in
+      let values = groupedByDate[key]
+      transactionListGroupedByDate.append(values ?? [])
+    }
+    
+    return transactionListGroupedByDate
   }
   
 }

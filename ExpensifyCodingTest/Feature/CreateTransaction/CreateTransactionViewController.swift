@@ -63,7 +63,7 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   }()
   
   /// notifies the coordinator that the transaction was successfully created
-  public var didSuccessfullyCreateTransaction: ((String) -> Void)?
+  public var didSuccessfullyCreateTransaction: (() -> Void)?
   
   private var currencyFormatter: NumberFormatter {
     let formatter = NumberFormatter()
@@ -122,8 +122,7 @@ private extension CreateTransactionViewController {
   }
   
   @objc func createTransactionButtonTapped() {
-    // here i am using `orEmpty` on the textfields just to avoid having to force unwrap the text property but since I'm alreadt
-    // validating the textfields input to be empty or the button to be enabled
+    // here i am using `orEmpty` on the textfields just to avoid having to force unwrap the text property but since I'm already validating the textfields input to be empty or the button to be enabled
     
     viewModel.createTransaction(amount: amountInputTextField.text.orEmpty,
                                 created: datePicker.date.expensifyDateFormat,
@@ -153,11 +152,11 @@ private extension CreateTransactionViewController {
       showIndicator()
       saveExpenseButton.alpha = 0.5
       saveExpenseButton.isEnabled = false
-    case .success(transactionID: let id):
+    case .success:
       hideIndicator()
       saveExpenseButton.alpha = 0.5
       saveExpenseButton.isEnabled = false
-      didSuccessfullyCreateTransaction?(id)
+      didSuccessfullyCreateTransaction?()
     case .failed(title: let title, reason: let message):
       hideIndicator()
       saveExpenseButton.alpha = 1

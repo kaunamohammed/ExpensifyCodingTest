@@ -1,8 +1,8 @@
 //
-//  TransactionPayload.swift
+//  TransactionResponse.swift
 //  ExpensifyCodingTest
 //
-//  Created by Kauna Mohammed on 05/06/2019.
+//  Created by Kauna Mohammed on 11/06/2019.
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
@@ -31,7 +31,7 @@ public struct TransactionList: Decodable {
 
 extension TransactionList {
   
-  /// maps `TransactionList` from a `DBTransactionList`
+  /// init a `TransactionList` from a `DBTransactionList`
   public init(dbTransactionList: DBTransactionList) {
     self.amount = Int(dbTransactionList.amount)
     self.category = dbTransactionList.category
@@ -55,8 +55,11 @@ extension TransactionList {
   
 }
 
+
 // MARK: - CDDBTransactionList
-public class DBTransactionList: NSManagedObject {}
+public class DBTransactionList: NSManagedObject {
+  
+}
 
 extension DBTransactionList {
   
