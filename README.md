@@ -84,6 +84,12 @@ I did not want to hit ``` pod install ``` too much in this project as I wanted t
 - [KeychainPasswordItem](https://developer.apple.com/library/content/samplecode/GenericKeychain/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007797-Intro-DontLinkElementID_2) by Apple. I used this lirary to handle interacting with the keychain.
 - [AuthController & Settings](https://www.raywenderlich.com/129-basic-ios-security-keychain-and-hashing) by RayWenderlich. I used this library to interact with the user current session state.
 
+# Improvements
+
+- Currently, interaction with the `PersistenceManager` is being handled by the `TransactionListViewModel` but to ensure a clearer separation of concerns, mmoving this interaction to a `TransactionListManager` would be an improvement
+
+- Adding a display object model as a specialized model for a `UIView`, responsible for removing business logic like formatting data. This will allow for a cleaner and better separation of concerns
+
 # Finally
 
 I would like to express my gratitude for the opportunity to work on this project. I look forward to hearing back from you.
