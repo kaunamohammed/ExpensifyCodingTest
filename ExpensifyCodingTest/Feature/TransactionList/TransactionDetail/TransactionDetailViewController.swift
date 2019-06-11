@@ -27,7 +27,6 @@ public final class TransactionDetailViewController: UIViewController {
   private let reimbursableCell: TransactionDetailTableViewCell2 = .init(style: .default, reuseIdentifier: nil)
   
   private let transactionDetail: TransactionDetail
-
   public init(transactionDetail: TransactionDetail) {
     self.transactionDetail = transactionDetail
     super.init(nibName: nil, bundle: nil)

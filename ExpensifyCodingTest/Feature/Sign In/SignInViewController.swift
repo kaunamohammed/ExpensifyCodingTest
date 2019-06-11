@@ -30,7 +30,7 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
   }
   
   private lazy var emailTextField = UITextField {
-    $0.placeholder = "Email"
+    $0.placeholder = NSLocalizedString("Email", comment: "email")
     $0.borderStyle = .roundedRect
     $0.keyboardType = .emailAddress
     $0.autocapitalizationType = .none
@@ -39,7 +39,7 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
   }
   
   private lazy var passwordTextField = UITextField {
-    $0.placeholder = "Password"
+    $0.placeholder = NSLocalizedString("Password", comment: "password")
     $0.isSecureTextEntry = true
     $0.borderStyle = .roundedRect
     $0.delegate = self
@@ -53,7 +53,7 @@ public final class SignInViewController: UIViewController, AlertDisplayable {
     $0.layer.shadowOffset = CGSize(width: 0, height: 0)
     $0.layer.shadowOpacity = 0.95
     $0.layer.cornerRadius = 5
-    $0.setTitle("Sign In", for: .normal)
+    $0.setTitle(NSLocalizedString("Sign In", comment: "sign in"), for: .normal)
     $0.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
   }
   

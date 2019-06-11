@@ -22,7 +22,7 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   
   // marked lazy so i can have self available
   private lazy var merchantInputTextField = UITextField {
-    $0.placeholder = "Merchant"
+    $0.placeholder = NSLocalizedString("Merchant", comment: "merchant title")
     $0.borderStyle = .roundedRect
     $0.delegate = self
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
@@ -38,7 +38,7 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   }
   
   private lazy var saveExpenseButton = UIButton {
-    $0.setTitle("Save", for: .normal)
+    $0.setTitle(NSLocalizedString("Save", comment: "button title"), for: .normal)
     $0.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
     $0.isEnabled = false
     $0.addTarget(self, action: #selector(createTransactionButtonTapped), for: .touchUpInside)
@@ -87,7 +87,7 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.title = "New Expense"
+    navigationItem.title = NSLocalizedString("New Expense", comment: "title")
     navigationItem.rightBarButtonItem = .init(customView: saveExpenseButton)
 
     view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
