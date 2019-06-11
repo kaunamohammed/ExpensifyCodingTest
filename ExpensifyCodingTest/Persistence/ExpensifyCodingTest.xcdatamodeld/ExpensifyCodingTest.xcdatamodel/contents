@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14838.16" systemVersion="19A471t" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="NO" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="19A471t" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DBTransactionList" representedClassName=".DBTransactionList" syncable="YES">
-        <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="category" optional="YES" attributeType="String"/>
-        <attribute name="comment" optional="YES" attributeType="String"/>
-        <attribute name="created" optional="YES" attributeType="String"/>
-        <attribute name="currency" optional="YES" attributeType="String"/>
-        <attribute name="merchant" optional="YES" attributeType="String"/>
-        <attribute name="reimbursable" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES">
+            <userInfo/>
+        </attribute>
+        <attribute name="category" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="comment" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="created" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="currency" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="merchant" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="reimbursable" attributeType="Boolean" usesScalarValueType="YES">
+            <userInfo/>
+        </attribute>
     </entity>
     <entity name="Test" representedClassName=".Test" syncable="YES">
-        <attribute name="name" attributeType="String"/>
+        <attribute name="name" attributeType="String">
+            <userInfo/>
+        </attribute>
     </entity>
     <elements>
-        <element name="Test" positionX="-63" positionY="-18" width="128" height="58"/>
         <element name="DBTransactionList" positionX="-54" positionY="0" width="128" height="148"/>
+        <element name="Test" positionX="-63" positionY="-18" width="128" height="58"/>
     </elements>
 </model>
