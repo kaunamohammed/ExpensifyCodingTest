@@ -163,7 +163,7 @@ extension SignInViewController {
   func showIndicator() {
     signInButton.add(activityIndicator)
     activityIndicator.startAnimating()
-    activityIndicator.trailingAnchor.constraint(equalTo: signInButton.trailingAnchor, constant: Self.Constants.activityIndicatorTrailingPadding).isActive = true
+    activityIndicator.trailingAnchor.constraint(equalTo: signInButton.trailingAnchor, constant: Constants.activityIndicatorTrailingPadding).isActive = true
     activityIndicator.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
   }
