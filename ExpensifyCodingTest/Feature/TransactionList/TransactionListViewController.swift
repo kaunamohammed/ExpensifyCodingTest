@@ -157,9 +157,16 @@ private extension TransactionListViewController {
       hideIndicator()
       refreshControl.endRefreshing()
       tableView.reloadData()
-    case .failed(title: let title, reason: let message):
+    case .failed(title: let title, reason: let message, offlineData: let offlineData):
+      dataSource = .init(dataList: offlineData,
+                         configure: { [weak self] (cell, model) in
+                          guard let strongSelf = self else { return }
+                          cell.configure(with: model, dateFormatter: strongSelf.viewModel.dateFormatter) })
+    
+      tableView.dataSource = dataSource
       hideIndicator()
       refreshControl.endRefreshing()
+      tableView.reloadData()
       displayAlert(title: title, message: message)
     }
   }

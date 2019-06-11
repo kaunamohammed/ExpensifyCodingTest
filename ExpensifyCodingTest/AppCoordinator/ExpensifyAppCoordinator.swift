@@ -17,11 +17,21 @@ import CoordinatorLibrary
  */
 public class ExpensifyAppCoordinator: AppCoordinator {
   
-  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
+  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(persistenceManager: persistenceManager,
+                                                                        presenter: presenter,
                                                                         removeCoordinator: remove)
   
-  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(presenter: presenter,
+  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(persistenceManager: persistenceManager,
+                                                                                        presenter: presenter,
                                                                                         removeCoordinator: remove)
+  
+  private let persistenceManager: PersistenceManager
+  init(persistenceManager: PersistenceManager = .shared,
+       presenter: UINavigationController,
+       window: UIWindow) {
+    self.persistenceManager = persistenceManager
+    super.init(presenter: presenter, window: window)
+  }
   
   override public func start() {
         
@@ -36,13 +46,11 @@ public class ExpensifyAppCoordinator: AppCoordinator {
 private extension ExpensifyAppCoordinator {
   
   func startSignInViewCoordinator() {
-    signInViewCoordinator = SignInViewCoordinator(presenter: presenter, removeCoordinator: remove)    
     add(child: signInViewCoordinator)
     signInViewCoordinator.start()
   }
   
   func startTransactionListViewCoordinator(with token: String) {
-    transactionListViewCoorinator = .init(presenter: presenter, removeCoordinator: remove)
     add(child: transactionListViewCoorinator)
     transactionListViewCoorinator.authToken = token
     transactionListViewCoorinator.start()

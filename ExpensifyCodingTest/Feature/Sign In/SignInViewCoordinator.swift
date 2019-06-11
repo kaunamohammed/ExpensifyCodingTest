@@ -11,8 +11,17 @@ import CoordinatorLibrary
 // here I have marked the class final because there's no need to inherit from it
 final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
   
-  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(presenter: presenter,
+  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(persistenceManager: persistenceManager,
+                                                                                        presenter: presenter,
                                                                                         removeCoordinator: remove)
+  
+  let persistenceManager: PersistenceManager
+  public init(persistenceManager: PersistenceManager,
+       presenter: UINavigationController,
+       removeCoordinator: @escaping ((Coordinatable) -> ())) {
+    self.persistenceManager = persistenceManager
+    super.init(presenter: presenter, removeCoordinator: removeCoordinator)
+  }
   
   override func start() {
     

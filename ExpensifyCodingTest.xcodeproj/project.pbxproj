@@ -42,6 +42,7 @@
 		FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */; };
 		FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */; };
 		FC55F7A622A9C2690066D3E5 /* CreateTransactionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F7A522A9C2690066D3E5 /* CreateTransactionParams.swift */; };
+		FC5F3EAC22AF44E9007A9A50 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3EAB22AF44E9007A9A50 /* PersistenceManager.swift */; };
 		FC5F9FD922A7F65400598548 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FD822A7F65400598548 /* AppDelegate.swift */; };
 		FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */; };
 		FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */; };
@@ -53,6 +54,7 @@
 		FC6832A122AB30070056C082 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */; };
 		FC7E355022A9875D008C8646 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E354F22A9875D008C8646 /* CurrencyCode.swift */; };
 		FC89987322A88EEB0071EA3B /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */; };
+		FC8E3B7722AF268F002AF52A /* ExpensifyCodingTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC83228B22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodeld */; };
 		FC989D5922A7F2CB0066310C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D5822A7F2CB0066310C /* SignInViewController.swift */; };
 		FC989D6C22A7F2DE0066310C /* ExpensifyCodingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC989D6B22A7F2DE0066310C /* ExpensifyCodingTestTests.swift */; };
 		FCA1D62222A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1D62122A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift */; };
@@ -113,6 +115,7 @@
 		FC55F78F22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewCoordinator.swift; sourceTree = "<group>"; };
 		FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionParams.swift; sourceTree = "<group>"; };
 		FC55F7A522A9C2690066D3E5 /* CreateTransactionParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionParams.swift; sourceTree = "<group>"; };
+		FC5F3EAB22AF44E9007A9A50 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		FC5F9FD822A7F65400598548 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensifyAppCoordinator.swift; sourceTree = "<group>"; };
 		FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DecodableModel+JSONDecoder.swift"; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 		FC68329E22AB1FD20056C082 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		FC6832A022AB30070056C082 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		FC7E354F22A9875D008C8646 /* CurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
+		FC83228C22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensifyCodingTest.xcdatamodel; sourceTree = "<group>"; };
+		FC83229022AF0B230023D5DC /* TestCDObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCDObject.swift; sourceTree = "<group>"; };
 		FC89987222A88EEB0071EA3B /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		FC989D5322A7F2CB0066310C /* ExpensifyCodingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensifyCodingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC989D5822A7F2CB0066310C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +251,7 @@
 				FC7E354F22A9875D008C8646 /* CurrencyCode.swift */,
 				FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */,
 				FC55F7A522A9C2690066D3E5 /* CreateTransactionParams.swift */,
+				FC83229022AF0B230023D5DC /* TestCDObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -306,6 +312,15 @@
 			path = Feature;
 			sourceTree = "<group>";
 		};
+		FC83228A22AEF98F0023D5DC /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				FC83228B22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodeld */,
+				FC5F3EAB22AF44E9007A9A50 /* PersistenceManager.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		FC989D4A22A7F2CA0066310C = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +347,7 @@
 				FC989D7622A7F5B10066310C /* AppCoordinator */,
 				FC68329A22AB05B70056C082 /* Feature */,
 				FC0EB6B022A8016400BFAFC2 /* Networking */,
+				FC83228A22AEF98F0023D5DC /* Persistence */,
 				FC0EB6B122A8021D00BFAFC2 /* Utilities */,
 				FC0EB6EE22A84EC200BFAFC2 /* Model */,
 				FCA1D63022A88E6300D33EF5 /* Protocols */,
@@ -527,6 +543,7 @@
 				FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */,
 				FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift in Sources */,
 				FCA1D62F22A8890500D33EF5 /* APIResponse.swift in Sources */,
+				FC8E3B7722AF268F002AF52A /* ExpensifyCodingTest.xcdatamodeld in Sources */,
 				FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */,
 				FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */,
 				FC68329F22AB1FD20056C082 /* SignInViewModel.swift in Sources */,
@@ -563,6 +580,7 @@
 				FC989D5922A7F2CB0066310C /* SignInViewController.swift in Sources */,
 				FC1C7CE322AC81E900447F7C /* Settings.swift in Sources */,
 				FC0EB6E322A83AA400BFAFC2 /* NetworkRouter.swift in Sources */,
+				FC5F3EAC22AF44E9007A9A50 /* PersistenceManager.swift in Sources */,
 				FC55F79922A9A6140066D3E5 /* CreateTransactionViewController.swift in Sources */,
 				FC1C7D0122AD29AE00447F7C /* TransactionListViewCoordinator.swift in Sources */,
 				FC48D83E22ADE02B000C4F63 /* TransactionDetail.swift in Sources */,
@@ -832,6 +850,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FC83228B22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FC83228C22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodel */,
+			);
+			currentVersion = FC83228C22AEFA020023D5DC /* ExpensifyCodingTest.xcdatamodel */;
+			path = ExpensifyCodingTest.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FC989D4B22A7F2CA0066310C /* Project object */;
 }

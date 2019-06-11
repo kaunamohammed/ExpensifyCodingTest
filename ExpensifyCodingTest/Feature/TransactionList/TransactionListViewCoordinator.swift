@@ -19,8 +19,18 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
   
   private lazy var createTransactionViewCoordinator: CreateTransactionViewCoordinator = .init(presenter: presenter,
                                                                                               removeCoordinator: remove)
-  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(presenter: presenter,
+ 
+  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(persistenceManager: persistenceManager,
+                                                                        presenter: presenter,
                                                                         removeCoordinator: remove)
+  
+  private let persistenceManager: PersistenceManager
+  public init(persistenceManager: PersistenceManager,
+              presenter: UINavigationController,
+              removeCoordinator: @escaping ((Coordinatable) -> ())) {
+    self.persistenceManager = persistenceManager
+    super.init(presenter: presenter, removeCoordinator: removeCoordinator)
+  }
   
   override public func start() {
         

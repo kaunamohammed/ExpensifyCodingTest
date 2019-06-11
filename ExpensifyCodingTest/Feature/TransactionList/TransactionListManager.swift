@@ -9,7 +9,7 @@
 import Foundation
 
 public class TransactionListManager {
-  
+
   private let router = Router()
   
   public func getTransactions(authToken: String, completion: @escaping (Result<[TransactionList], ApiJsonCodeResponse>) -> Void) {
