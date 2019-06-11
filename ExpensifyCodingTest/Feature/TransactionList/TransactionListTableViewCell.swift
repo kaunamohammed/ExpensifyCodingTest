@@ -51,6 +51,7 @@ public class TransactionListTableViewCell: UITableViewCell {
               attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .footnote)])
       .build()
     
+    print(model.currency.orEmpty)
     let amount = NumberFormatter.currency(from: .init(string: model.currency.orEmpty), amount: abs(model.amount.asCurrency)).orEmpty
     trailingLabel.attributedText = AttributedStringBuilder()
       .append(amount + "\n",
