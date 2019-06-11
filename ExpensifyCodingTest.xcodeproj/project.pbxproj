@@ -15,7 +15,6 @@
 		FC0EB6D522A8102A00BFAFC2 /* RESTComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6D422A8102A00BFAFC2 /* RESTComponent.swift */; };
 		FC0EB6D722A8117600BFAFC2 /* URLProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6D622A8117600BFAFC2 /* URLProducer.swift */; };
 		FC0EB6D922A8119900BFAFC2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6D822A8119900BFAFC2 /* EndPoint.swift */; };
-		FC0EB6DD22A81A0100BFAFC2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6DC22A81A0100BFAFC2 /* GlobalConstants.swift */; };
 		FC0EB6E322A83AA400BFAFC2 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */; };
 		FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6E422A83BAD00BFAFC2 /* Router.swift */; };
 		FC0EB6EB22A84D5E00BFAFC2 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */; };
@@ -43,6 +42,7 @@
 		FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */; };
 		FC55F7A622A9C2690066D3E5 /* CreateTransactionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC55F7A522A9C2690066D3E5 /* CreateTransactionParams.swift */; };
 		FC5F3EAC22AF44E9007A9A50 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3EAB22AF44E9007A9A50 /* PersistenceManager.swift */; };
+		FC5F3EAE22AFAD77007A9A50 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3EAD22AFAD76007A9A50 /* GlobalConstants.swift */; };
 		FC5F9FD922A7F65400598548 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FD822A7F65400598548 /* AppDelegate.swift */; };
 		FC5F9FDB22A7F69300598548 /* ExpensifyAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */; };
 		FC62B93622A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */; };
@@ -88,7 +88,6 @@
 		FC0EB6D422A8102A00BFAFC2 /* RESTComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTComponent.swift; sourceTree = "<group>"; };
 		FC0EB6D622A8117600BFAFC2 /* URLProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProducer.swift; sourceTree = "<group>"; };
 		FC0EB6D822A8119900BFAFC2 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		FC0EB6DC22A81A0100BFAFC2 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		FC0EB6E222A83AA400BFAFC2 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		FC0EB6E422A83BAD00BFAFC2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FC0EB6EA22A84D5E00BFAFC2 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -116,6 +115,7 @@
 		FC55F7A322A9C2170066D3E5 /* TransactionParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionParams.swift; sourceTree = "<group>"; };
 		FC55F7A522A9C2690066D3E5 /* CreateTransactionParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionParams.swift; sourceTree = "<group>"; };
 		FC5F3EAB22AF44E9007A9A50 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		FC5F3EAD22AFAD76007A9A50 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		FC5F9FD822A7F65400598548 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5F9FDA22A7F69300598548 /* ExpensifyAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensifyAppCoordinator.swift; sourceTree = "<group>"; };
 		FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DecodableModel+JSONDecoder.swift"; sourceTree = "<group>"; };
@@ -201,10 +201,10 @@
 				FC1C7CE222AC81E800447F7C /* Settings.swift */,
 				FC62B94122A8C78500A03D08 /* UITableView+Ext.swift */,
 				FCA1D62122A850F600D33EF5 /* UIViewController+SafeAreaConstraints.swift */,
+				FC5F3EAD22AFAD76007A9A50 /* GlobalConstants.swift */,
 				FC62B93F22A8B97C00A03D08 /* AttributedStringBuilder.swift */,
 				FC62B93522A8A5FA00A03D08 /* DecodableModel+JSONDecoder.swift */,
 				FC62B93722A8AE1B00A03D08 /* URLQueryItem+RemoveNilValues.swift */,
-				FC0EB6DC22A81A0100BFAFC2 /* GlobalConstants.swift */,
 				FC1C7CFB22AD270D00447F7C /* extensions.swift */,
 				FCD53AF022AE6F9B0000AB54 /* UIView+Constraints.swift */,
 			);
@@ -537,6 +537,7 @@
 				FC1C7CF622AD258D00447F7C /* TransactionListManager.swift in Sources */,
 				FC1C7CE122AC81DB00447F7C /* User.swift in Sources */,
 				FC1C7CF722AD258D00447F7C /* TransactionListViewController.swift in Sources */,
+				FC5F3EAE22AFAD77007A9A50 /* GlobalConstants.swift in Sources */,
 				FC0EB6D922A8119900BFAFC2 /* EndPoint.swift in Sources */,
 				FC0EB6E522A83BAD00BFAFC2 /* Router.swift in Sources */,
 				FC48D83C22ADDD5A000C4F63 /* TransactionDetailTableViewCells.swift in Sources */,
@@ -550,7 +551,6 @@
 				FC55F79A22A9A6140066D3E5 /* CreateTransactionViewCoordinator.swift in Sources */,
 				FC48D84022ADE198000C4F63 /* TransactionDetailViewCoordinator.swift in Sources */,
 				FC1C7CD922AC35E100447F7C /* CreateTransactionViewModel.swift in Sources */,
-				FC0EB6DD22A81A0100BFAFC2 /* GlobalConstants.swift in Sources */,
 				FC0EB6D122A802F400BFAFC2 /* Reusable.swift in Sources */,
 				FC0EB6D022A802F400BFAFC2 /* InitConfigurable.swift in Sources */,
 				FC55F7A422A9C2170066D3E5 /* TransactionParams.swift in Sources */,
