@@ -36,8 +36,4 @@ public final class CreateTransactionViewCoordinator: NavigationCoordinator<Creat
     
   }
   
-  deinit {
-    delegate = nil
-  }
-  
 }

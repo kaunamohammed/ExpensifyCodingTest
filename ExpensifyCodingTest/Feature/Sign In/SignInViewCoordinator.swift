@@ -10,9 +10,7 @@ import CoordinatorLibrary
 
 public final class SignInViewCoordinator: ChildCoordinator<SignInViewController> {
   
-  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(persistenceManager: persistenceManager,
-                                                                                        presenter: presenter,
-                                                                                        removeCoordinator: remove)
+  private var transactionListViewCoorinator: TransactionListViewCoorinator? = nil
   
   private let persistenceManager: PersistenceManager
   public init(persistenceManager: PersistenceManager, presenter: UINavigationController, removeCoordinator: @escaping ((Coordinatable) -> ())) {
@@ -42,8 +40,11 @@ public final class SignInViewCoordinator: ChildCoordinator<SignInViewController>
 // MARK: Child Coordinators
 private extension SignInViewCoordinator {
   func startTransactionListViewCoordinator(with authToken: String) {
-    add(child: transactionListViewCoorinator)
-    transactionListViewCoorinator.authToken = authToken
-    transactionListViewCoorinator.start()
+    transactionListViewCoorinator = .init(persistenceManager: persistenceManager,
+                                          presenter: presenter,
+                                          removeCoordinator: remove)
+    add(child: transactionListViewCoorinator!)
+    transactionListViewCoorinator!.authToken = authToken
+    transactionListViewCoorinator!.start()
   }
 }

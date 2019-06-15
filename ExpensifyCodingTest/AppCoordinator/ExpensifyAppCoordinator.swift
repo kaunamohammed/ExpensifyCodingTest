@@ -17,13 +17,9 @@ import CoordinatorLibrary
  */
 public class ExpensifyAppCoordinator: AppCoordinator {
   
-  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(persistenceManager: persistenceManager,
-                                                                        presenter: presenter,
-                                                                        removeCoordinator: remove)
+  private var signInViewCoordinator: SignInViewCoordinator? = nil
   
-  private lazy var transactionListViewCoorinator: TransactionListViewCoorinator = .init(persistenceManager: persistenceManager,
-                                                                                        presenter: presenter,
-                                                                                        removeCoordinator: remove)
+  private var transactionListViewCoorinator: TransactionListViewCoorinator? = nil
   
   private let persistenceManager: PersistenceManager
   public init(persistenceManager: PersistenceManager, presenter: UINavigationController, window: UIWindow) {
@@ -44,14 +40,20 @@ public class ExpensifyAppCoordinator: AppCoordinator {
 private extension ExpensifyAppCoordinator {
   
   func startSignInViewCoordinator() {
-    add(child: signInViewCoordinator)
-    signInViewCoordinator.start()
+    signInViewCoordinator = .init(persistenceManager: persistenceManager,
+                                  presenter: presenter,
+                                  removeCoordinator: remove)
+    add(child: signInViewCoordinator!)
+    signInViewCoordinator!.start()
   }
   
   func startTransactionListViewCoordinator(with authToken: String) {
-    add(child: transactionListViewCoorinator)
-    transactionListViewCoorinator.authToken = authToken
-    transactionListViewCoorinator.start()
+    transactionListViewCoorinator = .init(persistenceManager: persistenceManager,
+                                          presenter: presenter,
+                                          removeCoordinator: remove)
+    add(child: transactionListViewCoorinator!)
+    transactionListViewCoorinator!.authToken = authToken
+    transactionListViewCoorinator!.start()
   }
 
   

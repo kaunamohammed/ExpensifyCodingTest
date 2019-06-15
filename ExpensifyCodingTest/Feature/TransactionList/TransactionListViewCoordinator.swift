@@ -14,15 +14,11 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
       
   public var transactionNewlyCreated: (() -> Void)?
   
-  private lazy var transactionDetailViewCoordinator: TransactionDetailViewCoordinator = .init(presenter: presenter,
-                                                                                              removeCoordinator: remove)
+  private var transactionDetailViewCoordinator: TransactionDetailViewCoordinator? = nil
   
-  private lazy var createTransactionViewCoordinator: CreateTransactionViewCoordinator = .init(presenter: presenter,
-                                                                                              removeCoordinator: remove)
+  private var createTransactionViewCoordinator: CreateTransactionViewCoordinator? = nil
  
-  private lazy var signInViewCoordinator: SignInViewCoordinator = .init(persistenceManager: persistenceManager,
-                                                                        presenter: presenter,
-                                                                        removeCoordinator: remove)
+  private lazy var signInViewCoordinator: SignInViewCoordinator? = nil
   
   private let persistenceManager: PersistenceManager
   public init(persistenceManager: PersistenceManager, presenter: UINavigationController, removeCoordinator: @escaping ((Coordinatable) -> ())) {
@@ -44,7 +40,8 @@ public final class TransactionListViewCoorinator: ChildCoordinator<TransactionLi
       strongSelf.startCreateTransactionViewCoordinator(with: strongSelf.authToken.orEmpty)
     }
     
-    viewController.didTapToSignOut = { [startSignInViewCoordinator] in startSignInViewCoordinator()
+    viewController.didTapToSignOut = { [weak self] in
+      self?.startSignInViewCoordinator()
     }
     
   }
@@ -63,22 +60,30 @@ extension TransactionListViewCoorinator: CreateTransactionViewCoordinatorDelegat
 private extension TransactionListViewCoorinator {
   
   func startTransactionDetailViewCoordinator(with detail: TransactionDetail) {
-    add(child: transactionDetailViewCoordinator)
-    transactionDetailViewCoordinator.transactionDetail = detail
-    transactionDetailViewCoordinator.start()
+    transactionDetailViewCoordinator = .init(presenter: presenter,
+                                             removeCoordinator: remove)
+    add(child: transactionDetailViewCoordinator!)
+    transactionDetailViewCoordinator!.transactionDetail = detail
+    transactionDetailViewCoordinator!.start()
   }
   
   func startCreateTransactionViewCoordinator(with token: String) {
-    add(child: createTransactionViewCoordinator)
-    createTransactionViewCoordinator.authToken = token
-    createTransactionViewCoordinator.delegate = self
-    createTransactionViewCoordinator.start()
+    createTransactionViewCoordinator = .init(presenter: presenter,
+                                             removeCoordinator: remove)
+    add(child: createTransactionViewCoordinator!)
+    createTransactionViewCoordinator!.authToken = token
+    createTransactionViewCoordinator!.delegate = self
+    createTransactionViewCoordinator!.start()
   }
   
   func startSignInViewCoordinator() {
-    add(child: signInViewCoordinator)
+    signInViewCoordinator = .init(persistenceManager: persistenceManager,
+                                  presenter: presenter,
+                                  removeCoordinator: remove)
+    add(child: signInViewCoordinator!)
     presenter.defaultBarPreference(shouldApply: false)
-    signInViewCoordinator.start()
+    signInViewCoordinator!.start()
   }
   
 }
+

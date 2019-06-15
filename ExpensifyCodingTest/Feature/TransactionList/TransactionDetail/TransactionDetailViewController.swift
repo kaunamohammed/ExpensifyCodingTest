@@ -38,6 +38,8 @@ public final class TransactionDetailViewController: UIViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     
+    view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    
     navigationItem.title = NSLocalizedString("Expenses", comment: "expense title")
     setUpConstraints()
     configureCells()
@@ -48,21 +50,19 @@ public final class TransactionDetailViewController: UIViewController {
 // MARK: - Configure cells
 private extension TransactionDetailViewController {
   func configureCells() {
-    merchantNameCell.configure(topText:  NSLocalizedString("Merchant",
-                                                           comment: "title"),
+    merchantNameCell.configure(topText:  NSLocalizedString("Merchant", comment: "title"),
                                bottomText: transactionDetail.merchant)
-    amountCell.configure(topText: NSLocalizedString("Amount",
-                                                    comment: "title"),
+    
+    amountCell.configure(topText: NSLocalizedString("Amount", comment: "title"),
                          bottomText: transactionDetail.amount)
-    dateCell.configure(topText: NSLocalizedString("Date",
-                                                  comment: "title"),
+    
+    dateCell.configure(topText: NSLocalizedString("Date", comment: "title"),
                        bottomText: transactionDetail.date)
-    commentCell.configure(topText: NSLocalizedString("Comment",
-                                                     comment: "title"),
+    
+    commentCell.configure(topText: NSLocalizedString("Comment", comment: "title"),
                           bottomText: transactionDetail.comment)
     
-    reimbursableCell.configure(bottomText: NSLocalizedString("Reimbursable",
-                                                             comment: "title"),
+    reimbursableCell.configure(bottomText: NSLocalizedString("Reimbursable", comment: "title"),
                                checkmark: transactionDetail.reimbursable)
   }
 }
@@ -120,7 +120,8 @@ private extension TransactionDetailViewController {
     transactionDetailTableView.topAnchor.constraint(equalTo: topSafeArea).isActive = true
     transactionDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     transactionDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    transactionDetailTableView.bottomAnchor.constraint(equalTo: bottomSafeArea).isActive = true
+    // FIXME: - Made change for bottom safe area
+    transactionDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     transactionDetailTableView.translatesAutoresizingMaskIntoConstraints = false
   }
 }

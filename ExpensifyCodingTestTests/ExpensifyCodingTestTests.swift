@@ -11,6 +11,7 @@ import XCTest
 
 class ExpensifyCodingTestTests: XCTestCase {
   
+  // FIXME: test requires manually inputting date all the time
   func testConversionOfTodaysDateToString() {
     XCTAssertTrue(Date.nowString() == "2019-06-07")
   }
@@ -32,7 +33,6 @@ class ExpensifyCodingTestTests: XCTestCase {
     let authEndPoint = EndPoint.authenticateUser(partnerUserID: GlobalConstants.TestUser.id,
                                                  partnerUserSecret: GlobalConstants.TestUser.password).url
 
-    print(authEndPoint)
     XCTAssertTrue(authEndPoint == GlobalConstants.TestEndpoint.expensifyAuthEndPoint)
     
   }

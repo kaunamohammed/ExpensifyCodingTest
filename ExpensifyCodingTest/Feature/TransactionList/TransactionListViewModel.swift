@@ -47,7 +47,6 @@ public class TransactionListViewModel {
     
     do {
       dbtransactions = try (self.persistenceManager.context.fetch(DBTransactionList.fetchRequest()) as? [DBTransactionList] ?? [])
-      
     } catch _ {
       transactionListOutcome?(.failed(title: nil, message: "Couldn't retrieve your transactions."))
     }
@@ -83,7 +82,7 @@ public class TransactionListViewModel {
                               switch result {
                               case .success(let transactions):
                                 
-//                                // deletes all objects currently in the data store
+                                // deletes all objects currently in the data store
                                 strongSelf.dbtransactions.forEach { strongSelf.persistenceManager.context.delete($0) }
                                 
                                 // maps transactions received from .success to an array of DBTransactionList

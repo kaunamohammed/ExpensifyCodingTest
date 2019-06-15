@@ -73,7 +73,7 @@ public enum ApiJsonCodeResponse {
 extension ApiJsonCodeResponse: LocalizedError {
   public var errorDescription: String? {
     switch self {
-    case .insufficientPrivelages: return "Insifficeient previlages"
+    case .insufficientPrivelages: return "Insufficeient privelages"
     case .unrecognizedCommand: return "We do not recognize this command"
     case .missingArgument: return "missing argument"
     case .aborted: return "aborted"
