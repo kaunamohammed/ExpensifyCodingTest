@@ -48,12 +48,11 @@ public class TransactionListTableViewCell: UITableViewCell {
       .append(dateString,
               attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .footnote)])
       .build()
-    
+
     let amount = NumberFormatter.currency(from: .init(string: model.currency.orEmpty),
-                                          amount: abs(model.amount.asCurrency)).orEmpty
+                                          amount: abs(model.amount).asDouble.asMainUnitCurrency).orEmpty
     trailingLabel.attributedText = AttributedStringBuilder()
-      .append(amount + "\n",
-              attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .title3)])
+      .append(amount + "\n", attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .title3)])
       .build()
   }
   

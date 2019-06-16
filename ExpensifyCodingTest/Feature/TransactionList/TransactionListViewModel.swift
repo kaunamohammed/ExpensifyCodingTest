@@ -81,7 +81,7 @@ public class TransactionListViewModel {
                               guard let strongSelf = self else { return }
                               switch result {
                               case .success(let transactions):
-                                
+              
                                 // deletes all objects currently in the data store
                                 strongSelf.dbtransactions.forEach { strongSelf.persistenceManager.context.delete($0) }
                                 

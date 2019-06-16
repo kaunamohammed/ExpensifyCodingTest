@@ -38,9 +38,6 @@ public final class TransactionListViewController: UIViewController, AlertDisplay
   
   /// notifies the coordinator to go to the transation detail screen
   public var goToTransactionDetailScreen: ((TransactionDetail) -> Void)?
-   
-  /// the datasource of the tableview
-  //private var dataSource: TransactionListDatasource!
   
   private var viewModel: TransactionListViewModel
   private let coordinator: TransactionListViewCoorinator
@@ -131,7 +128,7 @@ extension TransactionListViewController: UITableViewDelegate {
     let item = viewModel.item(for: indexPath)
     let detail = TransactionDetail(merchant: item.merchant,
                                    amount: viewModel.currency(from: .init(string: item.currency.orEmpty),
-                                                              amount: Double(abs(item.amount)) / 1000).orEmpty,
+                                                              amount: abs(item.amount).asDouble.asMainUnitCurrency).orEmpty,
                                    date: item.created.orEmpty,
                                    comment: item.comment.orEmpty,
                                    reimbursable: item.reimbursable)

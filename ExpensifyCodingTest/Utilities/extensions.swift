@@ -53,8 +53,12 @@ extension Int {
     return Double(self)
   }
   
-  var asCurrency: Double {
-    return Double(self / 1000)
+}
+
+extension Double {
+  
+  var asMainUnitCurrency: Double {
+    return self / 1000
   }
   
 }
