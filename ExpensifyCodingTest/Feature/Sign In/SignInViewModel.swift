@@ -37,7 +37,7 @@ private extension SignInViewModel {
 
    handles the result received from the request
    
-   - parameter result:S=a result type
+   - parameter result: a result type
    
    */
   

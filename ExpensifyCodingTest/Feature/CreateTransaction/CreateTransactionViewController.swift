@@ -24,7 +24,6 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
   private lazy var merchantInputTextField = UITextField {
     $0.placeholder = NSLocalizedString("Merchant", comment: "merchant title")
     $0.borderStyle = .roundedRect
-    $0.delegate = self
     $0.addTarget(self, action: #selector(validateTextFieldInput), for: .editingChanged)
   }
   
@@ -107,7 +106,16 @@ public class CreateTransactionViewController: UIViewController, AlertDisplayable
 }
 
 // MARK: - UITextFieldDelegate
-extension CreateTransactionViewController: UITextFieldDelegate {}
+extension CreateTransactionViewController: UITextFieldDelegate {
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard textField.text.orEmpty.count < 20 else { return false }
+        
+        return true
+    }
+    
+}
 
 // MARK: Target/Action
 private extension CreateTransactionViewController {

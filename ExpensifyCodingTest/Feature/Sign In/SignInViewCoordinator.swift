@@ -24,7 +24,7 @@ public final class SignInViewCoordinator: ChildCoordinator<SignInViewController>
     // If someone tried to use a `TransactionListViewController` here the code won't compile, enforcing type-safety
     
     // also using type inference to leave out a full definition i.e SignInViewCoordinator(viewModel: SignInViewModel(manager: SignInManager(router: Router())))
-    viewController = .init(viewModel: .init(manager: SignInManager(router: Router())))
+    viewController = .init(viewModel: .init(manager: .init(router: Router())))
     
     navigate(to: viewController, with: .set, animated: false)
 

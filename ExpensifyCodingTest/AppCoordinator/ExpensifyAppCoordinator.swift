@@ -36,7 +36,7 @@ public class ExpensifyAppCoordinator: AppCoordinator {
   
 }
 
-// MARK: Child Coordinators
+// MARK: - Child Coordinators
 private extension ExpensifyAppCoordinator {
   
   func startSignInViewCoordinator() {
