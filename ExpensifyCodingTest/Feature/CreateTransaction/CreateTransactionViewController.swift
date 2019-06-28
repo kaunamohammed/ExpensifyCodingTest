@@ -110,9 +110,12 @@ extension CreateTransactionViewController: UITextFieldDelegate {
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        guard textField.text.orEmpty.count < 20 else { return false }
+        guard let stringRange = Range(range, in: textField.text.orEmpty) else { return false }
         
-        return true
+        let updatedText = textField.text.orEmpty.replacingCharacters(in: stringRange, with: string)
+        
+        return updatedText.count < 20
+        
     }
     
 }
@@ -122,7 +125,7 @@ private extension CreateTransactionViewController {
   
   @objc func validateTextFieldInput() {
     let textfieldsNotEmpty = (!merchantInputTextField.text.orEmpty.isEmpty && !amountInputTextField.text.orEmpty.isEmpty)
-    let amountGreaterThanZero = amountInputTextField.text.orEmpty != "0"
+    let amountGreaterThanZero = amountInputTextField.text.orEmpty != "0.00"
     let isValid = textfieldsNotEmpty && amountGreaterThanZero
     saveExpenseButton.alpha = isValid ? 1.0 : 0.5
     saveExpenseButton.isEnabled = isValid
